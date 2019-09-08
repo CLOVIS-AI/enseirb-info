@@ -1,0 +1,130 @@
+\documentclass[a4paper,10pt,french]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+\usepackage{clovisai}
+\newcommand{\Proba}{\mathbb{P}}
+\newcommand{\inter}{\cap}
+\newcommand{\union}{\cup}
+\newcommand{\sachant}{\mid}
+
+%opening
+\title{Probabilités et Statistiques}
+\author{François Dufour (\hrefu{mailto://francois.dufour@math.u-bordeaux.fr}{francois.dufour@math.u-bordeaux.fr})\\Notes prises par Ivan Canet}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Probabilités sur un espace fini}
+\section{Probabilités sur un espace fini, événements}
+\subsection{Définitions}
+
+\paragraph{Notation}
+On s'intéresse à l'expérience \emph{aléatoire} qui conduit à la réalisation d'un seul résultat parmi un nombre \emph{fini} de résultats possibles, notés $\omega_1\dots \omega_n$. On note $\Omega = \lbrace \omega_1\dots\omega_n \rbrace$ l'ensemble de ces résultats.\\
+Par exemple, un jeu de pile ou face peut être modélisé en $\Omega = \lbrace P, F \rbrace$.
+
+\paragraph{Probabilité}
+Une probabilité $\Proba$ sur l'ensemble $\Omega = \lbrace \omega_1\dots\omega_n \rbrace$ est une \emph{pondération} de $p_1\dots p_n$ où $n$ est un nombre réel positif, tels que:
+\[\sum_{i=1}^n p_i = 1\]
+
+\paragraph{Événement}
+On appelle événement tout sous-ensemble de $\Omega$.
+
+Pour un événement $A \subset \Omega$, on définit:
+\[\Proba(A) = \sum_{i=1}^n p_i\]
+où $\Proba(A)$ est appelé la \emph{probabilité de $A$}.
+
+\paragraph{Terminologie}
+\begin{itemize}
+ \item Si $\Proba(A)=0$, l'événement est dit \emph{négligeable}.
+ \item Si $\Proba(A)=1$, l'événement est dit \emph{presque sûr}.
+ \item Le contraire de $A$ est $\bar{A}$.
+ \item L'événement «~$A$ et $B$~»: $A \inter B$
+ \item L'évenement «~$A$ ou $B$~»: $A \union B$
+\end{itemize}
+
+On peut démontrer que:
+\[ \Proba(A \union B) = \Proba(A) + \Proba(B) - \Proba(A \inter B) \]
+
+\paragraph{Fonction indicatrice} La fonction indicatrice d'un événement $A$ est définie comme
+$ I_A: \Omega \rightarrow \lbrace 0, 1 \rbrace $
+telle que:
+\[
+\forall u \in \Omega, \; I_A(\omega) = \begin{cases*}
+1 & si $\omega \in A$ \\ 
+0 & si $\omega \notin A$
+\end{cases*}
+\]
+
+On retrouve aussi
+\[I_{A \inter B} = I_A I_B\]
+\[I_{A \union B} = I_A + I_B - I_{A \inter B}\]
+
+\subsection{Exemple}
+
+La probabilité uniforme fait que tous les événements élémentaires $\omega_1\dots\omega_n$ vont avoir la même probabilité.
+
+\[ p_i = p_1, \; \forall i \in \lbrace 1 \dots n \rbrace \]
+
+\[ 1 = \sum_{i=1}^n p_i = n p_1 = card(\Omega) p_1 \]
+donc $p_i = \frac{1}{card(\Omega)}$, et
+\[ \Proba(A) = \sum_{\omega_i \in A} p_i = \frac{card(A)}{card(B)} \]
+
+\section{Probabilités conditionnelles et indépendance}
+\subsection{Probabilité conditionnelle}
+
+La probabilité conditionnelle permet de prendre en compte l'information dont on dispose pour actualiser la probabilité d'un événement.
+
+\paragraph{Définition}
+Soit $\Omega$ un ensemble muni d'une probabilité $\Proba$. On considère deux événements $A$ et $B$. La probabilité conditionnelle de $A$ sachant $B$ est définie telle que:
+\[
+\Proba(A \sachant B) =
+    \begin{cases*}
+        \frac{\Proba(A \inter B)}{\Proba(B)} & si $\Proba(B) > 0$ \\
+        \Proba(A) & sinon
+    \end{cases*}
+\]
+
+\paragraph{Exemple 1}
+Quelle est la probabilité qu'un individu ayant deux enfants ai un garçon, sachant qu'il a une fille?
+
+$\Omega = \lbrace (F,F), (G,G), (F,G), (G,F) \rbrace$
+
+On définit $A$ l'événement \emph{avoir un garçon} et $B$ l'événement \emph{avoir une fille}.
+
+\[ \Proba(A \sachant B) = \frac{\Proba(A \inter B)}{\Proba(B)} = \frac{card(A \inter B)}{card(B)} = \frac{2}{3} \]
+donc, la probabilité que l'individu ai un garçon, en sachant qu'il a une fille, est $\frac 2 3$.
+
+\paragraph{Exemple 2}
+Quelle est la probabilité qu'un individu ayant deux enfants ai un garçon, sachant que l'aînée est une fille?
+
+$\Omega = \lbrace (F,F), (G,G), (G,F) \rbrace$ \textit{(on ignore l'ordre)}
+
+\[ \Proba(F,F)=\Proba(G,G)=\frac 1 4 \]
+\[ \Proba(F,G)=\frac 1 2 \]
+donc, la probabilité que l'individu ai un garçon, en sachant que l'aînée est une fille, est $\frac 1 2$.
+
+\paragraph{Remarque}
+$\Proba(A \inter B) = \Proba(A \sachant B) \Proba(B)$
+
+\paragraph{Formule de Bayes}
+Soit $B_1 \dots B_n$ une partition de $\Omega$ ($B_i \inter B_j = \emptyset$ pour $i \neq j$ et $\bigcup_{i=1} B_i = \Omega$) et $A \subset \Omega$ ($\Proba(A) > 0$).
+
+\[
+\Proba(B_i \sachant A) = \frac{\Proba(A \sachant B_i) \Proba(B_i)}{\sum_{j=1}^n \Proba(A \sachant B_j) \Proba(B_j)} = \frac{\Proba(A \inter B_i)}{\sum_{j=1}^n \Proba(A \inter B_j)}
+\]
+
+\subsection{Indépendance}
+
+\paragraph{Définition}
+Soit $\Omega$ muni d'une probabilité $\Proba$, $A$ et $B$ sont des événements indépendants si et seulement si:
+\[\Proba(A \inter B) = \Proba(A) \Proba(B)\]
+\[\Proba(A \sachant B) = \Proba(A)\]
+\[\Proba(B \sachant A) = \Proba(B)\]
+
+$A_1 \dots A_n$ sont indépendants si et seulement si:
+\[\forall j \subset \lbrace 1 \dots n \rbrace, \; \Proba(\bigcup_{j \in J} A_j) = \prod_{j \in J} \Proba(A_j)\]
+
+\end{document}
