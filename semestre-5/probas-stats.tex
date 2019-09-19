@@ -1,12 +1,12 @@
-\documentclass[a4paper,10pt,french]{memoir}
+\documentclass[a4paper,10pt,french,openany]{memoir}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
 
 \usepackage{clovisai}
 \newcommand{\Proba}{\mathbb{P}}
-\newcommand{\inter}{\cap}
-\newcommand{\union}{\cup}
-\newcommand{\sachant}{\mid}
+\newcommand{\Esper}{\mathbb{E}}
+\newcommand{\tribu}[1]{\mathcal{#1}}
+\newcommand{\implique}{\Rightarrow}
 
 %opening
 \title{Probabilités et Statistiques}
@@ -126,5 +126,153 @@ Soit $\Omega$ muni d'une probabilité $\Proba$, $A$ et $B$ sont des événements
 
 $A_1 \dots A_n$ sont indépendants si et seulement si:
 \[\forall j \subset \lbrace 1 \dots n \rbrace, \; \Proba(\bigcup_{j \in J} A_j) = \prod_{j \in J} \Proba(A_j)\]
+
+\chapter{Variables aléatoires discrètes}
+
+\section{Espace de probabilité}
+
+\paragraph{Définition}
+Une tribu $\tribu{A}$ sur $\Omega$ est une famille de sous-ensembles d'$\Omega$ qui vérifie les propriétés suivantes:
+
+\begin{itemize}
+ \item $\emptyset$ et $\Omega$ sont des éléments de $\tribu A$.
+ \item $A \in \tribu A \implique \bar A \in \tribu A $
+ \item Si $(A_i)_{i \in \setN} \subset \tribu A \implique \Union_{i=1}^{+\infty} A_i \in \tribu A$
+\end{itemize}
+
+\paragraph{Exemples}
+\begin{itemize}
+ \item $\{\emptyset, \Omega\}$ est une tribu,
+ \item $P(\Omega)$ est l'ensemble des parties de $\Omega$, c'est une tribu,
+ \item $A \in \Omega$, $\{ A, \bar A, \emptyset, \Omega \}$ est une tribu.
+\end{itemize}
+
+\paragraph{Définition}
+Soit $\Omega$ muni d'une tribu notée $\tribu A$.
+On appelle probabilité sur $(\Omega, \tribu A)$ une application 
+\( \Proba: \tribu A \rightarrow [0, 1] \)
+qui vérifie:
+\begin{itemize}
+ \item $\Proba(\Omega) = 1$
+ \item Si $(A_i)_{i \in I}$ est une famille dénombrable d'éléments de $\tribu A$ \emph{deux à deux disjoints} ($A_i \inter A_j = \emptyset$ pour $i \neq j$), alors:
+ \[ \Proba(\Union_{i\in I} A_i) = \sum_{i\in I} \Proba(A_i) \]
+\end{itemize}
+
+Tout ce qui a été introduit au chapitre précédent reste vrai:
+
+\[ \Proba(A \union B) = \Proba(A) + \Proba(B) - \Proba(A \inter B) \]
+
+\[ \text{Si } \Proba(B) > 0 \text{ alors } \Proba(A \sachant B) = \frac{\Proba(A \inter B)}{\Proba(B)} \]
+
+\paragraph{Indépendance}
+Une famille quelconque d'événements est dite indépendante si toute sous-famille \emph{finie} est indépendante.
+
+\section{Variables aléatoires discrètes}
+
+\subsection{Définition}
+On appelle variable aléatoire discrète $X$ une application $X: \Omega \rightarrow F$ où $F$ est un ensemble fini ou dénombrable. Pour $x \in F$ on note:
+\[ \{X=x\} = \{\omega \in \Omega: X(\omega) \in F\} \]
+
+Une famille du nombre $\Proba(X=x)_{x \in F}$ s'appelle la loi de $X$.
+
+Si $A \in \Omega$ alors la fonction indicatrice $I_A$ de $A$ est une variable aléatoire et $\Proba(I_A = 1) = \Proba(A)$.
+
+\[I_A : \Omega \rightarrow \{0,1\}\]
+
+\begin{align*}
+ \{I_A=1\} &= \{\omega \in \Omega: I_A(\omega)=1\}\\
+           &= A
+\end{align*}
+
+\subsection{Indépendance des variables aléatoires}
+
+\paragraph{Définition}
+Deux variables aléatoires discrètes $X$ et $Y$ à valeurs dans $F$ et $G$ respectivement sont dites indépendantes si:
+\[ \Proba(X=x, Y=y)=\Proba(X=X) \Proba(Y=y) \]
+où $x\in F$ et $y \in G$. On note:
+\[ \{X=x, Y=y\}=\{X=x\}\inter\{Y=y\} \]
+
+\paragraph{Définition}
+$n$ variables aléatoires $X_1\dots X_n$ à valeurs dans $F_1\dots F_n$ respectivement sont indépendantes si toute sous-famille \emph{finie} est indépendante.
+
+\subsection{Lois discrètes usuelles}
+
+Ce sont des variables aléatoires à valeur dans $F \subset \setN$.
+
+\paragraph{Loi de Bernouilli} de paramètre $p \in [0,1]$.
+
+C'est le jeu de pile ou face. On considère $X: \Omega \rightarrow \{0,1\}$:
+\[ \Proba(X=1)=p \qquad\qquad \Proba(X=0)=1-p \]
+
+L'événement $\{X=1\}$ représente un succès, et sa probabilité est associée à $p$.
+
+\paragraph{Loi géométrique} de paramètre $p \in ]0,1]$.
+
+$X:\Omega \rightarrow \setN$ suit une loi géométrique si:
+\[ \Proba(X=k)=(1-p)^{k-1}p \]
+où $k \in \setNs$.
+
+$X$ représente le temps du premier succès dans la répétition indépendante et identiquement distribuée d'un jeu dont la probabilité de succès vaut $p$.
+
+On considère une suite dee variables aléatoires qui sont modélisées par le jeu.
+
+Autrement, on considère des variables aléatoires $\{Y_i\}_{i\in \setNs}$ indépendantes, et $Y_i$ suit une loi dee Bernouilli de paramètre $p\in ]0,1]$.
+\[ \Proba(Y_i = 1) = p \qquad\qquad \Proba(Y_i=0)=1-p \]
+où $i$ représente l'instant du jeu.
+
+\paragraph{Loi binomiale} de paramètres $n\in \setNs$ et $p\in [0,1]$.
+
+C'est la loi variable $X:\Omega \rightarrow \{0,n\}$ définie par: 
+\[\Proba(X=k)=\parmi k n p^k (1-p)^{p-k}\]
+où $k \in \{0,n\}$.
+
+$X$ correspond au nombre de succès lors de la répétition indépendante de jeux dont la probabilité de succès vaut $p$.
+
+On considère que $n$ variables aléatoires $(Y_i)_{i\in 1\dots n}$ sont indépendants si $Y_i$ suit une loi de Bernouilli de paramètre $p$.
+
+\paragraph{Loi de poisson} de paramètre $\lambda \in \setRp$.
+
+C'est la loi variable aléatoire $X: \Omega \rightarrow \setN$ définie par:
+\[\Proba(X=k)=\frac{\lambda^k}{k!} e^{-\lambda}\]
+
+\subsection{Loi marginale}
+
+On considère deux variables aléatoires discrètes $X$ et $Y$ à valeurs dans $F$ et $G$.
+\begin{equation} \Proba(X=x)_{x\in F} \qquad\qquad \Proba(Y=y)_{y\in G} \label{eq:couple-solo}\end{equation}
+
+$(X,Y)$ est une variable aléatoire à valeur dans $F \times G$ et est discrète, donc:
+\begin{equation} \Proba((X,Y)=(x,y))_{x,y \in F \times G} \label{eq:couple-duo}\end{equation}
+
+\paragraph{Démonstration}
+\begin{align*}
+ \Union_{y\in G} \{(X,Y)=(x,y)\} &= \Union_{y\in G} (\{X=x\}\inter\{Y=y\})\\
+    &= \{X=x\}\inter \Omega\\
+    &= \{X=x\}
+\end{align*}
+
+\begin{align*}
+ \Proba(X=x) &= \Proba(\Union_{y\in G} \{X=x,Y=y\}) \\
+    &= \sum_{y\in G} \Proba((X,Y)=(x,y))
+\end{align*}
+
+Si on connait la loi du couple~(\ref{eq:couple-duo}), on peut calculer chacune de ses composantes~(\ref{eq:couple-solo}). L'inverse n'est généralement vrai (ce n'est possible que si $X$ et $Y$ sont indépendants).
+
+\section{Espérance et variance}
+
+\paragraph{Définition}
+Soit $X$ une variable aléatoire discrète à valeur $F\subset \setR$. On va dire que $X$ est intégrable si:
+\[\sum_{x\in F} \lvert x \rvert \Proba(X=x) < +\infty \]
+
+Dans ce cas, l'espérance de $X$ est notée $\Esper[X]$ et vaut:
+\[ \Esper[X]=\sum_{x\in F} x \Proba(X=x) \]
+
+\paragraph{Cas particuliers}
+L'espérance de $X$ dans le cas où $X$ suit une loi:
+\begin{itemize}
+ \item De Bernouilli de paramètre $p$: \[ \Esper[X]=p \]
+ \item Poisson de paramètre $\lambda \in \setR$: \[\Esper[X]=\lambda\]
+ \item Géométrique de paramètre $p\in ]0,1]$: \[ \Esper[X]=\frac 1 p \]
+\end{itemize}
+
 
 \end{document}
