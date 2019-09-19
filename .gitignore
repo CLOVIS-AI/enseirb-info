@@ -1,4 +1,7 @@
+# Symbolink links for the templates
 semestre-*/*.sty
+
+# LaTeX temporary files
 *.aux
 *.bbl
 *.blg
@@ -6,3 +9,7 @@ semestre-*/*.sty
 *.out
 *.pdf
 *.toc
+*.synctex.gz
+
+# Output directory on GitLab Pages
+public/
