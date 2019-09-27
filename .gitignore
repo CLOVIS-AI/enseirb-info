@@ -8,8 +8,13 @@ semestre-*/*.sty
 *.log
 *.out
 *.pdf
+*.html
 *.toc
 *.synctex.gz
 
 # Output directory on GitLab Pages
 public/
+pdfs/
+
+# Emacs files
+*~
