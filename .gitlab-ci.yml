@@ -1,8 +1,9 @@
-image: alpine:3.5
+image: ubuntu:latest
 
 stages:
   - build
   - deploy
+  - announce
 
 before_script:
   - export TERM=xterm
@@ -20,7 +21,6 @@ pdf:
 
 pages:
   stage: deploy
-  image: ubuntu:latest
   script:
     - ./html/build-site.sh
   dependencies:
@@ -28,5 +28,13 @@ pages:
   artifacts:
     paths:
       - public
+  only:
+    - master
+
+telegram:
+  stage: announce
+  image: clovisai/wget:latest
+  script:
+    - wget "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?parse_mode=markdown&chat_id=${CHAT_ID}&text=Les%20cours%20ont%20%C3%A9t%C3%A9%20mis%20%C3%A0%20jour%20%0A%0A[Voir%20la%20liste%20des%20fichiers](https://clovis-ai.gitlab.io/enseirb-info/)"
   only:
     - master
