@@ -5,8 +5,11 @@
 \usepackage{clovisai}
 \newcommand{\Proba}{\mathbb{P}}
 \newcommand{\Esper}{\mathbb{E}}
+\newcommand{\Var}{Var}
 \newcommand{\tribu}[1]{\mathcal{#1}}
 \newcommand{\implique}{\Rightarrow}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\laweq}{\overset{\mathcal L}=}
 
 %opening
 \title{Probabilités et Statistiques}
@@ -47,6 +50,7 @@ où $\Proba(A)$ est appelé la \emph{probabilité de $A$}.
 
 On peut démontrer que:
 \[ \Proba(A \union B) = \Proba(A) + \Proba(B) - \Proba(A \inter B) \]
+\[ \Proba(A \inter B) = \Proba(A) + \Proba(B) - \Proba(A \union B) \]
 
 \paragraph{Fonction indicatrice} La fonction indicatrice d'un événement $A$ est définie comme
 $ I_A: \Omega \rightarrow \lbrace 0, 1 \rbrace $
@@ -125,7 +129,7 @@ Soit $\Omega$ muni d'une probabilité $\Proba$, $A$ et $B$ sont des événements
 \[\Proba(B \sachant A) = \Proba(B)\]
 
 $A_1 \dots A_n$ sont indépendants si et seulement si:
-\[\forall j \subset \lbrace 1 \dots n \rbrace, \; \Proba(\bigcup_{j \in J} A_j) = \prod_{j \in J} \Proba(A_j)\]
+\[\forall j \subset \lbrace 1 \dots n \rbrace, \; \Proba(\Inter_{j \in J} A_j) = \prod_{j \in J} \Proba(A_j)\]
 
 \chapter{Variables aléatoires discrètes}
 
@@ -235,6 +239,8 @@ On considère que $n$ variables aléatoires $(Y_i)_{i\in 1\dots n}$ sont indépe
 C'est la loi variable aléatoire $X: \Omega \rightarrow \setN$ définie par:
 \[\Proba(X=k)=\frac{\lambda^k}{k!} e^{-\lambda}\]
 
+Elle est utile pour compter le nombre de gens qui entrent dans un magasin, ou le nombre de voitures qui traversent une rue.
+
 \subsection{Loi marginale}
 
 On considère deux variables aléatoires discrètes $X$ et $Y$ à valeurs dans $F$ et $G$.
@@ -259,12 +265,14 @@ Si on connait la loi du couple~(\ref{eq:couple-duo}), on peut calculer chacune d
 
 \section{Espérance et variance}
 
+\subsection{Espérance}
+
 \paragraph{Définition}
 Soit $X$ une variable aléatoire discrète à valeur $F\subset \setR$. On va dire que $X$ est intégrable si:
 \[\sum_{x\in F} \lvert x \rvert \Proba(X=x) < +\infty \]
 
 Dans ce cas, l'espérance de $X$ est notée $\Esper[X]$ et vaut:
-\[ \Esper[X]=\sum_{x\in F} x \Proba(X=x) \]
+\[ \Esper[X]=\sum_{x\in F} x\, \Proba(X=x) \]
 
 \paragraph{Cas particuliers}
 L'espérance de $X$ dans le cas où $X$ suit une loi:
@@ -273,6 +281,135 @@ L'espérance de $X$ dans le cas où $X$ suit une loi:
  \item Poisson de paramètre $\lambda \in \setR$: \[\Esper[X]=\lambda\]
  \item Géométrique de paramètre $p\in ]0,1]$: \[ \Esper[X]=\frac 1 p \]
 \end{itemize}
+
+\paragraph{Propriétés}
+\begin{itemize}
+ \item Linéarité: Si $X$ et $Y$ sont des variables aléatoires discrètes à valeurs réelles intégrables et $\lambda \in \setR$, alors $X + \lambda Y$ est intégrable et: \[\Esper[X+\lambda Y] = \Esper[X] + \lambda\Esper[Y]\]
+ \item Positivité: Si $X$ est une variable aléatoire discrète intégrable et presque sûrement positive (ie. $\Proba(X \geq 0) = 1$), alors: \[\Esper[X] \geq 0 \] \[\Esper[X] = 0 \;\Rightarrow\; \Proba(X=0)=1 \text{ et } X=0 \text{ presque sûrement}\]
+ \item Si $X$ et $Y$ sont deux variables aléatoires intégrables: \[\Proba(X \leq Y) = 1 \;\Rightarrow\; \Esper[X]\leq\Esper[Y]\]
+ \item Condition suffisante d'intégrabilité: Si $Y$ est une loi discrète presque sûrement positive et intégrable, $\Proba(\abs{X}\leq Y) = 1$ implique que $X$ est intégrable.
+\end{itemize}
+
+\paragraph{Théorème de transfert}
+Soit $X:\Omega \rightarrow F$ une variable aléatoire discrète et $f:F \rightarrow \setR$, alors $f(x)$ est une variable discrète et intégrable et: \[\sum_{x\in F} f(x) \,\Proba(X=x) < \infty\]
+
+Dans ce cas, \[\Esper[f(x)] = \sum_{x\in F} f(x) \,\Proba(X=x)\]
+
+\paragraph{Remarque}
+Si $f: F\rightarrow\setR$ est bornée, alors $f(x)$ est intégrable; si $\abs{F(x)} \leq M$ $\forall x \in F$, alors: \[\sum_{x\in F} \abs{F(x)} \Proba(X=x) \leq M < \infty\]
+
+\paragraph{Exemple}
+Calcul de l'espérance de la loi binomiale de paramètres $n\in\setNs$ et $p\in[0,1]$: $\Esper[X]=n p$.
+
+\paragraph{Proposition}
+Si $X$ et $Y$ sont des variables aléatoires discrètes à valeur dans $F$ et $G$ indépendantes alors pour toutes fonctions $f: F\rightarrow \setR$ et $g: G\rightarrow \setR$ avec $f(x)$ et $g(y)$ intégrables, on a que $f(x) g(y)$ est intégrable et:\[\Esper[f(x) g(y)]=\Esper[f(x)] \,\Esper[g(y)]\]
+
+\paragraph{Proposition}
+Si $X$ et $Y$ sont deux variables aléatoires discrètes à valeur dans $F$ et $G$ et vérifient \[\Esper[f(x) g(y)] = \Esper[f(x)]\,\Esper[g(y)]\] pour toutes fonctions $f:F\rightarrow \setR$ et $g: G\rightarrow \setR$ bornées, alors $X$ et $Y$ sont indépendantes.
+
+\subsection{Variance}
+
+\paragraph{Définition}
+Soit $X:\Omega \rightarrow F$ une variable aléatoire discrète à valeurs dans $\setR$, $X$ est dite de ``carré intégrable'' si $\sum_{x\in F}x^2\, \Proba(X=x) < \infty$ et, dans ce cas, la variance vaut: \[\Var(x)=\Esper[(X-\Esper[X])^2]\]
+
+La racine carrée de la variance s'appelle \emph{l'écart-type}, et se note: \[\sigma(x)=\sqrt{\Var(x)}\]
+
+\paragraph{Remarques}
+\begin{itemize}
+ \item Si $X$ est un carré intégrable, alors $X$ est intégrable. En effet, $\abs{X}\leq\frac{1+X^2}2$ et d'après la condition suffisante d'intégrabilité, on déduit que $X$ est intégrable; d'où:
+ \begin{align*}
+ \Esper[X] &= \sum_{x\in F} x\,\Proba(X=x) \\
+ X^2-2 \Esper[X] X+\Esper[X]^2 &= (X-\Esper[X])^2
+ \end{align*}
+ donc la variance a bien un sens.
+ \item $\Var(X)=\Esper[X^2]-(\Esper[X])^2$
+ \item $\Esper[X^2]\geq\Esper[X]^2$
+\end{itemize}
+
+\paragraph{Proposition}
+Soient $X_1\dots X_n$ des variables aléatoires de carré intégrable indépendantes, alors $\sum_{i=1}^n X_i$ est de carré intégrable.
+
+On a donc:
+\[\Var \left(\sum_{i=1}^n X_i\right) = \sum_{i=1}^n \Var(X_i)\]
+
+\paragraph{Démonstration}
+\begin{align*}
+ \Var \left(\sum_{i=1}^n X_i\right) &= \Esper\left[\left(\sum_{i=1}^n X_i - \Esper\left[\sum_{i=1}^n X_i\right]\right)\right] \\
+    &= \Esper\left[\left(\sum_{i=1}^n (X_i - \Esper[X_i])\right)\right] \\
+    &= \Esper\left[\sum_{i=1}^n (X_i - \Esper[X_i]) \sum_{i=1}^n (X_j - \Esper[X_j])\right] \\
+    &= \sum_{i=1}^n \sum_{j=1}^n \Esper[(X_i - \Esper[X_i])\,(X_j - \Esper[X_j])] \\
+    &= \sum_{i=1}^n \Esper[(X_i - \Esper[X_i])^2] + \sum_{i=1}^n \sum_{\genfrac{}{}{0pt}{}{j=1}{i\neq j}}^n \Esper[(X_i - \Esper[X_i])(X_j - \Esper[X_j])]
+\end{align*}
+
+On pose $\varphi_i(x)$ telle que:
+\[\varphi_i(x) = x - \Esper[X_i]\]
+d'où:
+\[\Esper[\varphi_i(X_i) \varphi_j(X_j)] = \Esper[\varphi_i(X_i)] \, \Esper[\varphi_j(X_j)] = 0\]
+
+\chapter{Fonctions génératrices}
+
+\paragraph{Définition}
+Soit $X: \Omega \rightarrow \setN$ une variable aléatoire à valeurs entières. On appelle fonction génératrice la fonction $g_x:[-1,1]\rightarrow\setR$ telle que:
+\[g_x(s)=\Esper[s^x]=\sum_{k\in \setN} s^k\,\Proba(X=k)\]
+
+\paragraph{Proposition}
+La fonction génératrice d'une variable aléatoire à valeurs entières caractérise sa loi.
+\[ X \laweq Y \:\Leftrightarrow\: g_x(s)=g_y(s), \quad\forall s\in [-1,1] \]
+où «~$\laweq$~» signifie ``sont de même loi''.
+
+\paragraph{Démonstration}
+On cherche à retrouver $\Proba(X=n)$ pour $n\in \setN$:
+\[ \Proba(X=n)=\frac{g_x^{(n)}(0)}{n!} \]
+où $g^{(n)}$ représente la dérivée $n$-ième d'une fonction.
+
+\paragraph{Exemple}
+\begin{itemize}
+ \item Loi binomiale de paramètres $n\in\setNs$ et $p\in[0,1]$:
+ \begin{align*}
+    g_x(s) &= \sum_{k=0}^n s^k\,\Proba(X=k) \\
+    &= \sum_{k=0}^n s^k\parmi{k}{n} p^k (1-p)^{n-k} \\
+    &= (p s + 1 - p)^n
+ \end{align*}
+ \item Loi géométrique de paramètre $p\in[0,1]$:
+ \begin{align*}
+    g_x(s) &= \sum_{k\in\setNs} s^k p (1-p)^{k-1} \\
+    &= p s \sum_{k\in\setN} (s (1-p))^k \\
+    &= \frac{p s}{1 - s(1-p)}
+ \end{align*}
+ \item Loi de poisson de paramètre $\lambda$:
+ 
+ \begin{align*}
+    g_x(s) &= \sum_{k\in\setN} s^k \frac{\lambda^k}{k!} e^{-\lambda} \\
+    &= e^{-\lambda} \sum_{k\in\setN} \frac{(\lambda s)^k}{k!} \\
+    &= e^{-\lambda} e^{\lambda s} \\
+    &= e^{\lambda(s-1)}
+ \end{align*}
+\end{itemize}
+
+\paragraph{Proposition}
+Si $X$ et $Y$ sont deux variables aléatoires à valeurs entières indpendantes:
+\[g_{X+\lambda Y}(s)=g_x(s) g_y(s)\]
+
+\paragraph{Exemple}
+On considère $(X_i)_{i\geq 1}$ une suite de variables aléatoires à valeurs entières \emph{indépendantes et identiquement distribuée} (IID.) et $N$ une variable aléatoire à valeurs entières indépendante de la suite $(X_i)_{i\geq 1}$. On pose:
+\[S=\begin{cases*}
+X_1+X_2+\dots+X_n & si $N\neq0$ \\ 
+0 & si $N=0$
+\end{cases*}\]
+
+Si $X_i$ et $N$ suivent des lois géométriques de paramètre $q$, quelle est la loi de~$S$?
+
+\begin{align*}
+ g_x(s) = \Esper\left[s^S\right] &= \sum_{k=0}^\infty s^k\,\Proba\left(\abs{S=k}\right) \\
+ &= \Esper\left[s^0 I_{N=0}\right] + \Esper\left[s^{\sum_{i=1}^N X_i} I_{N>0}\right] \\
+ &= \Esper\left[s^S I_{N=0}\right] + \Esper\left[s^S I_{N>0}\right] \\
+ &= \Esper\left[s^S (I_{N=0} + I_{N>0})\right] \\
+ &= \Esper[I_{N=0}] + \Esper\left[s^{\sum_{i=1}^N X_i} I_{N>0}\right] \\
+ &= \Esper[I_N=0] + \Esper\left[s^{\sum_{i=1}^N X_i} \sum_{k=1}^\infty I_{N=k}\right] \text{ car } I_{N>0}=\sum{k=1}^\infty I_{N=k} \\
+ &= \Proba(N=0) + \sum_{k=1}^\infty \Esper\left[s^{\sum_{i=1}^N X_i} I_{N=k}\right] \\
+ &= \Proba(N=0) + \sum_{k=1}^\infty \Proba\left(s^{\sum_{i=1}^k X_i}\right) \Proba(N=k) \\
+ &= \Proba(N=0) + \sum_{k=1}^\infty \Proba(N=k) (g_{X_i} (s))^k
+\end{align*}
 
 
 \end{document}
