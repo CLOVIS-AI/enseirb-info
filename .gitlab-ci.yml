@@ -1,0 +1,32 @@
+image: alpine:3.5
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - export TERM=xterm
+  - mkdir -p public/ pdfs/
+
+pdf:
+  stage: build
+  image: clovisai/latex:latest
+  script:
+    - make pdf
+    - mv semestre-*/*.pdf pdfs/
+  artifacts:
+    paths:
+      - pdfs
+
+pages:
+  stage: deploy
+  image: ubuntu:latest
+  script:
+    - ./html/build-site.sh
+  dependencies:
+    - pdf
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
