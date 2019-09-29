@@ -1,0 +1,173 @@
+\documentclass[a4paper,10pt,french,openany]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+\let\printglossary\undefined
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+
+\usepackage{clovisai}
+
+%opening
+\title{Japonais}
+\author{??\\Notes prises par Ivan Canet}%TODO
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Écrire}
+\section{Hiraganas}
+
+Les hiraganas (ひらがな) représentent des syllabes (\autoref{tab:hira-simple}).
+
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}{llllll}
+  あ a  & い i  & う u  & え e  & お o  &\\
+  か ka & き ki & く ku & け ke & こ ko &\\
+  さ sa & し shi& す su & せ se & そ so &\\
+  た ta & ち chi& つ tsu& て te & と to &\\
+  な na & に ni & ぬ nu & ね ne & の no &\\
+  は ha & ひ hi & ふ fu & へ he & ほ ho &\\
+  ま ma & み mi & む mu & め me & も mo &\\
+  や ya & 　    & ゆ yu &　     & よ yo &\\
+  ら ra & り ri & る ru & れ re & ろ ro &\\
+  わ wa & 　    & 　    & 　    & を wo & ん n\\
+ \end{tabular}
+ \caption{Tableaux des hiraganas}
+ \label{tab:hira-simple}
+\end{table}
+
+Des sons plus compliqués peuvent être formés en combinant les hiraganas simples avec un dakuten ('') ou un handakuten (°) (\autoref{tab:dakuten-handakuten}).
+
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}{r|lllll}
+  /k/'': /g/ & が ga & ぎ gi & ぐ gu & げ ge & ご go \\
+  /s/'': /z/ & ざ za & じ ji & ず zu & ぜ ze & ぞ zo \\
+  /t/'': /d/ & だ da & ぢ ji & ず zu & で de & ど do \\
+  /h/'': /b/ & ば ba & び bi & ぶ bu & べ be & ぼ bo \\
+  /h/°: /p/  & ぱ pa & ぴ pi & ぷ pu & ぺ pe & ぽ po \\
+ \end{tabular}
+ \caption{Effets du dakuten ('') et du handakuten (°)}
+ \label{tab:dakuten-handakuten}
+\end{table}
+
+Les sons du type /nyu/ sont obtenus en combinant un hiragana se terminant par le son /i/ (colonne du /i/) avec un autre commençant par le son /i/ (ligne du /y/). Attention, certains perdent le son /i/ (par exemple, /shi/ + /ya/ donne /sha/ et non /shya/).
+
+Dans ce cas, le deuxième hiragana est écrit en petit (pour faire la différence entre きゃ /kya/ et きや /kiya/). Les résultats sont présentés en \autoref{tab:hira-liasons-i}.
+
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}{lll}
+  きゃ kya& きゅ kyu& きょ kyo\\
+  ぎゃ gya& ぎゅ gyu& ぎょ gyo\\
+  しゃ sha& しゅ shu& しょ sho\\
+  じゃ ja & じゅ ju & じょ jo \\
+  ちゃ cha& ちゅ chu& ちょ cho\\
+  にゃ nya& にゅ nyu& にょ nyo\\
+  ひゃ hya& ひゅ hyu& ひょ hyo\\
+  びゃ bya& びゅ byu& びょ byo\\
+  ぴゃ pya& ぴゅ pyu& ぴょ pyo\\
+  みゃ mya& みゅ myu& みょ myo\\
+  りゃ rya& りゅ ryu& りょ ryo\\
+ \end{tabular}
+ \caption{Liaisons sur le son /i/}
+ \label{tab:hira-liasons-i}
+\end{table}
+
+En écrivant un petit つ (tsu), on peut signifier qu'il faut faire une pause dans le mot. En rōmaji, on double la consonne suivante. Le \autoref{tab:petit-tsu} donne des exemples.
+
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}{ll}
+  たつと tatsuto & たっと tatto \\
+  きて kite (aller) & きって kitte (timbre)
+ \end{tabular}
+ \caption{Exemples d'utilisation du petit /tsu/}
+ \label{tab:petit-tsu}
+\end{table}
+
+Pour écrire les sons longs, on écrit une voyelle supplémentaire. Par exemple, okaasan (mère) s'écrit おかあさん. En rōmaji, on a le choix entre doubler la voyelle ou écrire un accent plat pour montrer qu'elle est accentuée. D'autres exemples sont donnés dans le \autoref{tab:ex-doublage}. Attention, certains sons peuvent être obtenus de deux différentes manières (\autoref{tab:long-sounds}).
+
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}{rl}
+  mère & おかあさん okāsan \\
+  père & おとうさん otōsan\\
+  grand-frère & おにいさん onīsan\\
+  grande-sœur & おねえさん onēsan\\
+  air & くうき kūki\\
+  professeur\cdot{}e & せんせい sensē\\
+  nager & すいえい suiē\\
+  glace & こおり kōri\\
+  grand & おおきい ōkī\\
+ \end{tabular}
+ \caption{Exemples d'appui sur la voyelle}
+ \label{tab:ex-doublage}
+\end{table}
+
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}{cll}
+  ā & doubler le $a$ (おかあさん okāsan)\\
+  ī & doubler le $i$ (おにいさん onīsan)\\
+  ū & doubler le $u$ (くうき kūki)\\
+  ē & doubler le $e$ & ou ajouter un $i$ (せんせい sensē)\\
+  ō & doubler le $o$ (おおき ōki) & ou ajouter un $u$ (おうえん ōen)\\
+ \end{tabular}
+ \caption{Différentes manières de former les sons longs}
+ \label{tab:long-sounds}
+\end{table}
+
+\chapter{Compter}
+
+Les caractères de base sont représentés dans le \autoref{tab:chiffres}.
+
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}{rll}
+  0 & れい　 rei\\
+  1 & いち　 ichi\\
+  2 & に　　 ni\\
+  3 & さん　 san\\
+  4 & よん　 yon & し　 shi\\
+  5 & ご　　 go\\
+  6 & ろく　 roku\\
+  7 & なな　 nana & しち shichi\\
+  8 & はち　 hachi\\
+  9 & きょう kyō & く　 ku\\
+ 10 & じゅう jū\\
+ 100 & ぴょく pyoku\\
+ 1~000 & せん　 sen\\
+ 10~000 & まん　 man\\
+ \end{tabular}
+ \caption{Caractères de base}
+ \label{tab:chiffres}
+\end{table}
+
+Pour former les nombres jusqu'à 99, on écrit le numéro de dizaine, 10, puis les unités. Par exemple, 25 s'écrit 2-10-5, donc にじゅうご (nijūgo). Le \autoref{tab:dizaines} présente des exemples.
+
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}{cll}
+  11 & じゅういち    &jūichi\\
+  13 & じゅうさん    &jūsan\\
+  18 & じゅうはち    &jūhachi\\
+  20 & にじゅう      &nijū\\
+  30 & さんじゅう    &sanjū\\
+  48 & よんじゅうはち &yonjūhachi\\
+  52 & ごじゅうに    &gojūni\\
+  65 & ろくじゅうご  &rokujūgo\\
+  72 & ななじゅうに  &nanajūni\\
+  89 & はちじゅうく  &hachijūku\\
+ \end{tabular}
+ \caption{Exemples de nombres de 11 à 99}
+ \label{tab:dizaines}
+\end{table}
+
+Les nombres supérieurs à 100 s'écrivent de la même manière: 258~652 s'écrit 2-100-5-10000-8-1000-6-100-5-10-2 donc にぴょくごまんはちせんろくぴょくごじゅうに (nipyokugomanhachisenrokupyokugojūni)\footnote{En Kanji, cela s'écrirait 二百五万八千六百五十二.}.
+
+\end{document}
