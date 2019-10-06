@@ -10,6 +10,12 @@
 \newcommand{\implique}{\Rightarrow}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\laweq}{\overset{\mathcal L}=}
+\newcommand{\xonen}{x_1\dots x_n}
+\newcommand{\Xonen}{X_1\dots X_n}
+\newcommand{\xoned}{x_1\dots x_d}
+\newcommand{\Xoned}{X_1\dots X_d}
+\newcommand{\xonek}{x_1\dots x_k}
+\DeclareMathOperator{\jac}{Jac}
 
 %opening
 \title{Probabilités et Statistiques}
@@ -411,5 +417,65 @@ Si $X_i$ et $N$ suivent des lois géométriques de paramètre $q$, quelle est la
  &= \Proba(N=0) + \sum_{k=1}^\infty \Proba(N=k) (g_{X_i} (s))^k
 \end{align*}
 
+\chapter{Vecteurs aléatoires à densité}
+
+\section{Définition}
+
+On dit que le vecteur aléatoire $X = (\Xoned): \Omega \rightarrow \setR^d$ possède la densité $p: \setR^d \rightarrow \setRp$ pour tout $o$ un ouvert de $\setR^d$.
+
+\begin{align*}
+ \Proba(X\in o) &= \int_o p(x) \dif x \\
+ &= \int_{\setR^d} I_0(x) p(x) \dif x \\
+ &= \int_{\setR^d} I_0(\xoned) p(\xoned) \dif \xoned
+\end{align*}
+
+\paragraph{Théorème}
+Le vecteur aléatoire $X:\Omega \rightarrow \setR^d$ possède la densité $p:\setR^d \rightarrow \setRp$ si et seulement si pour toute fonction bornée $f:\setR^d \rightarrow \setR$ on a que: \[\Esper[f(x)]=\int_{\setR^d}f(x)p(x) \dif x\]
+
+\paragraph{Remarque}
+Soient $X:\Omega \rightarrow \setR^d$ de densité $p$ et $f:\setR^d \rightarrow \setR$.
+
+Si $\int_{\setR^d} \lvert f(x) \rvert p(x) \dif x < \infty$ alors $f(x)$ est dite \emph{intégrable} et:
+\[ \Esper[f(x)] = \int_{\setR^d} f(x) p(x) \dif x \]
+
+\section{Densité marginale}
+Soit $X=(\Xoned):\Omega \rightarrow \setR^d$ un vecteur aléatoire à densité notée $p$, on considère $k<d$.
+
+Le vecteur $(\Xoned)$ est-il à densité?
+\[\forall o_k \text{ de }\setR^k\]
+\[ \Proba((\Xoned) \in o_k) = \int_{\setR^k} I_{o_k}(\xonek) q(\xonek) \dif \xonek\]
+
+\[\forall o_d \text{ de }\setR^d\]
+\[\Proba((\Xoned) \in o_d) = \int_{\setR^d} I_{o_d}(x_1\dots x_k, x_{k+1}\dots x_d) q(\xoned) \dif \xoned\]
+
+\paragraph{Proposition}
+Soit $X$ une variable aléatoire qui possède une densité, alors tout sous-vecteur $Y$ de $X$ possède une densité marginale obtenue en intégrant la densité de $X$ sur les composantes qui ne figurent pas dans $Y$.
+
+\section{Changement de variable}
+On se pose la question suivante:
+\begin{cquote}{}
+ Si $X$ est une variable aléatoire qui possède une densité de valeurs dans $\setR^d$ et $f$ est la fonction $f:\setR^d \rightarrow \setR^d$, est-ce que $Y=f(x)$ est à densité?
+\end{cquote}
+
+\paragraph{Proposition}
+Soit $X:\Omega \rightarrow \setR^d$ est un vecteur aléatoire qui possède la densité $p$ portée par un ouvert $o$ de $\setR^d$ (c'est-à-dire que $\int_o p(x) \dif x = 1$), et $\varphi$ une bijection de $o$ sur $G'$ de classe C', ainsi que son inverse $\varphi^{-1}$; alors $Y=f(X)$ possède la densité:
+\[q(y) = I_{G'}(y)\;p(\varphi^{-1}(y)) \; \lvert \jac \varphi^{-1}(y) \rvert \]
+où $\jac\varphi^{-1} (y)$ est le Jacobin de l'inverse de $\varphi$; et vaut:
+\[ \jac \varphi^{-1}(y) = \det\left(\frac{\partial(\varphi^{-1}_i)}{\partial y_j}(y)\right)_{1\leq i\leq d, 1\leq j \leq d} \]
+
+\section{Indépendance}
+
+\paragraph{Définition}
+Les vecteurs aléatoires $X_1:\Omega \rightarrow \setR^{d_1}\dots X_n:\Omega \rightarrow \setR^{d_n}$ qui possèdent les densités $p_1:\setR^{d_1}\rightarrow \setR\dots p_n:\setR^{d_n} \rightarrow \setR$, sont dites indépendantes si $X=(\Xonen)$ possède la densité $p_1(x_1) p_2(x_2) \dots p_n (x_n)$ telle que:
+
+\begin{align*}
+ X_1 &= \begin{pmatrix}X_{1,1}\\\vdots\\X_{1,d_1}\end{pmatrix} = p_1(x_1) = p_1(x_{1,n},\dots x_{1,d_1})\\
+ & \vdots \\
+ X_n &= \begin{pmatrix}X_{n,1}\\\vdots\\X_{n,d_n}\end{pmatrix} = p_n(x_n) = p_n(x_{n,1},\dots x_{n,d_n})
+\end{align*}
+
+\paragraph{Proposition}
+Soient $X_1:\Omega \rightarrow \setR^{d_1}, \dots X_n:\Omega \rightarrow \setR^{d_n}$, $n$ variables aléatoires indépendantes, alors pour toute fonction $f_1:\setR^{d_1}\rightarrow \setR, \dots f_n:\setR^{d_n}\rightarrow \setR$ est intégrable et:
+\[\Esper[f_1(X_1)\: f_2(X_2) \dots f_n(X_n)] = \Esper[f_1(X_1)]\: \Esper[f_2(X_2)] \dots \Esper[f_n(X_n)]\]
 
 \end{document}
