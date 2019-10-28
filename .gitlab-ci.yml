@@ -15,6 +15,7 @@ pdf:
   script:
     - make pdf
     - mv semestre-*/*.pdf pdfs/
+    - for dir in semestre-*; do mkdir -p pdfs/$dir; cp $dir/*.pdf pdfs/$dir/; done
   artifacts:
     paths:
       - pdfs
