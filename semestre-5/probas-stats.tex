@@ -5,8 +5,11 @@
 \usepackage{clovisai}
 \newcommand{\Proba}{\mathbb{P}}
 \newcommand{\Esper}{\mathbb{E}}
-\newcommand{\Var}{Var}
 \newcommand{\tribu}[1]{\mathcal{#1}}
+\newcommand{\normale}{\mathcal{N}}
+\newcommand{\uniforme}{\mathcal{U}}
+\newcommand{\cauchy}{\mathcal{C}}
+\newcommand{\expo}{\mathcal{E}}
 \newcommand{\implique}{\Rightarrow}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\laweq}{\overset{\mathcal L}=}
@@ -16,6 +19,8 @@
 \newcommand{\Xoned}{X_1\dots X_d}
 \newcommand{\xonek}{x_1\dots x_k}
 \DeclareMathOperator{\jac}{Jac}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
 
 %opening
 \title{Probabilités et Statistiques}
@@ -59,7 +64,7 @@ On peut démontrer que:
 \[ \Proba(A \inter B) = \Proba(A) + \Proba(B) - \Proba(A \union B) \]
 
 \paragraph{Fonction indicatrice} La fonction indicatrice d'un événement $A$ est définie comme
-$ I_A: \Omega \rightarrow \lbrace 0, 1 \rbrace $
+$ I_A: \Omega \mapsto \lbrace 0, 1 \rbrace $
 telle que:
 \[
 \forall u \in \Omega, \; I_A(\omega) = \begin{cases*}
@@ -160,7 +165,7 @@ Une tribu $\tribu{A}$ sur $\Omega$ est une famille de sous-ensembles d'$\Omega$ 
 \paragraph{Définition}
 Soit $\Omega$ muni d'une tribu notée $\tribu A$.
 On appelle probabilité sur $(\Omega, \tribu A)$ une application 
-\( \Proba: \tribu A \rightarrow [0, 1] \)
+\( \Proba: \tribu A \mapsto [0, 1] \)
 qui vérifie:
 \begin{itemize}
  \item $\Proba(\Omega) = 1$
@@ -180,14 +185,14 @@ Une famille quelconque d'événements est dite indépendante si toute sous-famil
 \section{Variables aléatoires discrètes}
 
 \subsection{Définition}
-On appelle variable aléatoire discrète $X$ une application $X: \Omega \rightarrow F$ où $F$ est un ensemble fini ou dénombrable. Pour $x \in F$ on note:
+On appelle variable aléatoire discrète $X$ une application $X: \Omega \mapsto F$ où $F$ est un ensemble fini ou dénombrable. Pour $x \in F$ on note:
 \[ \{X=x\} = \{\omega \in \Omega: X(\omega) \in F\} \]
 
 Une famille du nombre $\Proba(X=x)_{x \in F}$ s'appelle la loi de $X$.
 
 Si $A \in \Omega$ alors la fonction indicatrice $I_A$ de $A$ est une variable aléatoire et $\Proba(I_A = 1) = \Proba(A)$.
 
-\[I_A : \Omega \rightarrow \{0,1\}\]
+\[I_A : \Omega \mapsto \{0,1\}\]
 
 \begin{align*}
  \{I_A=1\} &= \{\omega \in \Omega: I_A(\omega)=1\}\\
@@ -211,14 +216,14 @@ Ce sont des variables aléatoires à valeur dans $F \subset \setN$.
 
 \paragraph{Loi de Bernouilli} de paramètre $p \in [0,1]$.
 
-C'est le jeu de pile ou face. On considère $X: \Omega \rightarrow \{0,1\}$:
+C'est le jeu de pile ou face. On considère $X: \Omega \mapsto \{0,1\}$:
 \[ \Proba(X=1)=p \qquad\qquad \Proba(X=0)=1-p \]
 
 L'événement $\{X=1\}$ représente un succès, et sa probabilité est associée à $p$.
 
 \paragraph{Loi géométrique} de paramètre $p \in ]0,1]$.
 
-$X:\Omega \rightarrow \setN$ suit une loi géométrique si:
+$X:\Omega \mapsto \setN$ suit une loi géométrique si:
 \[ \Proba(X=k)=(1-p)^{k-1}p \]
 où $k \in \setNs$.
 
@@ -232,7 +237,7 @@ où $i$ représente l'instant du jeu.
 
 \paragraph{Loi binomiale} de paramètres $n\in \setNs$ et $p\in [0,1]$.
 
-C'est la loi variable $X:\Omega \rightarrow \{0,n\}$ définie par: 
+C'est la loi variable $X:\Omega \mapsto \{0,n\}$ définie par: 
 \[\Proba(X=k)=\parmi k n p^k (1-p)^{p-k}\]
 où $k \in \{0,n\}$.
 
@@ -242,7 +247,7 @@ On considère que $n$ variables aléatoires $(Y_i)_{i\in 1\dots n}$ sont indépe
 
 \paragraph{Loi de poisson} de paramètre $\lambda \in \setRp$.
 
-C'est la loi variable aléatoire $X: \Omega \rightarrow \setN$ définie par:
+C'est la loi variable aléatoire $X: \Omega \mapsto \setN$ définie par:
 \[\Proba(X=k)=\frac{\lambda^k}{k!} e^{-\lambda}\]
 
 Elle est utile pour compter le nombre de gens qui entrent dans un magasin, ou le nombre de voitures qui traversent une rue.
@@ -297,26 +302,26 @@ L'espérance de $X$ dans le cas où $X$ suit une loi:
 \end{itemize}
 
 \paragraph{Théorème de transfert}
-Soit $X:\Omega \rightarrow F$ une variable aléatoire discrète et $f:F \rightarrow \setR$, alors $f(x)$ est une variable discrète et intégrable et: \[\sum_{x\in F} f(x) \,\Proba(X=x) < \infty\]
+Soit $X:\Omega \mapsto F$ une variable aléatoire discrète et $f:F \mapsto \setR$, alors $f(x)$ est une variable discrète et intégrable et: \[\sum_{x\in F} f(x) \,\Proba(X=x) < \infty\]
 
 Dans ce cas, \[\Esper[f(x)] = \sum_{x\in F} f(x) \,\Proba(X=x)\]
 
 \paragraph{Remarque}
-Si $f: F\rightarrow\setR$ est bornée, alors $f(x)$ est intégrable; si $\abs{f(x)} \leq M$ $\forall x \in F$, alors: \[\sum_{x\in F} \abs{f(x)} \Proba(X=x) \leq M < \infty\]
+Si $f: F\mapsto\setR$ est bornée, alors $f(x)$ est intégrable; si $\abs{f(x)} \leq M$ $\forall x \in F$, alors: \[\sum_{x\in F} \abs{f(x)} \Proba(X=x) \leq M < \infty\]
 
 \paragraph{Exemple}
 Calcul de l'espérance de la loi binomiale de paramètres $n\in\setNs$ et $p\in[0,1]$: $\Esper[X]=n p$.
 
 \paragraph{Proposition}
-Si $X$ et $Y$ sont des variables aléatoires discrètes à valeur dans $F$ et $G$ indépendantes alors pour toutes fonctions $f: F\rightarrow \setR$ et $g: G\rightarrow \setR$ avec $f(x)$ et $g(y)$ intégrables, on a que $f(x) g(y)$ est intégrable et:\[\Esper[f(x) g(y)]=\Esper[f(x)] \,\Esper[g(y)]\]
+Si $X$ et $Y$ sont des variables aléatoires discrètes à valeur dans $F$ et $G$ indépendantes alors pour toutes fonctions $f: F\mapsto \setR$ et $g: G\mapsto \setR$ avec $f(x)$ et $g(y)$ intégrables, on a que $f(x) g(y)$ est intégrable et:\[\Esper[f(x) g(y)]=\Esper[f(x)] \,\Esper[g(y)]\]
 
 \paragraph{Proposition}
-Si $X$ et $Y$ sont deux variables aléatoires discrètes à valeur dans $F$ et $G$ et vérifient \[\Esper[f(x) g(y)] = \Esper[f(x)]\,\Esper[g(y)]\] pour toutes fonctions $f:F\rightarrow \setR$ et $g: G\rightarrow \setR$ bornées, alors $X$ et $Y$ sont indépendantes.
+Si $X$ et $Y$ sont deux variables aléatoires discrètes à valeur dans $F$ et $G$ et vérifient \[\Esper[f(x) g(y)] = \Esper[f(x)]\,\Esper[g(y)]\] pour toutes fonctions $f:F\mapsto \setR$ et $g: G\mapsto \setR$ bornées, alors $X$ et $Y$ sont indépendantes.
 
 \subsection{Variance}
 
 \paragraph{Définition}
-Soit $X:\Omega \rightarrow F$ une variable aléatoire discrète à valeurs dans $\setR$, $X$ est dite de ``carré intégrable'' si $\sum_{x\in F}x^2\, \Proba(X=x) < \infty$ et, dans ce cas, la variance vaut: \[\Var(x)=\Esper[(X-\Esper[X])^2]\]
+Soit $X:\Omega \mapsto F$ une variable aléatoire discrète à valeurs dans $\setR$, $X$ est dite de ``carré intégrable'' si $\sum_{x\in F}x^2\, \Proba(X=x) < \infty$ et, dans ce cas, la variance vaut: \[\Var(x)=\Esper[(X-\Esper[X])^2]\]
 
 La racine carrée de la variance s'appelle \emph{l'écart-type}, et se note: \[\sigma(x)=\sqrt{\Var(x)}\]
 
@@ -352,10 +357,10 @@ On pose $\varphi_i(x)$ telle que:
 d'où:
 \[\Esper[\varphi_i(X_i) \varphi_j(X_j)] = \Esper[\varphi_i(X_i)] \, \Esper[\varphi_j(X_j)] = 0\]
 
-\chapter{Fonctions génératrices}
+\section{Fonctions génératrices}
 
 \paragraph{Définition}
-Soit $X: \Omega \rightarrow \setN$ une variable aléatoire à valeurs entières. On appelle fonction génératrice la fonction $g_x:[-1,1]\rightarrow\setR$ telle que:
+Soit $X: \Omega \mapsto \setN$ une variable aléatoire à valeurs entières. On appelle fonction génératrice la fonction $g_x:[-1,1]\mapsto\setR$ telle que:
 \[g_x(s)=\Esper[s^x]=\sum_{k\in \setN} s^k\,\Proba(X=k)\]
 
 \paragraph{Proposition}
@@ -417,11 +422,69 @@ Si $X_i$ et $N$ suivent des lois géométriques de paramètre $q$, quelle est la
  &= \Proba(N=0) + \sum_{k=1}^\infty \Proba(N=k) (g_{X_i} (s))^k
 \end{align*}
 
+\chapter{Variables aléatoires à densité}
+
+\section{Variables aléatoires réelles à densité}
+
+\paragraph{Définition}
+Soit $(\Omega, \tribu A, \Proba)$ un espace de probabilité. On dit que $X:\Omega\mapsto\setR$ est une variable aléatoire à densité $p:\setR\mapsto\setRp$ si:
+\[\Proba(\omega\in\Omega: X_\omega \in \;]a,b])=\int_a^b p(x) \dif x\]
+où $a$ et $b$ sont des éléments de $\setR\union\lbrace-\infty,+\infty\rbrace$, et $a<b$.
+
+\paragraph{Remarque}
+$\Proba(X\in\setR)=1$ par définition, d'où $\int_{\setR} p(x) \dif x = 1$. On peut en déduire que:
+\begin{align*}
+    \Proba(X=x=0) &= \lim_{n\to\infty} \int_{n-\frac1n}^x p(y) \dif y \\
+    &= \lim_{n\to\infty} \Proba\left(X\in\left]x-\frac1n,x\right]\right)
+\end{align*}
+et on peut en déduire que:
+\begin{align*}
+    \Proba(X\in\;]a,b]) &= \Proba(X\in[a,b]) \\
+    &= \Proba(X\in[a,b[) \\
+    &= \Proba(X\in\;]a,b[)
+\end{align*}
+
+\paragraph{Exemples de densités}
+\begin{itemize}
+ \item $X$ suit la loi uniforme de l'intervalle $[a,b]$ où $a<b$ et on note $X\leadsto\uniforme([a,b])$ si $X$ possède la densité \[p(x)=\frac1{b-a}I_{[a,b]}(x)\]
+ 
+ \item Loi exponentielle de paramètre $\lambda>0$: on note $X\leadsto\expo(\lambda)$ si \[p(x)=\lambda e^{-\lambda x} I_{\setRp}(x)\]
+ 
+ \item Loi gaussienne (normale) de paramètres $\mu$ et $\sigma^2>0$: on note $X\leadsto\normale(\mu,\sigma^2)$: \[p(x)=\frac1{\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]
+ 
+ \item Loi de Cauchy de paramètre $a>0$: on note $X\leadsto\cauchy(x)$ si \[p(x)=\frac{a}{\pi(x^2+a^2)}\]
+\end{itemize}
+
+\section{Espérance et variance}
+
+\paragraph{Espérance}
+La variable aléatoire $X:\Omega\mapsto\setR$ qui possède la densité $p$ est dite:
+\begin{itemize}
+ \item intégrable si \[\int_{\setR} \abs{x}\,p(x) \dif x < \infty\]
+ son espérance vaut alors: \[\Esper[X] = \int_{\setR} \abs{x}\,p(x) \dif x\]
+ 
+ \item de carré intégrable si \[\int_{\setR} x^2\,p(x) \dif x < \infty\]
+ on a alors aussi: \[\Esper[X^2] = \int_{\setR} x^2\,p(x)\dif x\]
+\end{itemize}
+
+\paragraph{Variance}
+La variance vaut: \[\Var(X)=\Esper[X^2]-\Esper[X]^2\]
+
+\paragraph{Propriétés de l'espérance}
+\begin{itemize}
+ \item Linéarité si $X$ et $Y$ sont à densité et intégrables; \[\Esper[X+\lambda Y] = \Esper[X] + \lambda \Esper[Y]\]
+ où $\lambda \in \setR$.
+ 
+ \item Condition suffisante d'intégrabilité: soit $Y$ une variable aléatoire à densité et intégrable. Si $X$ est à densité et vérifie $\Proba(\abs{X}\leq Y)=1$ alors $X$ est intégrable.
+ 
+ \item Croissance: Si $X$ et $Y$ sont à densité et intégrables, \[\Proba(X\leq1) = 1 \;\implique\; \Esper[X] \leq \Esper[Y]\]
+\end{itemize}
+
 \chapter{Vecteurs aléatoires à densité}
 
 \section{Définition}
 
-On dit que le vecteur aléatoire $X = (\Xoned): \Omega \rightarrow \setR^d$ possède la densité $p: \setR^d \rightarrow \setRp$ pour tout $o$ un ouvert de $\setR^d$.
+On dit que le vecteur aléatoire $X = (\Xoned): \Omega \mapsto \setR^d$ possède la densité $p: \setR^d \mapsto \setRp$ pour tout $o$ un ouvert de $\setR^d$.
 
 \begin{align*}
  \Proba(X\in o) &= \int_o p(x) \dif x \\
@@ -430,16 +493,16 @@ On dit que le vecteur aléatoire $X = (\Xoned): \Omega \rightarrow \setR^d$ poss
 \end{align*}
 
 \paragraph{Théorème}
-Le vecteur aléatoire $X:\Omega \rightarrow \setR^d$ possède la densité $p:\setR^d \rightarrow \setRp$ si et seulement si pour toute fonction bornée $f:\setR^d \rightarrow \setR$ on a que: \[\Esper[f(x)]=\int_{\setR^d}f(x)p(x) \dif x\]
+Le vecteur aléatoire $X:\Omega \mapsto \setR^d$ possède la densité $p:\setR^d \mapsto \setRp$ si et seulement si pour toute fonction bornée $f:\setR^d \mapsto \setR$ on a que: \[\Esper[f(x)]=\int_{\setR^d}f(x)p(x) \dif x\]
 
 \paragraph{Remarque}
-Soient $X:\Omega \rightarrow \setR^d$ de densité $p$ et $f:\setR^d \rightarrow \setR$.
+Soient $X:\Omega \mapsto \setR^d$ de densité $p$ et $f:\setR^d \mapsto \setR$.
 
 Si $\int_{\setR^d} \lvert f(x) \rvert p(x) \dif x < \infty$ alors $f(x)$ est dite \emph{intégrable} et:
 \[ \Esper[f(x)] = \int_{\setR^d} f(x) p(x) \dif x \]
 
 \section{Densité marginale}
-Soit $X=(\Xoned):\Omega \rightarrow \setR^d$ un vecteur aléatoire à densité notée $p$, on considère $k<d$.
+Soit $X=(\Xoned):\Omega \mapsto \setR^d$ un vecteur aléatoire à densité notée $p$, on considère $k<d$.
 
 Le vecteur $(\Xoned)$ est-il à densité?
 \[\forall o_k \text{ de }\setR^k\]
@@ -454,11 +517,11 @@ Soit $X$ une variable aléatoire qui possède une densité, alors tout sous-vect
 \section{Changement de variable}
 On se pose la question suivante:
 \begin{cquote}{}
- Si $X$ est une variable aléatoire qui possède une densité de valeurs dans $\setR^d$ et $f$ est la fonction $f:\setR^d \rightarrow \setR^d$, est-ce que $Y=f(x)$ est à densité?
+ Si $X$ est une variable aléatoire qui possède une densité de valeurs dans $\setR^d$ et $f$ est la fonction $f:\setR^d \mapsto \setR^d$, est-ce que $Y=f(x)$ est à densité?
 \end{cquote}
 
 \paragraph{Proposition}
-Soit $X:\Omega \rightarrow \setR^d$ est un vecteur aléatoire qui possède la densité $p$ portée par un ouvert $o$ de $\setR^d$ (c'est-à-dire que $\int_o p(x) \dif x = 1$), et $\varphi$ une bijection de $o$ sur $G'$ de classe C', ainsi que son inverse $\varphi^{-1}$; alors $Y=f(X)$ possède la densité:
+Soit $X:\Omega \mapsto \setR^d$ est un vecteur aléatoire qui possède la densité $p$ portée par un ouvert $o$ de $\setR^d$ (c'est-à-dire que $\int_o p(x) \dif x = 1$), et $\varphi$ une bijection de $o$ sur $G'$ de classe C', ainsi que son inverse $\varphi^{-1}$; alors $Y=f(X)$ possède la densité:
 \[q(y) = I_{G'}(y)\;p(\varphi^{-1}(y)) \; \lvert \jac \varphi^{-1}(y) \rvert \]
 où $\jac\varphi^{-1} (y)$ est le Jacobin de l'inverse de $\varphi$; et vaut:
 \[ \jac \varphi^{-1}(y) = \det\left(\frac{\partial(\varphi^{-1}_i)}{\partial y_j}(y)\right)_{1\leq i\leq d, 1\leq j \leq d} \]
@@ -466,7 +529,7 @@ où $\jac\varphi^{-1} (y)$ est le Jacobin de l'inverse de $\varphi$; et vaut:
 \section{Indépendance}
 
 \paragraph{Définition}
-Les vecteurs aléatoires $X_1:\Omega \rightarrow \setR^{d_1}\dots X_n:\Omega \rightarrow \setR^{d_n}$ qui possèdent les densités $p_1:\setR^{d_1}\rightarrow \setR\dots p_n:\setR^{d_n} \rightarrow \setR$, sont dites indépendantes si $X=(\Xonen)$ possède la densité $p_1(x_1) p_2(x_2) \dots p_n (x_n)$ telle que:
+Les vecteurs aléatoires $X_1:\Omega \mapsto \setR^{d_1}\dots X_n:\Omega \mapsto \setR^{d_n}$ qui possèdent les densités $p_1:\setR^{d_1}\mapsto \setR\dots p_n:\setR^{d_n} \mapsto \setR$, sont dites indépendantes si $X=(\Xonen)$ possède la densité $p_1(x_1) p_2(x_2) \dots p_n (x_n)$ telle que:
 
 \begin{align*}
  X_1 &= \begin{pmatrix}X_{1,1}\\\vdots\\X_{1,d_1}\end{pmatrix} = p_1(x_1) = p_1(x_{1,n},\dots x_{1,d_1})\\
@@ -475,7 +538,160 @@ Les vecteurs aléatoires $X_1:\Omega \rightarrow \setR^{d_1}\dots X_n:\Omega \ri
 \end{align*}
 
 \paragraph{Proposition}
-Soient $X_1:\Omega \rightarrow \setR^{d_1}, \dots X_n:\Omega \rightarrow \setR^{d_n}$, $n$ variables aléatoires indépendantes, alors pour toute fonction $f_1:\setR^{d_1}\rightarrow \setR, \dots f_n:\setR^{d_n}\rightarrow \setR$ est intégrable et:
+Soient $X_1:\Omega \mapsto \setR^{d_1}, \dots X_n:\Omega \mapsto \setR^{d_n}$, $n$ variables aléatoires indépendantes, alors pour toute fonction $f_1:\setR^{d_1}\mapsto \setR, \dots f_n:\setR^{d_n}\mapsto \setR$ est intégrable et:
 \[\Esper[f_1(X_1)\: f_2(X_2) \dots f_n(X_n)] = \Esper[f_1(X_1)]\: \Esper[f_2(X_2)] \dots \Esper[f_n(X_n)]\]
+
+\section{Covariance}
+On rappelle que si $Y$ et $Z$ sont des variables de carré intégrable, alors le produit $YZ$ est intégrable car $\abs{YZ}\leq\frac{Y^2 + Z^2}{Z}$.
+
+\paragraph{Définition}
+Soient $Y$ et $Z$ deux variables aléatoires réelles de carré intégrable. On appelle covariance de $Y$ et $Z$ le nombre noté $\Cov(Y,Z)$:
+\[ \Cov(Y,Z)=\Esper\left[(Y-\Esper[Y])(Z-\Esper[Z])\right] \]
+
+Soit $X=\Xoned$ un vecteur aléatoire à valeurs dans $\setR^d$ dont les composantes sont de carré intégrable. On appelle matrice de covariance du vecteur $X$ la matrice $K^X$ de dimension $d\times d$ où:
+\[ K_{i,j}^X = \Esper[(X_i - \Esper[X_i]) (X_j-\Esper[X_j])] \]
+
+\paragraph{Propriétés}
+\begin{itemize}
+ \item $\Cov(Y,Y)=\Var(Y)$ si $Y$ est à valeurs réelles.
+ \item Les éléments sur la diagonale de $K^X$ sont les variances des composantes de $X$.
+ \item $\Cov(Y,Z) = \Esper[YZ] - \Esper[Y]\;\Esper[Z]$
+ \item Si $Y$ et $Z$ sont indépendantes, alors $\Cov(Y,Z)=0$.
+ \item La matrice $X^k$ est symétrique et positive:
+ \[ \transposee{(K^X)} = K^X \text{ et } \transposee{\!u} K^X u \geq 0 \] où $u\in\setR^d$.
+\end{itemize}
+
+\paragraph{Corrolaire}
+Si $\Xoned$ sont des variables aléatoires réelles de carré ntégrable et indépendantes;
+\[ \Var\left(\sum_{i=1}^d X_i\right) = \sum_{i=1}^d \Var(X_i) \]
+
+\chapter{Convergence et théorèmes limites}
+
+Dans ce chapitre, on va introduire différents modes de convergence pour une suite de variables aléatoires. Cela va nous permettre d'établir deux résultats:
+\begin{itemize}
+ \item La loi forte des grands nombres, qui permet d'assurer la convergence de la moyenne empirique $\frac 1 n \sum_{i=1}^n X_i$ d'une suite IID $(X_i)_{i\geq1}$ de variable aléatoire vers $\Esper[X_i]$.
+ 
+ \item Le théorème limite centrale, qui indique à quelle vitesse a lieu la convergence.
+\end{itemize}
+
+\section{Convergence}
+
+\paragraph{Définition}
+Pour $n\to+\infty$, on dit qu'une suite $(X_n)_{n\geq1}$ de variables aléatoires à valeurs dans $\setR^d$ converge vers la variable aléatoire $X$ à valeurs dans $\setR^d$:
+\begin{itemize}
+ \item Presque sûrement si $\Proba(\omega\in\Omega, \lim_{n\to\infty} X_n(\omega) = X(\omega)) = 1$.
+ 
+ \item En probabilité: $\forall \varepsilon > 0$:
+ \[\lim_{n\to\infty} \Proba(\omega\in\Omega, \abs{X_n(u) - X(u)} \geq \varepsilon) = 0\]
+ 
+ \item Dans $L^1$: si $X$ et $X_n$ pour $n\geq1$ sont intégrables:
+ \[ \lim_{n\to\infty} \Esper[\abs{X_n - X}] = 0 \]
+ 
+ \item Dans $L^2$: si $X$ et $X_n$ pour $n\geq 1$ sont de carré intégrable:
+ \[ \lim_{n\to\infty} \Esper\left[(X_n-X)^2\right] = 0\]
+\end{itemize}
+
+\paragraph{Remarque}
+Soit $(X_n)_{n\geq1}$ une suite de variables aléatoires qui converge vers $X$ dans $L^1$; alors $\lim_{n\to\infty} \Esper[X_n]=\Esper[X]$, et \[X_n-X\leq\abs{X_n-X} \implique \lim_{n\to\infty} \Esper[X_n]\leq\Esper[X]\] et par symétrie on obtient l'autre inégalité.
+
+\paragraph{Théorème de convergence dominée}
+Soit $(X_n)_{n\geq1}$ une suite de variables aléatoires qui converge presque sûrement vers $X$. On suppose de plus que la suite $(X_n)_{n\geq1}$ est dominée au sens où où il existe une variable aléatoire $Y$ intégrable telle que $\Proba(\abs{X_n}\leq Y) = 1$ pour $n\geq1$; alors $X$ est intégrable et $(X_n)_{n\geq1}$ converge dans $L^1$ vers $X$ et en particulier, \[\lim_{n\to\infty} \Esper[X_n]=\Esper[X]\]
+
+\paragraph{Proposition: inégalités}
+\begin{itemize}
+ \item Inégalité de Markov: si $\Esper[\abs{X}]<\infty$ alors $\forall a > 0$:
+ \[\Proba(\abs{X}\geq a) \leq \frac{\Esper[\abs{X}]}a\]
+ 
+ \item Inégalité de Bienaymé Tchebychev: si $\Esper[\abs{X^2}]<\infty$ alors $\forall a > 0$:
+ \[\Proba(\abs{X}\geq a) \leq \frac{\Esper[X^2]}{a^2}\]
+ 
+ \item Inégalité de Cauchy-Schwartz: si $X$ et $Y$ sont de carré intégrable alors \[\abs{\Esper[XY]}\leq\sqrt{\Esper[X^2]} \sqrt{\Esper[Y^2]}\]
+\end{itemize}
+
+\paragraph{Proposition}
+\begin{itemize}
+ \item La convergence dans $L^2$ implique la convergence dans $L^1$, implique la convergence en probabilité.
+ 
+ \item La convergence presque sûre implique la convergence en probabilité.
+ 
+ \item Si $(X_n)_{n\geq1}$ converge dans $L^2$ vers $X$ alors: \[\lim_{n\to\infty} \Esper[X_n] = \Esper[X]\] \[\lim_{n\to\infty}\Esper[X_n^2] = \Esper[X]\] \[\lim_{n\to\infty} \Var(X_n) = \Var(X)\]
+\end{itemize}
+
+\section{Loi des grands nombres}
+
+\subsection{Loi faible des grands nombres}
+
+\paragraph{Proposition}
+La moyenne empirique $\overline X_n = \frac 1 n \sum_{k=1}^n X_k$ d'une suite $(X_k)_{k \geq 1}$ de variable aléatoire IID et de carré intégrable converge dans $L^2$ vers $\Esper[X_i]$, $\forall j \; \Esper[X_j] = \Esper[X_i]$.
+
+\subsection{Loi forte des grands nombres}
+
+\paragraph{Proposition}
+La moyenne empirique d'une suite de variables aléatoires à valeurs réelles IID intégrables, converge presque sûrement et dans $L^1$ vers $\Esper[X_i]$.
+
+\paragraph{Démonstration d'un cas particulier}
+On suppose $\Esper[X_1^4]<\infty$ et on va montrer la convergence presque sûre $\Esper[X_i]$.
+\begin{align*}
+ \Esper\left[(\overline X_n - \Esper[X_1])^4\right] &= \Esper\left[\left(\frac 1 n \sum_{k=1}^n X_k - \frac 1 n \sum_{k=1}^n \Esper[X_k]\right)^4\right] \\
+ &= \frac 1 {n^4}\;\Esper\left[\left(\sum_{k=1}^n X_k - \Esper[X_k]\right)^4\right] \\
+ &= \frac 1 {n^4} \sum_{i_1 = 1}^n \sum_{i_2 = 1}^n \sum_{i_3 = 1}^n \sum_{i_4 = 1}^n \Esper[(X_{i_1}-\Esper[X_{i_1}])]\; \Esper[(X_{i_2}-\Esper[X_{i_2}])] \\ &\qquad\qquad\qquad\qquad\qquad\, \Esper[(X_{i_3}-\Esper[X_{i_3}])]\; \Esper[(X_{i_4}-\Esper[X_{i_4}])]
+\end{align*}
+
+On remarque que $\Esper[X_{i_1} - \Esper[X_{i_1}]] = 0$. On en déduit que les valeurs sont égales par paires:
+\begin{align*}
+ \Esper\left[(X_{i_1} - \Esper[X_{i_1}])^2\right]\;\Esper\left[(X_{i_2} - \Esper[X_{i_2}])^2\right] &= \Var(X_{i_1}) \Var(X_{i_2}) \\
+ &= \Var(X_1)^2
+\end{align*}
+car les deux sont identiquement distribuées.
+
+On peut donc reprendre l'égalité précédente;
+\begin{align*}
+ \Esper\left[(\overline X_n - \Esper[X_1])^4\right] &= \frac 1 {n^4} \left[n \Esper\left[(X_1 - \Esper[X_1])^4\right] + 3 n (n-1) \Var(X_1)^2\right]
+\end{align*}
+avec \[ \Esper\left[(\overline X_n - \Esper[X_i])^4\right] = \frac 1 {n^3}\; \Esper\left[(X_i - \Esper[X_1])^4\right] + 3 \frac{n-1}{n^3} \Var(X_i)^2 \]
+
+On observe:
+\begin{align*}
+ \sum_{n=1}^\infty \Esper\left[(\overline X_n - \Esper[X_i])^4\right] < \infty &\implique \Esper\left[\sum_{n=1}^\infty (\overline X_n - \Esper[X_i])^4\right] < \infty \\
+\end{align*}
+
+On en déduit que:
+\begin{align*}
+ &\Proba(\omega \in \Omega: \sum_{k=1}^\infty (\overline X_n(\omega) - \Esper[X_1])^4 < \infty) = 1 \\
+ \implique\;& \Proba(\omega \in \Omega: \lim_{n\to\infty} (\overline X_n(\omega) - \Esper[X_1])^4 < \infty = 0)\\
+ \implique\;& \Proba(\omega \in \Omega: \lim_{n\to\infty} \overline X_n(\omega) = \Esper[X_1]) = 1
+\end{align*}
+
+\section{Fonction caractéristique et convergence en loi}
+
+Il est nécessaire d'introduire la convergence en loi pour étudier la vitesse et convergence dans la loi forte (faible) des grands nombres.
+
+\subsection{Fonction caractéristique}
+
+\paragraph{Définition}
+Soit $X$ un vecteur aléatoire $X:\Omega\mapsto\setR^d$. On appelle \emph{fonction caractéristique} de $X$ (notée $\Phi X$) la fonction définie sur $\setR^d$:
+\[ \Phi X (u) = \Esper[e^{i\, \transposee{\!u}\, x}] \]
+$\forall u \in \setR^d$ et $\transposee{\!u}\in\setR$.
+
+\paragraph{Application aux lois connues}
+\begin{itemize}
+ \item Loi de Bernouilli de paramètre $p\in[0,1]$:
+ \[ \Phi X(u) = 1-p+pe^{iu} \] où $u\in\setR$.
+ 
+ \item Loi binomiale de paramètres $n\in\setNs$ et $p\in[0,1]$:
+ \[ \Phi X(u) = (1-p + pe^{iu})^n \] où $u\in\setR$.
+ 
+ \item Loi géométrique de paramètre $p\in]0,1]$:
+ \[ \Phi X(u) = \frac{pe^{iu}}{1-(1-p)e^{iu}} \] où $u\in\setR$.
+ 
+ \item Loi uniforme sur $[a,b]$:
+ \[ \Phi X(u) = \frac{\sin((b-a)\frac u 2)}{(b-a)\frac u 2} e^{iu \frac{a+n}2} \] où $u\in\setR$.
+ 
+ \item Loi exponentielle de paramètre $\lambda>0$:
+ \[ \Phi X(u) = \frac \lambda {\lambda^{-iu}} \] où $u\in\setR$.
+ 
+ \item Loi gaussienne $\normale(\mu, \sigma^2)$:
+ \[ \Phi X(u) = \frac{\sigma^2 u^2}2 e^{iu\mu} \] où $u\in\setR$.
+\end{itemize}
 
 \end{document}
