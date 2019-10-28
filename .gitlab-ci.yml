@@ -1,5 +1,5 @@
 image: ubuntu:latest
-
+0;115;0c
 stages:
   - build
   - deploy
@@ -14,7 +14,6 @@ pdf:
   image: clovisai/latex:latest
   script:
     - make pdf
-    - mv semestre-*/*.pdf pdfs/
     - for dir in semestre-*; do mkdir -p pdfs/$dir; cp $dir/*.pdf pdfs/$dir/; done
   artifacts:
     paths:
