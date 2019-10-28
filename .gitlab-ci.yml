@@ -1,5 +1,5 @@
 image: ubuntu:latest
-0;115;0c
+
 stages:
   - build
   - deploy
