@@ -694,4 +694,38 @@ $\forall u \in \setR^d$ et $\transposee{\!u}\in\setR$.
  \[ \Phi X(u) = \frac{\sigma^2 u^2}2 e^{iu\mu} \] où $u\in\setR$.
 \end{itemize}
 
+\chapter{Le théorème de limite centrale}
+
+\paragraph{Théorème}
+Soit $(X_j)_{j\geq1}$ ne ste de variables aléatoires réelles IID. telles que $\Esper[X_i^2]<+\infty$ et $\sigma=\sqrt{\Var(X_i)} > 0$. On note la moyenne empirique: \[\overline X_n = \frac1n \sum_{k=1}^n X_k\]
+
+Alors on a:
+\[\frac{\sqrt n}{\overline V} \left(\overline X_n - \Esper[X_i]\; \underset{n\to\infty}{\overset{\mathcal{L}}\to} \;Y \leadsto \normale(0, 1)\right)\]
+
+\section{Intervalle de confiance et méthode de Monte Carlo}
+
+\paragraph{Énoncé}
+Le principe de la méthode de Monte Carlo est d'évaluer numériquement l'espérance d'une variable aléatoire réelle $X$ intégrable.
+
+On génère une réalisation d'une suite de variables aléatoires $(X_j)_{j\geq1}$ IID. de même loi que $X$.
+
+L'idée est d'approcher $\Esper[X]$ par $\overline X_n = \frac1n \sum_{k=1}^n X_k$. La loi forte des grands nombres assume la convergence de cette approximation.
+
+Si on donne $f(x)=I_{\abs x \leq a}$ la fonction continue en dehors de $a$ et $-a$, qui est bornée. On peut alors dire que \[\lim_{n\to\infty} \Esper\left[f\left(\frac{\sqrt n}{\overline V} (\overline X_n - \Esper[X])\right)\right] = \Esper[f(Y)]\]
+où $Y\leadsto\normale(0,1)$.
+
+\paragraph{Explication rapide}
+Pour $n$ grand on a que; \[\Proba\left[\overline X_n - \frac{a\sigma}{\sqrt n} \leq \Esper[X] \leq \overline X_n + \frac{a\sigma}{\sqrt n}\right] \approx \int_{-a}^a \frac1{\sqrt{2\pi}} e^{-\frac{y^2}2} \dif y\]
+
+Pour un intervalle de confiance à 95\%, on prend $a=1.96$; et pour un intervalle à 99\%, on prend $a=2.58$.
+
+Cela veut dire que l'on a confiance à 99\% que l'espérance $\Esper[X]$ soit comprise dans l'intervalle: \[\left[ \overline X_n - \frac{2.58\sigma}{\sqrt n};\; \overline X_n + \frac{2.58\sigma}{\sqrt n} \right]\]
+
+Une fois que $a$ est fixé, il reste à choisir $n$ pour s'assurer de la précision, sachant que la taille de l'intervalle de confiance vaut $\frac{2\sigma a}{\sqrt n}$.
+
+On approxime $\sigma$ par \[\overline\sigma_n = \sqrt{\frac1n \sum_{k=1}^n X_k^2 - (\overline X_n)^2}\]
+
+On choisit alors pour intervalle de confiance:
+\[I_n = \left[ \overline X_n - \frac{a\sigma_n}{\sqrt n};\; \overline X_n + \frac{a\sigma_n}{\sqrt n} \right]\]
+
 \end{document}
