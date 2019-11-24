@@ -10,6 +10,7 @@
 \newcommand{\uniforme}{\mathcal{U}}
 \newcommand{\cauchy}{\mathcal{C}}
 \newcommand{\expo}{\mathcal{E}}
+\newcommand{\binomiale}{\mathcal{B}}
 \newcommand{\implique}{\Rightarrow}
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\laweq}{\overset{\mathcal L}=}
@@ -79,13 +80,9 @@ On retrouve aussi
 
 \subsection{Exemple}
 
-La probabilité uniforme fait que tous les événements élémentaires $\omega_1\dots\omega_n$ vont avoir la même probabilité.
+La probabilité uniforme correspond à ce que tous les événements élémentaires $\omega_1\dots\omega_n$ aient la même probabilité.
 
-\[ p_i = p_1, \; \forall i \in \lbrace 1 \dots n \rbrace \]
-
-\[ 1 = \sum_{i=1}^n p_i = n p_1 = card(\Omega) p_1 \]
-donc $p_i = \frac{1}{card(\Omega)}$, et
-\[ \Proba(A) = \sum_{\omega_i \in A} p_i = \frac{card(A)}{card(B)} \]
+\[ p_i = \frac1n, \; \forall i \in \lbrace 1 \dots n \rbrace \]
 
 \section{Probabilités conditionnelles et indépendance}
 \subsection{Probabilité conditionnelle}
@@ -93,7 +90,7 @@ donc $p_i = \frac{1}{card(\Omega)}$, et
 La probabilité conditionnelle permet de prendre en compte l'information dont on dispose pour actualiser la probabilité d'un événement.
 
 \paragraph{Définition}
-Soit $\Omega$ un ensemble muni d'une probabilité $\Proba$. On considère deux événements $A$ et $B$. La probabilité conditionnelle de $A$ sachant $B$ est définie telle que:
+Soit $\Omega$ un ensemble muni d'une probabilité $\Proba$. On considère deux événements $A$ et $B$. La probabilité conditionnelle de $A$ sachant $B$ est définie par:
 \[
 \Proba(A \sachant B) =
     \begin{cases*}
@@ -103,23 +100,23 @@ Soit $\Omega$ un ensemble muni d'une probabilité $\Proba$. On considère deux �
 \]
 
 \paragraph{Exemple 1}
-Quelle est la probabilité qu'un individu ayant deux enfants ai un garçon, sachant qu'il a une fille?
+Quelle est la probabilité qu'un individu ayant deux enfants ait un garçon, sachant qu'il a une fille?
 
 $\Omega = \lbrace (F,F), (G,G), (F,G), (G,F) \rbrace$
 
 On définit $A$ l'événement \emph{avoir un garçon} et $B$ l'événement \emph{avoir une fille}.
 
 \[ \Proba(A \sachant B) = \frac{\Proba(A \inter B)}{\Proba(B)} = \frac{card(A \inter B)}{card(B)} = \frac{2}{3} \]
-donc, la probabilité que l'individu ai un garçon, en sachant qu'il a une fille, est $\frac 2 3$.
+donc, la probabilité que l'individu ait un garçon, en sachant qu'il a une fille, est $\frac 2 3$.
 
 \paragraph{Exemple 2}
-Quelle est la probabilité qu'un individu ayant deux enfants ai un garçon, sachant que l'aînée est une fille?
+Quelle est la probabilité qu'un individu ayant deux enfants ait un garçon, sachant que l'aînée est une fille?
 
 $\Omega = \lbrace (F,F), (G,G), (G,F) \rbrace$ \textit{(on ignore l'ordre)}
 
 \[ \Proba(F,F)=\Proba(G,G)=\frac 1 4 \]
 \[ \Proba(F,G)=\frac 1 2 \]
-donc, la probabilité que l'individu ai un garçon, en sachant que l'aînée est une fille, est $\frac 1 2$.
+donc, la probabilité que l'individu ait un garçon, en sachant que l'aînée est une fille, est $\frac 1 2$.
 
 \paragraph{Remarque}
 $\Proba(A \inter B) = \Proba(A \sachant B) \Proba(B)$
@@ -136,11 +133,12 @@ Soit $B_1 \dots B_n$ une partition de $\Omega$ ($B_i \inter B_j = \emptyset$ pou
 \paragraph{Définition}
 Soit $\Omega$ muni d'une probabilité $\Proba$, $A$ et $B$ sont des événements indépendants si et seulement si:
 \[\Proba(A \inter B) = \Proba(A) \Proba(B)\]
+ou, de façon équivalente:
 \[\Proba(A \sachant B) = \Proba(A)\]
 \[\Proba(B \sachant A) = \Proba(B)\]
 
 $A_1 \dots A_n$ sont indépendants si et seulement si:
-\[\forall j \subset \lbrace 1 \dots n \rbrace, \; \Proba(\Inter_{j \in J} A_j) = \prod_{j \in J} \Proba(A_j)\]
+\[\forall J \subset \lbrace 1 \dots n \rbrace, \; \Proba(\Inter_{j \in J} A_j) = \prod_{j \in J} \Proba(A_j)\]
 
 \chapter{Variables aléatoires discrètes}
 
@@ -152,7 +150,7 @@ Une tribu $\tribu{A}$ sur $\Omega$ est une famille de sous-ensembles d'$\Omega$ 
 \begin{itemize}
  \item $\emptyset$ et $\Omega$ sont des éléments de $\tribu A$.
  \item $A \in \tribu A \implique \bar A \in \tribu A $
- \item Si $(A_i)_{i \in \setN} \subset \tribu A \implique \Union_{i=1}^{+\infty} A_i \in \tribu A$
+ \item Si $(A_i)_{i \in \setN} \subset \tribu A$, alors $\Union_{i=1}^{+\infty} A_i \in \tribu A$
 \end{itemize}
 
 \paragraph{Exemples}
@@ -188,7 +186,7 @@ Une famille quelconque d'événements est dite indépendante si toute sous-famil
 On appelle variable aléatoire discrète $X$ une application $X: \Omega \mapsto F$ où $F$ est un ensemble fini ou dénombrable. Pour $x \in F$ on note:
 \[ \{X=x\} = \{\omega \in \Omega: X(\omega) \in F\} \]
 
-Une famille du nombre $\Proba(X=x)_{x \in F}$ s'appelle la loi de $X$.
+La famille de nombres $\Proba(X=x)_{x \in F}$ s'appelle la loi de $X$.
 
 Si $A \in \Omega$ alors la fonction indicatrice $I_A$ de $A$ est une variable aléatoire et $\Proba(I_A = 1) = \Proba(A)$.
 
@@ -203,12 +201,13 @@ Si $A \in \Omega$ alors la fonction indicatrice $I_A$ de $A$ est une variable al
 
 \paragraph{Définition}
 Deux variables aléatoires discrètes $X$ et $Y$ à valeurs dans $F$ et $G$ respectivement sont dites indépendantes si:
-\[ \Proba(X=x, Y=y)=\Proba(X=X) \Proba(Y=y) \]
-où $x\in F$ et $y \in G$. On note:
+\[ \Proba(X=x, Y=y)=\Proba(X=x) \Proba(Y=y) \]
+où $x\in F$ et $y \in G$, où l'on note:
 \[ \{X=x, Y=y\}=\{X=x\}\inter\{Y=y\} \]
 
 \paragraph{Définition}
-$n$ variables aléatoires $X_1\dots X_n$ à valeurs dans $F_1\dots F_n$ respectivement sont indépendantes si toute sous-famille \emph{finie} est indépendante.
+$n$ variables aléatoires sont indépendantes si pour tout $(x_i)$, \[\Proba(X_1=x_1, X_2=x_2\dots X_n=x_n) = \prod \Proba(X_i=x_i)\]
+c'est à dire, que leurs intersections sont nulles.
 
 \subsection{Lois discrètes usuelles}
 
@@ -216,26 +215,40 @@ Ce sont des variables aléatoires à valeur dans $F \subset \setN$.
 
 \paragraph{Loi de Bernouilli} de paramètre $p \in [0,1]$.
 
-C'est le jeu de pile ou face. On considère $X: \Omega \mapsto \{0,1\}$:
+\begin{cquote}{}
+Je joue à pile ou face.
+
+$\Proba(X=1) = 0.1$ signifie que j'ai 10\% de chances de gagner.
+\end{cquote}
+
+On considère $X: \Omega \mapsto \{0,1\}$:
 \[ \Proba(X=1)=p \qquad\qquad \Proba(X=0)=1-p \]
 
 L'événement $\{X=1\}$ représente un succès, et sa probabilité est associée à $p$.
 
 \paragraph{Loi géométrique} de paramètre $p \in ]0,1]$.
 
+\begin{cquote}{}
+Si je joue beaucoup de fois à pile ou face, au bout de la quantième vais-je gagner?
+
+$\Proba(X=5)=0.1$ signifie que j'ai 10\% de chances de gagner lors de 5\ieme{} tentative.
+\end{cquote}
+
 $X:\Omega \mapsto \setN$ suit une loi géométrique si:
 \[ \Proba(X=k)=(1-p)^{k-1}p \]
-où $k \in \setNs$.
+où $k \in \setNs$, et $p$ représente la probabilité de gagner.
 
-$X$ représente le temps du premier succès dans la répétition indépendante et identiquement distribuée d'un jeu dont la probabilité de succès vaut $p$.
-
-On considère une suite dee variables aléatoires qui sont modélisées par le jeu.
-
-Autrement, on considère des variables aléatoires $\{Y_i\}_{i\in \setNs}$ indépendantes, et $Y_i$ suit une loi dee Bernouilli de paramètre $p\in ]0,1]$.
+Autrement, on considère des variables aléatoires $\{Y_i\}_{i\in \setNs}$ indépendantes, et $Y_i$ suit une loi de Bernouilli de paramètre $p\in ]0,1]$.
 \[ \Proba(Y_i = 1) = p \qquad\qquad \Proba(Y_i=0)=1-p \]
 où $i$ représente l'instant du jeu.
 
 \paragraph{Loi binomiale} de paramètres $n\in \setNs$ et $p\in [0,1]$.
+
+\begin{cquote}{}
+Je joue à pile ou face, combien de fois je peux m'attendre à gagner?
+
+$\Proba(X=5)=0.1$ avec $X\leadsto\binomiale(15, p)$ signifie que j'ai 10\% de chances de gagner 5 fois à pile ou face, si je joue 15 parties.
+\end{cquote}
 
 C'est la loi variable $X:\Omega \mapsto \{0,n\}$ définie par: 
 \[\Proba(X=k)=\parmi k n p^k (1-p)^{p-k}\]
@@ -245,12 +258,15 @@ $X$ correspond au nombre de succès lors de la répétition indépendante de jeu
 
 On considère que $n$ variables aléatoires $(Y_i)_{i\in 1\dots n}$ sont indépendants si $Y_i$ suit une loi de Bernouilli de paramètre $p$.
 
-\paragraph{Loi de poisson} de paramètre $\lambda \in \setRp$.
+\paragraph{Loi de Poisson} de paramètre $\lambda \in \setRp$.
+\begin{cquote}{}
+Combien de personnes vont entrer dans un magasin dans la journée?
+
+$\Proba(X=5)=0.1$ signifie qu'il y a 10\% de chances que 5 personnes entrent dans le magasin aujourd'hui.
+\end{cquote}
 
 C'est la loi variable aléatoire $X: \Omega \mapsto \setN$ définie par:
 \[\Proba(X=k)=\frac{\lambda^k}{k!} e^{-\lambda}\]
-
-Elle est utile pour compter le nombre de gens qui entrent dans un magasin, ou le nombre de voitures qui traversent une rue.
 
 \subsection{Loi marginale}
 
@@ -258,7 +274,7 @@ On considère deux variables aléatoires discrètes $X$ et $Y$ à valeurs dans $
 \begin{equation} \Proba(X=x)_{x\in F} \qquad\qquad \Proba(Y=y)_{y\in G} \label{eq:couple-solo}\end{equation}
 
 $(X,Y)$ est une variable aléatoire à valeur dans $F \times G$ et est discrète, donc:
-\begin{equation} \Proba((X,Y)=(x,y))_{x,y \in F \times G} \label{eq:couple-duo}\end{equation}
+\begin{equation} \Proba((X,Y)=(x,y))_{(x,y) \in F \times G} \label{eq:couple-duo}\end{equation}
 
 \paragraph{Démonstration}
 \begin{align*}
@@ -302,9 +318,9 @@ L'espérance de $X$ dans le cas où $X$ suit une loi:
 \end{itemize}
 
 \paragraph{Théorème de transfert}
-Soit $X:\Omega \mapsto F$ une variable aléatoire discrète et $f:F \mapsto \setR$, alors $f(x)$ est une variable discrète et intégrable et: \[\sum_{x\in F} f(x) \,\Proba(X=x) < \infty\]
+Soit $X:\Omega \mapsto F$ une variable aléatoire discrète et $f:F \mapsto \setR$, alors $f(X)$ est une variable discrète et intégrable si: \[\sum_{x\in F} \abs{f(x)} \,\Proba(X=x) < \infty\]
 
-Dans ce cas, \[\Esper[f(x)] = \sum_{x\in F} f(x) \,\Proba(X=x)\]
+Dans ce cas, on a: \[\Esper[f(X)] = \sum_{x\in F} f(x) \,\Proba(X=x)\]
 
 \paragraph{Remarque}
 Si $f: F\mapsto\setR$ est bornée, alors $f(x)$ est intégrable; si $\abs{f(x)} \leq M$ $\forall x \in F$, alors: \[\sum_{x\in F} \abs{f(x)} \Proba(X=x) \leq M < \infty\]
@@ -313,10 +329,10 @@ Si $f: F\mapsto\setR$ est bornée, alors $f(x)$ est intégrable; si $\abs{f(x)} 
 Calcul de l'espérance de la loi binomiale de paramètres $n\in\setNs$ et $p\in[0,1]$: $\Esper[X]=n p$.
 
 \paragraph{Proposition}
-Si $X$ et $Y$ sont des variables aléatoires discrètes à valeur dans $F$ et $G$ indépendantes alors pour toutes fonctions $f: F\mapsto \setR$ et $g: G\mapsto \setR$ avec $f(x)$ et $g(y)$ intégrables, on a que $f(x) g(y)$ est intégrable et:\[\Esper[f(x) g(y)]=\Esper[f(x)] \,\Esper[g(y)]\]
+Si $X$ et $Y$ sont des variables aléatoires discrètes indépendantes à valeur dans $F$ et $G$ respectivement, alors pour toutes fonctions $f: F\mapsto \setR$ et $g: G\mapsto \setR$ avec $f(X)$ et $g(Y)$ intégrables, on a que $f(X) g(Y)$ est intégrable et:\[\Esper[f(X) g(Y)]=\Esper[f(X)] \,\Esper[g(Y)]\]
 
 \paragraph{Proposition}
-Si $X$ et $Y$ sont deux variables aléatoires discrètes à valeur dans $F$ et $G$ et vérifient \[\Esper[f(x) g(y)] = \Esper[f(x)]\,\Esper[g(y)]\] pour toutes fonctions $f:F\mapsto \setR$ et $g: G\mapsto \setR$ bornées, alors $X$ et $Y$ sont indépendantes.
+Si $X$ et $Y$ sont deux variables aléatoires discrètes à valeur dans $F$ et $G$ et vérifient \[\Esper[f(X) g(Y)] = \Esper[f(X)]\,\Esper[g(Y)]\] pour toutes fonctions $f:F\mapsto \setR$ et $g: G\mapsto \setR$ bornées, alors $X$ et $Y$ sont indépendantes.
 
 \subsection{Variance}
 
@@ -327,7 +343,7 @@ La racine carrée de la variance s'appelle \emph{l'écart-type}, et se note: \[\
 
 \paragraph{Remarques}
 \begin{itemize}
- \item Si $X$ est un carré intégrable, alors $X$ est intégrable. En effet, $\abs{X}\leq\frac{1+X^2}2$ et d'après la condition suffisante d'intégrabilité, on déduit que $X$ est intégrable; d'où:
+ \item Si $X$ est de carré intégrable, alors $X$ est intégrable. En effet, $\abs{X}\leq\frac{1+X^2}2$ et d'après la condition suffisante d'intégrabilité, on déduit que $X$ est intégrable; d'où:
  \begin{align*}
  \Esper[X] &= \sum_{x\in F} x\,\Proba(X=x) \\
  X^2-2 \Esper[X] X+\Esper[X]^2 &= (X-\Esper[X])^2
@@ -338,9 +354,7 @@ La racine carrée de la variance s'appelle \emph{l'écart-type}, et se note: \[\
 \end{itemize}
 
 \paragraph{Proposition}
-Soient $X_1\dots X_n$ des variables aléatoires de carré intégrable indépendantes, alors $\sum_{i=1}^n X_i$ est de carré intégrable.
-
-On a donc:
+Soient $X_1\dots X_n$ des variables aléatoires de carré intégrable indépendantes, alors $\sum_{i=1}^n X_i$ est de carré intégrable, et on a:
 \[\Var \left(\sum_{i=1}^n X_i\right) = \sum_{i=1}^n \Var(X_i)\]
 
 \paragraph{Démonstration}
@@ -360,37 +374,37 @@ d'où:
 \section{Fonctions génératrices}
 
 \paragraph{Définition}
-Soit $X: \Omega \mapsto \setN$ une variable aléatoire à valeurs entières. On appelle fonction génératrice la fonction $g_x:[-1,1]\mapsto\setR$ telle que:
-\[g_x(s)=\Esper[s^x]=\sum_{k\in \setN} s^k\,\Proba(X=k)\]
+Soit $X: \Omega \mapsto \setN$ une variable aléatoire à valeurs entières. On appelle fonction génératrice la fonction $g_X:[-1,1]\mapsto\setR$ telle que:
+\[g_X(s)=\Esper[s^X]=\sum_{k\in \setN} s^k\,\Proba(X=k)\]
 
 \paragraph{Proposition}
 La fonction génératrice d'une variable aléatoire à valeurs entières caractérise sa loi.
-\[ X \laweq Y \:\Leftrightarrow\: g_x(s)=g_y(s), \quad\forall s\in [-1,1] \]
+\[ X \laweq Y \:\Leftrightarrow\: g_X(s)=g_Y(s), \quad\forall s\in [-1,1] \]
 où «~$\laweq$~» signifie ``sont de même loi''.
 
 \paragraph{Démonstration}
 On cherche à retrouver $\Proba(X=n)$ pour $n\in \setN$:
-\[ \Proba(X=n)=\frac{g_x^{(n)}(0)}{n!} \]
+\[ \Proba(X=n)=\frac{g_X^{(n)}(0)}{n!} \]
 où $g^{(n)}$ représente la dérivée $n$-ième d'une fonction.
 
 \paragraph{Exemple}
 \begin{itemize}
  \item Loi binomiale de paramètres $n\in\setNs$ et $p\in[0,1]$:
  \begin{align*}
-    g_x(s) &= \sum_{k=0}^n s^k\,\Proba(X=k) \\
+    g_X(s) &= \sum_{k=0}^n s^k\,\Proba(X=k) \\
     &= \sum_{k=0}^n s^k\parmi{k}{n} p^k (1-p)^{n-k} \\
     &= (p s + 1 - p)^n
  \end{align*}
  \item Loi géométrique de paramètre $p\in[0,1]$:
  \begin{align*}
-    g_x(s) &= \sum_{k\in\setNs} s^k p (1-p)^{k-1} \\
+    g_X(s) &= \sum_{k\in\setNs} s^k p (1-p)^{k-1} \\
     &= p s \sum_{k\in\setN} (s (1-p))^k \\
     &= \frac{p s}{1 - s(1-p)}
  \end{align*}
- \item Loi de poisson de paramètre $\lambda$:
+ \item Loi de Poisson de paramètre $\lambda$:
  
  \begin{align*}
-    g_x(s) &= \sum_{k\in\setN} s^k \frac{\lambda^k}{k!} e^{-\lambda} \\
+    g_X(s) &= \sum_{k\in\setN} s^k \frac{\lambda^k}{k!} e^{-\lambda} \\
     &= e^{-\lambda} \sum_{k\in\setN} \frac{(\lambda s)^k}{k!} \\
     &= e^{-\lambda} e^{\lambda s} \\
     &= e^{\lambda(s-1)}
@@ -399,27 +413,40 @@ où $g^{(n)}$ représente la dérivée $n$-ième d'une fonction.
 
 \paragraph{Proposition}
 Si $X$ et $Y$ sont deux variables aléatoires à valeurs entières indpendantes:
-\[g_{X+\lambda Y}(s)=g_x(s) g_y(s)\]
+\[g_{X+Y}(s)=g_X(s) g_Y(s)\]
 
 \paragraph{Exemple}
 On considère $(X_i)_{i\geq 1}$ une suite de variables aléatoires à valeurs entières \emph{indépendantes et identiquement distribuée} (IID.) et $N$ une variable aléatoire à valeurs entières indépendante de la suite $(X_i)_{i\geq 1}$. On pose:
 \[S=\begin{cases*}
-X_1+X_2+\dots+X_n & si $N\neq0$ \\ 
+X_1+X_2+\dots+X_N & si $N\neq0$ \\ 
 0 & si $N=0$
 \end{cases*}\]
 
 Si $X_i$ et $N$ suivent des lois géométriques de paramètre $q$, quelle est la loi de~$S$?
 
+\[
+ g_S(s) = \Esper[s^S] = \sum_{k=0}^\infty s^k \Proba(S=k)
+\]
+
+Réécrivons $\Proba(S=k)$:
 \begin{align*}
- g_x(s) = \Esper\left[s^S\right] &= \sum_{k=0}^\infty s^k\,\Proba\left(\abs{S=k}\right) \\
- &= \Esper\left[s^0 I_{N=0}\right] + \Esper\left[s^{\sum_{i=1}^N X_i} I_{N>0}\right] \\
- &= \Esper\left[s^S I_{N=0}\right] + \Esper\left[s^S I_{N>0}\right] \\
- &= \Esper\left[s^S (I_{N=0} + I_{N>0})\right] \\
- &= \Esper[I_{N=0}] + \Esper\left[s^{\sum_{i=1}^N X_i} I_{N>0}\right] \\
- &= \Esper[I_N=0] + \Esper\left[s^{\sum_{i=1}^N X_i} \sum_{k=1}^\infty I_{N=k}\right] \text{ car } I_{N>0}=\sum{k=1}^\infty I_{N=k} \\
- &= \Proba(N=0) + \sum_{k=1}^\infty \Esper\left[s^{\sum_{i=1}^N X_i} I_{N=k}\right] \\
- &= \Proba(N=0) + \sum_{k=1}^\infty \Proba\left(s^{\sum_{i=1}^k X_i}\right) \Proba(N=k) \\
- &= \Proba(N=0) + \sum_{k=1}^\infty \Proba(N=k) (g_{X_i} (s))^k
+ \Proba(S=k) &= \sum_{n=1}^\infty \Proba(N=n)\,\Proba(S=k \sachant N = n)\\
+ &= \sum_{n=1}^\infty q (1-q)^{n-1} \,\Proba(S=k\sachant N=n)
+\end{align*}
+
+Donc:
+\begin{align*}
+ g_S(s) &= \sum_{k=0}^\infty s^k \sum_{n=1}^\infty q (1-q)^{n-1} \,\Proba(S=k\sachant N=n) \\
+ &= \sum_{n=1}^\infty q (1-q)^{n-1} \sum_{k=0}^\infty s^k \,\Proba(S=k\sachant N=n)
+\end{align*}
+
+On reconnaît la somme de $n$ variables indépendantes, on peut donc utiliser \[g_{X_1} + g_{X_2} + \dots + g_{X_n} (s) = \prod_{i=1}^n g_{X_i} (s)\]
+
+Donc:
+\begin{align*}
+ g_S(s) &= \sum_{n=1}^\infty q (1-q)^{n-1} g_X(s)^n\\
+ &= q g_X(s) \sum_{n=0}^\infty (1-q)^n g_X (s)^n\\
+ &= \frac{q g_X(s)}{(1-(1-q) g_X(s))}
 \end{align*}
 
 \chapter{Variables aléatoires à densité}
@@ -432,9 +459,9 @@ Soit $(\Omega, \tribu A, \Proba)$ un espace de probabilité. On dit que $X:\Omeg
 où $a$ et $b$ sont des éléments de $\setR\union\lbrace-\infty,+\infty\rbrace$, et $a<b$.
 
 \paragraph{Remarque}
-$\Proba(X\in\setR)=1$ par définition, d'où $\int_{\setR} p(x) \dif x = 1$. On peut en déduire que:
+$\Proba(X\in\setR)=1$ par définition, d'où $\int_{\setR} p(x) \dif x = 1$. De plus, $\forall x \in \Omega$, $\Proba(X=x)=0$ car:
 \begin{align*}
-    \Proba(X=x=0) &= \lim_{n\to\infty} \int_{n-\frac1n}^x p(y) \dif y \\
+    \Proba(X=x) &= \lim_{n\to\infty} \int_{x-\frac1n}^x p(y) \dif y \\
     &= \lim_{n\to\infty} \Proba\left(X\in\left]x-\frac1n,x\right]\right)
 \end{align*}
 et on peut en déduire que:
@@ -461,7 +488,7 @@ et on peut en déduire que:
 La variable aléatoire $X:\Omega\mapsto\setR$ qui possède la densité $p$ est dite:
 \begin{itemize}
  \item intégrable si \[\int_{\setR} \abs{x}\,p(x) \dif x < \infty\]
- son espérance vaut alors: \[\Esper[X] = \int_{\setR} \abs{x}\,p(x) \dif x\]
+ son espérance vaut alors: \[\Esper[X] = \int_{\setR} x\,p(x) \dif x\]
  
  \item de carré intégrable si \[\int_{\setR} x^2\,p(x) \dif x < \infty\]
  on a alors aussi: \[\Esper[X^2] = \int_{\setR} x^2\,p(x)\dif x\]
@@ -502,22 +529,24 @@ Si $\int_{\setR^d} \lvert f(x) \rvert p(x) \dif x < \infty$ alors $f(x)$ est dit
 \[ \Esper[f(x)] = \int_{\setR^d} f(x) p(x) \dif x \]
 
 \section{Densité marginale}
-Soit $X=(\Xoned):\Omega \mapsto \setR^d$ un vecteur aléatoire à densité notée $p$, on considère $k<d$.
-
-Le vecteur $(\Xoned)$ est-il à densité?
-\[\forall o_k \text{ de }\setR^k\]
-\[ \Proba((\Xoned) \in o_k) = \int_{\setR^k} I_{o_k}(\xonek) q(\xonek) \dif \xonek\]
-
-\[\forall o_d \text{ de }\setR^d\]
-\[\Proba((\Xoned) \in o_d) = \int_{\setR^d} I_{o_d}(x_1\dots x_k, x_{k+1}\dots x_d) q(\xoned) \dif \xoned\]
 
 \paragraph{Proposition}
 Soit $X$ une variable aléatoire qui possède une densité, alors tout sous-vecteur $Y$ de $X$ possède une densité marginale obtenue en intégrant la densité de $X$ sur les composantes qui ne figurent pas dans $Y$.
 
+\paragraph{Démonstration}
+Soit $X=(\Xoned):\Omega \mapsto \setR^d$ un vecteur aléatoire à densité notée $p$, on considère $k<d$.
+
+Le vecteur $(\Xoned)$ est-il à densité?
+\[\forall O_k \subset \setR^k\]
+\[\Proba((\Xoned) \in O_k) = \int_{\setR^k} I_{O_k}(\xonek) q(\xonek) \dif \xonek\]
+
+\[\forall O_d \text{ de }\setR^d\]
+\[\Proba((\Xoned) \in O_d) = \int_{\setR^d} I_{O_d}(x_1\dots x_k, x_{k+1}\dots x_d) q(\xoned) \dif \xoned\]
+
 \section{Changement de variable}
 On se pose la question suivante:
 \begin{cquote}{}
- Si $X$ est une variable aléatoire qui possède une densité de valeurs dans $\setR^d$ et $f$ est la fonction $f:\setR^d \mapsto \setR^d$, est-ce que $Y=f(x)$ est à densité?
+ Si $X$ est une variable aléatoire qui possède une densité de valeurs dans $\setR^d$ et $f$ est la fonction $f:\setR^d \mapsto \setR^d$, est-ce que $Y=f(X)$ est à densité?
 \end{cquote}
 
 \paragraph{Proposition}
@@ -532,17 +561,17 @@ où $\jac\varphi^{-1} (y)$ est le Jacobin de l'inverse de $\varphi$; et vaut:
 Les vecteurs aléatoires $X_1:\Omega \mapsto \setR^{d_1}\dots X_n:\Omega \mapsto \setR^{d_n}$ qui possèdent les densités $p_1:\setR^{d_1}\mapsto \setR\dots p_n:\setR^{d_n} \mapsto \setR$, sont dites indépendantes si $X=(\Xonen)$ possède la densité $p_1(x_1) p_2(x_2) \dots p_n (x_n)$ telle que:
 
 \begin{align*}
- X_1 &= \begin{pmatrix}X_{1,1}\\\vdots\\X_{1,d_1}\end{pmatrix} = p_1(x_1) = p_1(x_{1,n},\dots x_{1,d_1})\\
+ X_1 &= \begin{pmatrix}X_{1,1}\\\vdots\\X_{1,d_1}\end{pmatrix} \qquad p_1(x_1) = p_1(x_{1,n},\dots x_{1,d_1})\\
  & \vdots \\
- X_n &= \begin{pmatrix}X_{n,1}\\\vdots\\X_{n,d_n}\end{pmatrix} = p_n(x_n) = p_n(x_{n,1},\dots x_{n,d_n})
+ X_n &= \begin{pmatrix}X_{n,1}\\\vdots\\X_{n,d_n}\end{pmatrix} \qquad p_n(x_n) = p_n(x_{n,1},\dots x_{n,d_n})
 \end{align*}
 
 \paragraph{Proposition}
-Soient $X_1:\Omega \mapsto \setR^{d_1}, \dots X_n:\Omega \mapsto \setR^{d_n}$, $n$ variables aléatoires indépendantes, alors pour toute fonction $f_1:\setR^{d_1}\mapsto \setR, \dots f_n:\setR^{d_n}\mapsto \setR$ est intégrable et:
+Soient $X_1:\Omega \mapsto \setR^{d_1}, \dots X_n:\Omega \mapsto \setR^{d_n}$, $n$ variables aléatoires indépendantes, alors pour toute fonction $f_1:\setR^{d_1}\mapsto \setR, \dots f_n:\setR^{d_n}\mapsto \setR$ telle que $f_i(X_i)$ est intégrable:
 \[\Esper[f_1(X_1)\: f_2(X_2) \dots f_n(X_n)] = \Esper[f_1(X_1)]\: \Esper[f_2(X_2)] \dots \Esper[f_n(X_n)]\]
 
 \section{Covariance}
-On rappelle que si $Y$ et $Z$ sont des variables de carré intégrable, alors le produit $YZ$ est intégrable car $\abs{YZ}\leq\frac{Y^2 + Z^2}{Z}$.
+On rappelle que si $Y$ et $Z$ sont des variables de carré intégrable, alors le produit $YZ$ est intégrable car $\abs{YZ}\leq\frac{Y^2 + Z^2}{2}$.
 
 \paragraph{Définition}
 Soient $Y$ et $Z$ deux variables aléatoires réelles de carré intégrable. On appelle covariance de $Y$ et $Z$ le nombre noté $\Cov(Y,Z)$:
@@ -562,7 +591,7 @@ Soit $X=\Xoned$ un vecteur aléatoire à valeurs dans $\setR^d$ dont les composa
 \end{itemize}
 
 \paragraph{Corrolaire}
-Si $\Xoned$ sont des variables aléatoires réelles de carré ntégrable et indépendantes;
+Si $\Xoned$ sont des variables aléatoires réelles de carré intégrable et indépendantes;
 \[ \Var\left(\sum_{i=1}^d X_i\right) = \sum_{i=1}^d \Var(X_i) \]
 
 \chapter{Convergence et théorèmes limites}
@@ -630,7 +659,7 @@ La moyenne empirique $\overline X_n = \frac 1 n \sum_{k=1}^n X_k$ d'une suite $(
 La moyenne empirique d'une suite de variables aléatoires à valeurs réelles IID intégrables, converge presque sûrement et dans $L^1$ vers $\Esper[X_i]$.
 
 \paragraph{Démonstration d'un cas particulier}
-On suppose $\Esper[X_1^4]<\infty$ et on va montrer la convergence presque sûre $\Esper[X_i]$.
+On suppose $\Esper[X_1^4]<\infty$ et on va montrer la convergence presque sûre vers $\Esper[X_i]$.
 \begin{align*}
  \Esper\left[(\overline X_n - \Esper[X_1])^4\right] &= \Esper\left[\left(\frac 1 n \sum_{k=1}^n X_k - \frac 1 n \sum_{k=1}^n \Esper[X_k]\right)^4\right] \\
  &= \frac 1 {n^4}\;\Esper\left[\left(\sum_{k=1}^n X_k - \Esper[X_k]\right)^4\right] \\
@@ -669,29 +698,29 @@ Il est nécessaire d'introduire la convergence en loi pour étudier la vitesse e
 \subsection{Fonction caractéristique}
 
 \paragraph{Définition}
-Soit $X$ un vecteur aléatoire $X:\Omega\mapsto\setR^d$. On appelle \emph{fonction caractéristique} de $X$ (notée $\Phi X$) la fonction définie sur $\setR^d$:
-\[ \Phi X (u) = \Esper[e^{i\, \transposee{\!u}\, x}] \]
+Soit $X$ un vecteur aléatoire $X:\Omega\mapsto\setR^d$. On appelle \emph{fonction caractéristique} de $X$ (notée $\Phi_X$) la fonction définie sur $\setR^d$:
+\[ \Phi_X (u) = \Esper[e^{i\, \transposee{\!u}\, x}] \]
 $\forall u \in \setR^d$ et $\transposee{\!u}\in\setR$.
 
 \paragraph{Application aux lois connues}
 \begin{itemize}
  \item Loi de Bernouilli de paramètre $p\in[0,1]$:
- \[ \Phi X(u) = 1-p+pe^{iu} \] où $u\in\setR$.
+ \[ \Phi_X(u) = 1-p+pe^{iu} \] où $u\in\setR$.
  
  \item Loi binomiale de paramètres $n\in\setNs$ et $p\in[0,1]$:
- \[ \Phi X(u) = (1-p + pe^{iu})^n \] où $u\in\setR$.
+ \[ \Phi_X(u) = (1-p + pe^{iu})^n \] où $u\in\setR$.
  
  \item Loi géométrique de paramètre $p\in]0,1]$:
- \[ \Phi X(u) = \frac{pe^{iu}}{1-(1-p)e^{iu}} \] où $u\in\setR$.
+ \[ \Phi_X(u) = \frac{pe^{iu}}{1-(1-p)e^{iu}} \] où $u\in\setR$.
  
  \item Loi uniforme sur $[a,b]$:
- \[ \Phi X(u) = \frac{\sin((b-a)\frac u 2)}{(b-a)\frac u 2} e^{iu \frac{a+n}2} \] où $u\in\setR$.
+ \[ \Phi_X(u) = \frac{\sin((b-a)\frac u 2)}{(b-a)\frac u 2} e^{iu \frac{a+n}2} \] où $u\in\setR$.
  
  \item Loi exponentielle de paramètre $\lambda>0$:
- \[ \Phi X(u) = \frac \lambda {\lambda^{-iu}} \] où $u\in\setR$.
+ \[ \Phi_X(u) = \frac \lambda {\lambda^{-iu}} \] où $u\in\setR$.
  
  \item Loi gaussienne $\normale(\mu, \sigma^2)$:
- \[ \Phi X(u) = \frac{\sigma^2 u^2}2 e^{iu\mu} \] où $u\in\setR$.
+ \[ \Phi_X(u) = \frac{\sigma^2 u^2}2 e^{iu\mu} \] où $u\in\setR$.
 \end{itemize}
 
 \chapter{Le théorème de limite centrale}
