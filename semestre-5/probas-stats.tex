@@ -757,4 +757,43 @@ On approxime $\sigma$ par \[\overline\sigma_n = \sqrt{\frac1n \sum_{k=1}^n X_k^2
 On choisit alors pour intervalle de confiance:
 \[I_n = \left[ \overline X_n - \frac{a\sigma_n}{\sqrt n};\; \overline X_n + \frac{a\sigma_n}{\sqrt n} \right]\]
 
+\chapter{Remise à niveau}
+
+\section{Fonctions et suites génératrices}
+
+\paragraph{Définition}
+On a une suite $(a_n)_{n=0}^\infty$, on peut considérer la fonction:
+\[f(x) = \sum_{n=0}^\infty a_n x^n\]
+Attention, cette fonction n'est pas forcément définie en 0. $f$ est toujours définie sur:
+\begin{itemize}
+ \item $\lbrace 0 \rbrace$,
+ \item $\setR$,
+ \item $] -r, r [$ pour un certain $r$, appelé ``rayon de convergence'',
+ \item $[ -r, r ]$ (idem).
+\end{itemize}
+On a souvent $r=1$.
+
+\paragraph{Propriétés}
+Supposons qu'on ai montré que si $r>0$, alors $f(x)=\sum_{n=0}^\infty a_n x^n$ sur $]-r,r[$. On a alors:
+\begin{itemize}
+ \item $f$ est infiniment dérivable,
+ \item $\frac{f^{(n)} (x)}{n!} = a_n$ donc $f^{(n)}(x) = a_n n!$,
+ \item \[f'(x) = \sum_{n=1}^\infty n a_n x^{n-1}\]
+ \item \[F(x) = \sum_{n=0}^\infty \frac{a_n}{a+1} x^{n+1}\]
+\end{itemize}
+
+\paragraph{Appliquée aux probabilités}
+En probabilités, la fonction génératrice est définie par:
+\begin{itemize}
+ \item $X$ à valeurs dans $\setN$,
+ \item \[g_x (t) = \Esper[t^X] = \sum_{n=0}^\infty \Proba(X=n) t^n\] (où $\Proba(X=n)$ représente $a_n$).
+\end{itemize}
+On en déduit que le rayon de convergence vaut au moins 1, car pour tout $t=1$: \[\sum_{n=0}^\infty \Proba(X=n)=1\] donc on sait tout de suite que $g_x (t)$ est définie sur $[-1,1]$ au minimum.
+
+\paragraph{Caractérisation de la loi}
+La fonction génératrice caractérise la loi:
+Si $\forall t \in ]-1,1[$ on a \[g_x(t) = g_y(t)\] alors $X$ et $Y$ ont la même loi ($X \laweq Y$).
+
+À noter que si $g'_x(1)$ et $\Esper[X]$ existent, on a: \[g'_x(1) = \Esper[X]\]
+
 \end{document}
