@@ -1,0 +1,96 @@
+\documentclass[a4paper,10pt,french,openany]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+\usepackage{clovisai}
+
+\newcommand{\absfrac}[2]{\frac{\left|#1\right|}{\left|#2\right|}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\normo}[1]{\norm{#1}_1}
+\lstset{language=Python}
+
+%opening
+\title{Probabilités et Statistiques}
+\author{Notes prises par Ivan Canet}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Méthodes numériques}
+
+\section{Représentation machine des nombres}
+
+\subsection{Entiers}
+
+Les entiers sont représentés en binaire sur $n$ bits où le premier est le signe; donc $n \in [-2^{n-1}, 2^{n-1}]$.
+
+Les entiers usuels (type \lstinline{int} en C++, Java\dots) vont environ de -2 milliards à 2 milliards.
+
+\paragraph{Complément à deux}
+Pour représenter un entier négatif, on fait les opérations suivantes:
+\begin{itemize}
+ \item On calcule la représentation binaire de son inverse ($-p$),
+ \item Opération miroir ($0 \rightarrow 1$, $1 \rightarrow 0$),
+ \item On ajoute 1.
+\end{itemize}
+
+Par exemple, -17 devient 010001, 101110 puis 101111.
+
+\subsection{Réels}
+
+Les réels sont représentés sous la forme: \[ x = s y 2^e \] où $s$ est le bit de signe, $y$ est la mantisse et est incluse dans $[0.5, 1]$ et $e$ est l'exposant.
+
+Pour les nombres en précision double (C, Python, Java\dots), $s$ est codé sur 1 bit, la mantisse sur 52 et l'exposant sur 11. Les nombres peuvent donc être écrits de $10^{-308}$ à $10^{308}$.
+
+Pour calculer $y$:
+\begin{itemize}
+ \item Trouver l'exposant $e$ en multipliant (ou divisant) $x$ par des puissances de 2, tel que $0.5 \leq x 2^{-e} \leq 1$,
+ \item Multiplier $x$ par 2 pour obtenir le bit suivant de la mantisse, on itère en ignorant la partie entière.
+\end{itemize}
+
+%TODO Exemple
+
+\paragraph{Précision}
+On appelle précision l'écart entre 1 et le nombre le plus proche représentable. Pour un nombre à simple précision il s'agit de $2.10^{-7}$, et $10^{-16}$ pour les nombres à double précision.
+
+\section{Erreurs d'arrondis}
+
+Un nombre ayant une écriture finie en décimal aura le plus souvent une représentation approchée en binaire.
+
+\subsection{Erreurs lors de l'addition}
+
+On additionne $x + \delta x$ et $y + \delta y$, on a donc $x + y + \delta x + \delta y$.
+
+L'erreur relative est:
+\begin{align*}
+ \left|\frac{x+y-(x+y+\delta x+\delta y)}{x+y}\right| & = \left| \frac{\delta x + \delta y}{x+y} \right| \\
+ & \leq \frac{\left|\delta x\right|}{\left|x+y\right|} + \frac{\left|\delta y\right|}{\left|x+y\right|}
+\end{align*}
+à comparer avec $\absfrac{\delta x}{x}$ et $\absfrac{\delta y}{y}$: on a donc une erreur multipliée par $\absfrac{x}{x+y}$ et $\absfrac{y}{x+y}$.
+
+On a donc une erreur plus grand lorsque $x+y$ est proche de 0, c'est-à-dire que l'on additionne des nombres opposés.
+
+\subsection{Erreur lors de la multiplication}
+
+On calcule:
+\begin{align*}
+ \left|\frac{x y - (x+y+\delta x+\delta y)}{x y}\right| & = \left|\frac{x\delta y + y\delta x + \delta x\delta y}{x y}\right| \\
+ & = \left|\frac{\delta y}y + \frac{\delta x}x + \frac{\delta x\delta y}{xy}\right|
+\end{align*}
+Au pire on somme les erreurs relatives de $x$ et $y$, donc il n'y a pas de problèmes de précision sur la multiplication.
+
+\subsection{Erreur lors des calculs matriciels}
+
+Soit $x\in \setR^n$ un vecteur. On note sa norme euclidienne $\norm{x}$ telle que:
+\[ \norm{x} = \sqrt{\sum_{i=1}^n x_i^2} \]
+En Python, on utilisera \lstinline{norm(x)}.
+
+On définie la ``norme 1 de $x$'', qu'on note $\normo{x}$, telle que:
+\[ \normo x = \sum_{i=1}^n \left|x\right| \]
+En Python, on utilisera \lstinline{norm(x, 1)}.
+
+Soit $A \in M_{m,n}(\setR)$ une matrice dans l'espace des matrices de $m$ lignes et $n$ colonnes.
+
+\end{document}
