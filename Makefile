@@ -1,5 +1,5 @@
 BUILD="./templates/build"
-FILES="semestre-5/*.tex"
+FILES="semestre-*/*.tex"
 FLAGS="--no-print-logs"
 
 default: pdf
@@ -8,6 +8,8 @@ submodules:
 	@git submodule update --init
 	@ln -s ../templates/clovisai.sty semestre-5/clovisai.sty 2>/dev/null || true
 	@ln -s ../templates/clovisai-constructs.sty semestre-5/clovisai-constructs.sty 2>/dev/null || true
+	@ln -s ../templates/clovisai.sty semestre-6/clovisai.sty 2>/dev/null || true
+	@ln -s ../templates/clovisai-constructs.sty semestre-6/clovisai-constructs.sty 2>/dev/null || true
 
 pdf: submodules dep
 	@$(BUILD) $(FLAGS) PDF $(FILES)
