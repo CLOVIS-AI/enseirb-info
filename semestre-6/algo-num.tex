@@ -7,6 +7,8 @@
 \newcommand{\absfrac}[2]{\frac{\left|#1\right|}{\left|#2\right|}}
 \newcommand{\norm}[1]{\lVert#1\rVert}
 \newcommand{\normo}[1]{\norm{#1}_1}
+\newcommand{\normfrac}[2]{\frac{\norm{#1}}{\norm{#2}}}
+\DeclareMathOperator{\cond}{cond}
 \lstset{language=Python}
 
 %opening
@@ -92,5 +94,60 @@ On définie la ``norme 1 de $x$'', qu'on note $\normo{x}$, telle que:
 En Python, on utilisera \lstinline{norm(x, 1)}.
 
 Soit $A \in M_{m,n}(\setR)$ une matrice dans l'espace des matrices de $m$ lignes et $n$ colonnes.
+
+\paragraph{Rappel}
+Pour tout $x \in \setR^n$ et pour toute matrice $A \in M_{m, m}(\setR)$, on a l'inégalité $\norm{A_x} \leq \norm{A} \norm{x}$.
+
+\paragraph{Conditionnement} On appelle conditionnement de $A$ (noté $\cond(A)$) la quantité:
+\[
+    \cond(A) =
+    \begin{cases*}
+        \norm{A} \norm{A^{-1}} & si la matrice est réversible ($A^{-1}$ existe) \\
+        +\infty & sinon
+    \end{cases*}
+\]
+
+Numériquement, il est rare d'obtenir $+\infty$. Si on obtient $10^{16}$ en double précision, il est probable que $A$ soit irréversible.
+
+Si le conditionnement est petit mais supérieur à 1, on dit que la matrice est ``bien conditionnée''.
+
+\paragraph{Exemple}
+
+On veut résoudre le système $A_x = b$ avec $x, b \in \setR^n$ et $A \in M_{m,m}(\setR)$.
+
+En pratique, on obtient une solution approchée $y = x + \delta x$ où $\delta x$ est petit. Cette situation ne vérifiera pas $A_y = b$ mais $A_y = b + \delta b$. $\delta b$ est facile à calculer: $\delta b = A_y - b$. On appelle $\norm{\delta b}$ le résultat. À partir de $\norm{\delta b}$, peut-on estimer $\norm{\delta x}$?
+
+On part de $A(x+\delta x) = b + \delta b$ et il faut majorer $\normfrac{\delta x}{x}$ en fonction de $\normfrac{\delta b}{b}$ et $\cond(A)$. On a $A_x = b$.
+
+\begin{align*}
+  A(x+\delta x) &= b+\delta b \\
+  A\delta x &= \delta b \\
+  \delta x &= A^{-1} \delta b \\
+  \norm{\delta x} &\leq \norm{A^{-1}} \norm{\delta b} \\
+  \norm{b} &\leq \norm{A} \norm{x} \\
+  \norm{\delta x} \norm{b} &\leq \cond(A) \norm{\delta b} \norm{x} \\
+  \normfrac{\delta x}{x} &\leq \cond(A) \normfrac{\delta b}{b}
+\end{align*}
+
+Conclusion: si $A$ est mal conditionnée, il faut un résidut très faible pour obtenir un $y$ fiable.
+
+\section{Principe pour minimiser les erreurs d'arrondi}
+
+\subsection{Éviter de soustraire des quantités proches}
+
+Par exemple, pour calculer les racines d'un polynôme de degré 2, avec:
+\[a x^2 + b x + c = 0\]
+\[\Delta = b^2 + 4 a c\]
+\[x_1 = \frac{-b+\sqrt{\Delta}}{2 a} \text{ et } x_2 = \frac{-b-\sqrt{\Delta}}{2 a}\]
+
+Puisque $\left|4 a c\right| \ll b^2$ on sait que $\sqrt{\Delta} \approx b$. Or, on fait $-b+\sqrt{\Delta}$ pour calculer $x_1$, ce qui est une grande perte de précision.
+
+La solution est de calculer $x_2 = \frac{-b-\sqrt{\Delta}}{2 a}$, et de profiter du fait que $x_1 x_2 = \frac c a$ d'où $x_1 = \frac c {a x_2}$.
+
+\subsection{Lors d'une somme, commencer par les termes les plus petits}
+
+En commençant par les termes les plus grands, tous les petits termes n'apparaîtront pas à cause du nombre de chiffres significatifs; ils n'auront donc aucune influence sur le résultat et sont perdus.
+
+Si l'on commence par les petits termes, ils s'accumulent avant l'arrondi lors de l'ajout des grands termes, ils ont donc une chance d'influencer le total collectivement.
 
 \end{document}
