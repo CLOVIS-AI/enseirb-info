@@ -150,4 +150,77 @@ En commençant par les termes les plus grands, tous les petits termes n'apparaî
 
 Si l'on commence par les petits termes, ils s'accumulent avant l'arrondi lors de l'ajout des grands termes, ils ont donc une chance d'influencer le total collectivement.
 
+\chapter{Résolution des systèmes linéaires}
+
+\chapter{Calcul des éléments propres}
+
+L'objectif est de trouver $\lambda \in \setC$ et $x \in \setC^n$ ($x \neq 0$) tel que $A x = \lambda x$. Si $A$ est réelle, les valeurs propres sont complexes conjuguées. $\lambda$ est appelée valeur propre (eigenvalue) et $x$ est appelé vecteur propre.
+
+\[ Sp(A) = \lbrace \lambda \text{ tel que } \lambda \text{ valeur propre de } A \rbrace = \text{spectre de } A \]
+
+\paragraph{Diagonalisation}
+On dit que $A$ est diagonalisable si et seulement si elle est semblable à une matrice diagonale, c'est-à-dire qu'il existe $P$ matrice irréversible et $D$ diagonale telle que $A = P D P^{-1}$. $P$ est appelée ``matrice de passage''.
+
+L'ensemble des matrices diagonalisables est ``dense'' (on peut toujours trouver une suite $A_k$ de matrices diagonalisables telles que $\lim A_k = A$).
+
+En Python, pour calculer $D$ et $P$, on utilise \lstinline{eig}:
+\begin{lstlisting}
+D, P = eig(A)
+\end{lstlisting}
+les colonnes de $P$ sont les vecteurs propres de $A$. Si $A$ n'est pas diagonalisable, $P$ ne sera pas inversible ($\cond(P) \approx 10^{16}$).
+
+La notion de valeur propre s'applique qu'aux matrices carrées. Pour les matrices rectangulaires, on a la notion de décomposition en valeurs singulières: $A$ peut s'écrire sous la forme:
+\[ A = U S V^{T} \]
+avec $U$ et $V$ matrices orthogonales et $S$ diagonale.
+
+Rappel: $Q$ est orthogonale si et seulement si $Q Q^T = I$.
+
+\paragraph{Transformation de Householder}
+C'est une transformation orthogonale de symétrie par rapport au plan formé par deux vecteurs; c'est la symétrie par rapport au plan médian.
+
+La normale du plan: \[\overrightarrow{n} = \frac{X-Y}{\norm{X-Y}}\] où $X \in \setR^n$, $Y \in \setR^n$ et $\norm x = \norm y$.
+
+Si $X = Y$, la transformation de Householder est l'identité.
+
+Sa transformation est notée $H$ et vaut:
+\[ H(\overrightarrow{u}) = \overrightarrow{u} - 2 (\overrightarrow{u} \cdot \overrightarrow{n}) \overrightarrow{n} \]
+
+La matrice associée à $H$ s'écrit $\mathcal{H} = I - 2 N^T$ (où $N^T$ est une matrice de termes $n_i n_j$).
+
+Pour calculer $N N^T$ en Python, on fait \lstinline{outer(N, N)}.
+
+Stocker la matrice $\mathcal{H}$ a peu d'intérêt car il est plus efficace de calculer \[ \mathcal{H} \overrightarrow{u} = H(\overrightarrow u) = \overrightarrow{u} - 2 (\overrightarrow{n} \cdot \overrightarrow{u}) \overrightarrow{n} \] (qui se calcule en $O(n)$) alors que $\mathcal H U$ (qui se calcule en $O(n^2)$).
+
+Pour effectuer le produit matrice matrice $\mathcal H A$ avec $A$ une matrice, on applique $H(\overrightarrow u)$ pour toutes les colonnes $\overrightarrow u$ de $A$: la complexité est en $O(n^2)$.
+
+Pour calculer $A \mathcal H$ on applique $H$ aux lignes de $A$.
+
+\paragraph{Factorisation QR}
+On cherche $Q$ une matrice orthogonale et $R$ une matrice triangulaire telles que $A = Q R$ ($A$ peut être rectangulaire).
+
+En Python, on écrit:
+\begin{lstlisting}
+Q, R = qr(A)
+\end{lstlisting}
+
+Un algorithme possible est:
+\begin{lstlisting}
+R = A
+Q = I
+for i les indices des colonnes de A:
+    X = R[i:, i] # i: tous les indices à partir de i
+                   #  = (i, i+1, i+2, ... n-1)
+                   # X: fin de colonne i de R
+    alpha = -norm(X) * signe(X[0])
+    Y = [alpha, 0, 0, 0, 0, 0, 0, 0...]
+    # on calcule H la transformation de Householder de X à Y
+    # on applique H à R[i:, i][:, i:]
+    # R est écrasée avec les nouvelles valeurs
+\end{lstlisting}
+on a calculé: $Q_n Q_{n-1} \dots Q_1 A = R$ où $Q_i$ sont des matrices de Householder.
+
+On a donc: \[ A = Q_1^T Q_2^T \dots Q_n^T R = Q_1 Q_2 \dots Q_n R \]
+
+
+
 \end{document}
