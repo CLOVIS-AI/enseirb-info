@@ -221,6 +221,24 @@ on a calculé: $Q_n Q_{n-1} \dots Q_1 A = R$ où $Q_i$ sont des matrices de Hous
 
 On a donc: \[ A = Q_1^T Q_2^T \dots Q_n^T R = Q_1 Q_2 \dots Q_n R \]
 
+On peut utiliser la factorisation QR pour résoudre un système:
+\begin{align*}
+ A x = b &\Leftrightarrow Q R x = b\\
+    &\Leftrightarrow Q^T Q R x = Q^T b\\
+    &\Leftrightarrow R x = Q^T b
+\end{align*}
+mais cette méthode est plus coûteuse que la factorisation de Cholesky. Elle permet de minimiser $\norm{A x - b}$ quand $A$ est rectangulaire.
 
+\paragraph{Exemple de factorisation QR}
+Si on a les points $(x_i, y_i)_{i \leq i \leq m}$, on cherche $P(x) = a_0 + a_1 x + \dots + a_{n-1} x^{n-1}$. $P$ est un polynôme de degré $n-1$ tel que la quantité $\sum_{i=1}^m (y_i - P(x_i))^2$ soit minimale. On commence par trouver la matrice $A$ est le vecteur $b$ tels que $\sum_{i=1}^m (y_i - P(x_i))^2 = \norm{A z - b}^2$, puis on expliquera comment trouver $z$ tel que $\norm{A x - b}^2$ soit minimal en utilisant la factorisation QR.
+
+Pour minimiser $\norm{A x - b}$ pour $A$ rectangulaire: \[ \norm x = \sqrt{\sum x_i^2} \]
+
+\section{Calcul des valeurs propres}
+
+Si $Q$ est une matrice orthogonale, alorsr $A$ et $Q A Q^T$ sont semblables (ie. même valeurs propres). L'idée est d'appliquer des transformations orthogonales successives $A_{k+1} = Q_k A_k Q_k^T$ telles que $A_k$ converge vers une matrice diagonale.
+
+Dans le cas de la SVD, on construit une suite de matrices $Q_{l, k}$ eet $Q_{k, k}$ orthogonales telles que $A_{k+1} = Q_{i, k} A_k Q_{k, k}$ et telle que $\lim_{k \to +\infty} A_k =$ matrice diagonale.
+\[A_n = Q_{L, N} Q_{L, N-1} \dots Q_{L, 1} A Q_{K, 1} Q_{K, 2} \dots Q_{R, N}\] d'où \[A = USV\] avec $U$ et $V$ orthogonales et $S$ diagonale.
 
 \end{document}
