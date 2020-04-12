@@ -11,6 +11,8 @@ semestre-*/*.sty
 *.html
 *.toc
 *.synctex.gz
+*.idx
+*.ind
 
 # Output directory on GitLab Pages
 public/
