@@ -24,24 +24,28 @@
 
 \section{Définition d'une catégorie}
 
-Une catégorie est représentée par des points, et des flèches allant d'un point à un autre. Elle doit respecter certaines lois.
+Une catégorie est représentée par des points, et des flèches allant d'un point à un autre.
+Elle doit respecter certaines lois.
 
 \paragraph{Objets}\imain{objet}
 Un objet est une structure abstraite qui ne comporte pas de propriétés en particulier.
 
-On note les objets par leur nom; par exemple $a$.
+On note les objets par leur nom;
+par exemple $a$.
 
 \paragraph{Morphismes}\imain{morphisme}
 Les morphismes sont des flèches allant d'un point vers un autre.
 
-On note les morphismes avec la notation `flèche' et un nom; par exemple le morphisme $f$ allant de $a$ à $b$ est noté:
+On note les morphismes avec la notation `flèche' et un nom;
+par exemple le morphisme $f$ allant de $a$ à $b$ est noté:
 \[ f: a \mapsto b \]
 
 À noter que deux morphismes ayant le même point de départ et d'arrivée ne sont pas forcément identiques;
 \[ \forall a, b \quad \forall f: a \mapsto b \quad \exists g: a \mapsto b \;|\; f \neq g \]
 
 \paragraph{Identité}\imain{identité}
-L'identité est un morphisme allant d'un objet à lui même. On la nomme $id_{objet}$:
+L'identité est un morphisme allant d'un objet à lui même.
+On la nomme $id_{objet}$:
 \[ \forall a \quad \exists id_a: a \mapsto a \]
 
 \paragraph{Composition}\imain{composition}
@@ -52,10 +56,12 @@ Dans une catégorie réversible, on peut définir l'inverse d'un morphisme grâc
 \[ \forall a,b \quad \forall f: a \mapsto b \quad \exists g: b \mapsto a \;|\; id_a = g \after f \text{ et } id_b = f \after g \]
 
 \paragraph{Associativité}\imain{associativité}
-La composition doit être associative. En conséquence, on n'écrit jamais les parenthèses, et on écrira toujours $h \after g \after f$.
+La composition doit être associative.
+En conséquence, on n'écrit jamais les parenthèses, et on écrira toujours $h \after g \after f$.
 
 \paragraph{Catégorie}
-Une catégorie est composée d'objets et de morphismes. Chaque objet doit avoir une loi d'identité, et il doit être possible de composer ses morphismes de manière associative.
+Une catégorie est composée d'objets et de morphismes.
+Chaque objet doit avoir une loi d'identité, et il doit être possible de composer ses morphismes de manière associative.
 
 Tant que ces trois lois sont respectées, les objets et les morphismes peuvent représenter ce que l'on souhaite; voici quelques exemples de catégories connues:
 \begin{itemize}
@@ -65,7 +71,8 @@ Tant que ces trois lois sont respectées, les objets et les morphismes peuvent r
 \end{itemize}
 
 \paragraph{Hom-Ensemble}\imain{hom-ensemble}
-Le Hom-Ensemble de $a$ à $b$ est l'ensemble de tous les morphismes allant de $a$ à $b$. Dans une catégorie $C$, on le note $C(a, b)$.
+Le Hom-Ensemble de $a$ à $b$ est l'ensemble de tous les morphismes allant de $a$ à $b$.
+Dans une catégorie $C$, on le note $C(a, b)$.
 
 \section{Catégories concrètes}\imain{catégorie!concrète}
 
@@ -85,10 +92,12 @@ Ces concepts peuvent être étendus à d'autres catégories.
 \subsection{Morphismes particuliers}
 
 \paragraph{Épimorphisme}\imain{morphisme!épimorphisme}
-Pour n'importe quel objet du codomaine, il existe un morphisme provenant du domaine. Autrement dit, le codomaine et l'image sont identiques.
+Pour n'importe quel objet du codomaine, il existe un morphisme provenant du domaine.
+Autrement dit, le codomaine et l'image sont identiques.
 
 \paragraph{Monomorphisme}\imain{morphisme!monomorphisme}
-Deux morphismes ne peuvent pas arriver au même objet. L'image contient au moins autant d'éléments que le domaine.
+Deux morphismes ne peuvent pas arriver au même objet.
+L'image contient au moins autant d'éléments que le domaine.
 
 \paragraph{Isomorphisme}\imain{morphisme!isomorphisme}
 Dans une catégorie réversible, il s'agit à la fois d'un épimorphisme et d'un monomorphisme: chaque objet du domaine admet un unique morphisme vers un élément du codomaine, et le codomaine et l'image sont identiques.
@@ -99,7 +108,7 @@ Dans une catégorie irréversible, les isomorphismes sont impossibles.
 
 \section{Ordres}\imain{ordre}
 
-Les ordres sont des catégories dans lesquelles les morphismes ne peuvent pas être représentés par des fonctions, mais représentent des relations (par exemple $\leq$).
+Les ordres sont des catégories dans lesquelles les morphismes ne peuvent pas être représentés par des fonctions, mais représentent des relations (par exemple $\leq$, ou $\subseteq$).
 
 \paragraph{Pré-ordre et catégories fines}\imain{ordre!pré-ordre}\imain{catégorie!fine}
 Un pré-ordre est une catégorie formée par une relation, la plus simple possible: elle doit respecter l'identité, la composition et son associativité, mais rien d'autre.
@@ -115,7 +124,7 @@ Un ordre partiel est un pré-ordre qui ne peut pas contenir de boucles: un morph
 Un ordre total est un ordre partiel dans lequel il existe un morphisme entre chaque objet.
 
 \paragraph{Catégories épaisses}\imain{catégorie!épaisse}
-Une catégorie épaisse est une catégorie dans laquelle 
+Une catégorie épaisse est une catégorie dans laquelle au moins deux objets admettent plusieurs morphismes dans le même sens entre eux.
 
 \chapter{Monoids}
 
@@ -131,11 +140,13 @@ Il n'existe pas d'identité ou de composition, mais puisqu'il n'y a pas d'objets
 En Kotlin, elle est appelée \lstinline{Nothing}.
 
 \subsection{Un objet unique: Monoid}\imain{monoid}
-La catégorie Monoid comporte un unique objet, lui aussi appelé Monoid. Dans cette catégorie, tous les morphismes sont composables.
+La catégorie Monoid comporte un unique objet, lui aussi appelé Monoid.
+Dans cette catégorie, tous les morphismes sont composables.
 
 Il est possible de définir un morphisme de n'importe quel objet de n'importe quel catégorie vers Monoid, ou depuis Monoid.
 
 En C et dérivés, elle est appelée (à tord) \lstinline{void}.
+En Kotlin, elle s'appelle \lstinline{Unit}.
 
 \subsection{Deux objets: Boolean}\imain{boolean}
 La catégorie Boolean comporte deux objets, $true$ et $false$.
