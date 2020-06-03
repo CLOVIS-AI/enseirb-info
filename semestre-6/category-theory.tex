@@ -120,13 +120,15 @@ Puisqu'il n'est pas possible d'avoir deux morphismes allant d'un même endroit �
 \paragraph{Ordre partiel}\imain{ordre!partiel}
 Un ordre partiel est un pré-ordre qui ne peut pas contenir de boucles: un morphisme ne peut pas avoir d'inverse.
 
+Par exemple, la relation ``être un sous-ensemble de'' est un ordre partiel.
+
 \paragraph{Ordre total}\imain{ordre!total}
 Un ordre total est un ordre partiel dans lequel il existe un morphisme entre chaque objet.
 
 \paragraph{Catégories épaisses}\imain{catégorie!épaisse}
 Une catégorie épaisse est une catégorie dans laquelle au moins deux objets admettent plusieurs morphismes dans le même sens entre eux.
 
-\chapter{Monoids}
+\chapter{Catégories courantes}
 
 \section{Catégories avec peu d'objets}
 
@@ -148,10 +150,60 @@ Il est possible de définir un morphisme de n'importe quel objet de n'importe qu
 En C et dérivés, elle est appelée (à tord) \lstinline{void}.
 En Kotlin, elle s'appelle \lstinline{Unit}.
 
-\subsection{Deux objets: Boolean}\imain{boolean}
-La catégorie Boolean comporte deux objets, $true$ et $false$.
+On remarque aussi que les chaînes de caractères (avec la concaténation) sont aussi des Monoids.
 
-\section{Kleisli}\imain{kleisli}
+\subsection{Deux objets: Boolean}\imain{boolean}
+La catégorie Boolean comporte deux objets, \lstinline{true} et \lstinline{false}.
+
+\section{Catégorie de Kleisli}\imain{kleisli}
+
+On va définir une catégorie de Kleisli basée sur une catégorie quelconque $C$ et un monoid\ientry{monoid} $M$.
+
+Comme exemple, on suppose que la catégorie $C$ contient trois objets $a$, $b$ et $c$ ainsi que les flèches $a \mapsto b$ et $b \mapsto c$ (et, puisque $C$ est une catégorie, chaque objet a aussi une identité).
+
+On définie un ``type embelli'' comme une paire d'un élément de ce type et d'un élément de $M$ (par exemple, \lstinline{String}).
+Pour chaque flèche de $C$, on définie sa ``variante embellie'' ayant un rôle similaire:
+\begin{itemize}
+ \item Les identités deviennent une paire avec l'identité du monoid: $id_a: a \mapsto a$ a comme variante $id_a': a \mapsto (a, \text{``''})$;
+ \item Les autres flèches deviennent une paire avec un objet quelconque du monoid: $f: a \mapsto b$ a comme variante $f': a \mapsto (b, \text{``une chaîne quelconque''})$;
+ \item La composition de deux flèches $f: a \mapsto b$ et $g: b \mapsto c$, écrite:
+\begin{lstlisting}
+fun <A, B, C> compose(f: (A) -> B, g: (B) -> C): (A) -> C
+    = { a -> g(f(a)) }
+\end{lstlisting}
+       admet une variante:
+\begin{lstlisting}
+fun <A, B, C> compose2(f: (A) -> Pair<B, String>, g: (B) -> Pair<C, String>): (A) -> Pair<C, String>
+    = { a ->
+        val b = f(a)
+        val c = g(b.first)
+        c.first to b.second + c.second
+    }
+\end{lstlisting}
+\end{itemize}
+
+On défini la catégorie de Kleisli de la catégorie $C$ par le monoid $M$ comme la catégorie contenant tous les objets de $C$, mais où chaque flèche est remplacée par sa variante. Dans cette catégorie, l'identité existe bien, la composition aussi, et la composition est bien associative.
+
+\section{Catégorie des ensembles}\imain{ensemble}
+Dans cette section, on va donner des équivalences entre des concepts de théorie des ensembles et de théorie des catégories.
+
+\paragraph{Objet terminal}\imain{objet!terminal}
+On peut définir l'ensemble à un seul élément comme la seule catégorie pour laquelle toutes les autres catégories ont une unique flèche qui y mène; on l'appelle \lstinline{unit}.
+
+Dans un cas plus général, on défini un objet terminal comme un objet pour lequel une flèche unique provient de tous les autres objets:
+\[ \forall a \; \exists f : a \mapsto terminal \]
+\[ \forall f : a \mapsto terminal,\; g : a \mapsto terminal \implies f = g \]
+
+Dans un ordre, un objet terminal est l'objet extrême: si les flèches représentent la relation ``est plus petit ou égal que'', l'objet terminal est l'objet le maximum.
+
+\paragraph{Objet initial}\imain{objet!initial}
+On peut définir l'ensemble vide comme la seule catégorie pour laquelle il existe une flèche vers n'importe quelle autre catégorie; on l'appelle \lstinline{absurd} (ou $id_{Void}$\ientry{void} si elle mène vers elle-même).
+
+Dans un cas plus général, on défini un objet initial comme un objet depuis lequel une flèche unique va vers tous les autres objets:
+\[ \forall a \; \exists f : Void \mapsto a \]\ientry{void}
+\[ \forall f : Void \mapsto a,\; g : Void \mapsto a \implies f = g \]
+
+Dans un ordre, un objet initial est l'autre extrême: si les flèches représentent la relation ``est plus petit ou égal que'', l'objet initial est l'objet minimum.
 
 \printindex
 
