@@ -5,25 +5,45 @@
 \let\printglossary\undefined
 \usepackage{luatexja}
 \usepackage{luatexja-fontspec}
+\usepackage{luatexja-ruby}
 
 \usepackage{clovisai}
 
+\newcommand{\term}[1]{\textcolor{blue}{#1}}
+
 %opening
 \title{Japonais}
-\author{愛里せんせい\\Support: Genki, seconde édition\\Notes prises par Ivan Canet}
+\author{愛里せんせい\\Notes prises par Ivan Canet}
+
+\addto{\captionsfrench}{\renewcommand{\abstractname}{Introduction}}
 
 \begin{document}
 
 \maketitle
+
+\begin{abstract}
+ Notes de cours prises lors des cours de Japonais dispensés à l'ENSEIRB-MATMECA, de 2019 à 2020.
+ 
+ Ces notes s'organisent en plusieurs chapitres indépendants, sur les différentes parties de la langue.
+ Au sein de chaque chapitre, on essaie d'avoir un avancement logique se basant sur les sections précédentes, mais qui peut aussi se baser sur des sections d'autres chapitres.
+\end{abstract}
+
+
 \tableofcontents
 
-\chapter{Hiraganas}
-\section{Simples}
+\chapter{Lecture}
+\section{Hiraganas}
+
+Le Japonais est écrit avec trois différents alphabets, les hiraganas, les katakanas, et les kanjis.
+
+\subsection{Tableau des hiraganas sans combinaisons}
 
 Les hiraganas (ひらがな) représentent des syllabes (\autoref{tab:hira-simple}).
 
 \begin{table}[htbp]
  \centering
+ \caption{Tableaux des hiraganas}
+ \label{tab:hira-simple}
  \begin{tabular}{llllll}
   あ a  & い i  & う u  & え e  & お o  &\\
   か ka & き ki & く ku & け ke & こ ko &\\
@@ -36,16 +56,16 @@ Les hiraganas (ひらがな) représentent des syllabes (\autoref{tab:hira-simpl
   ら ra & り ri & る ru & れ re & ろ ro &\\
   わ wa & 　    & 　    & 　    & を wo & ん n\\
  \end{tabular}
- \caption{Tableaux des hiraganas}
- \label{tab:hira-simple}
 \end{table}
 
-\section{Dakuten \& Handakuten}
+\subsection{Dakuten \& Handakuten}
 
 Des sons plus compliqués peuvent être formés en combinant les hiraganas simples avec un dakuten ('') ou un handakuten (°) (\autoref{tab:dakuten-handakuten}).
 
 \begin{table}[htbp]
  \centering
+ \caption{Effets du dakuten ('') et du handakuten (°)}
+ \label{tab:dakuten-handakuten}
  \begin{tabular}{r|lllll}
   /k/'': /g/ & が ga & ぎ gi & ぐ gu & げ ge & ご go \\
   /s/'': /z/ & ざ za & じ ji & ず zu & ぜ ze & ぞ zo \\
@@ -53,11 +73,9 @@ Des sons plus compliqués peuvent être formés en combinant les hiraganas simpl
   /h/'': /b/ & ば ba & び bi & ぶ bu & べ be & ぼ bo \\
   /h/°: /p/  & ぱ pa & ぴ pi & ぷ pu & ぺ pe & ぽ po \\
  \end{tabular}
- \caption{Effets du dakuten ('') et du handakuten (°)}
- \label{tab:dakuten-handakuten}
 \end{table}
 
-\section{Liaisons sur le son /i/}
+\subsection{Liaisons sur le son /i/}
 
 Les sons du type /nyu/ sont obtenus en combinant un hiragana se terminant par le son /i/ (colonne du /i/) avec un autre commençant par le son /i/ (ligne du /y/). Attention, certains perdent le son /i/ (par exemple, /shi/ + /ya/ donne /sha/ et non /shya/).
 
@@ -65,6 +83,8 @@ Dans ce cas, le deuxième hiragana est écrit en petit (pour faire la différenc
 
 \begin{table}[htbp]
  \centering
+ \caption{Liaisons sur le son /i/}
+ \label{tab:hira-liasons-i}
  \begin{tabular}{lll}
   きゃ kya& きゅ kyu& きょ kyo\\
   ぎゃ gya& ぎゅ gyu& ぎょ gyo\\
@@ -78,40 +98,40 @@ Dans ce cas, le deuxième hiragana est écrit en petit (pour faire la différenc
   みゃ mya& みゅ myu& みょ myo\\
   りゃ rya& りゅ ryu& りょ ryo\\
  \end{tabular}
- \caption{Liaisons sur le son /i/}
- \label{tab:hira-liasons-i}
 \end{table}
 
-\section{Consonnes et voyelles allongées}
+\subsection{Consonnes et voyelles allongées}
 
 En écrivant un petit つ (tsu), on peut signifier qu'il faut faire une pause dans le mot. En rōmaji, on double la consonne suivante. Le \autoref{tab:petit-tsu} donne des exemples.
 
 \begin{table}[htbp]
  \centering
+ \caption{Exemples d'utilisation du petit /tsu/}
+ \label{tab:petit-tsu}
  \begin{tabular}{ll}
   たつと tatsuto & たっと tatto \\
   きて kite (aller) & きって kitte (timbre)
  \end{tabular}
- \caption{Exemples d'utilisation du petit /tsu/}
- \label{tab:petit-tsu}
 \end{table}
 
 À noter que quand on souhaite doubler le son /n/ seul, on n'écrit pas de petit /tsu/. Voir le tableau \autoref{tab:petit-tsu-n} pour des exemples.
 
 \begin{table}[htbp]
  \centering
+ \caption{On n'utilise pas de petit /tsu/ pour le son /n/}
+ \label{tab:petit-tsu-n}
  \begin{tabular}{l}
   さんねん sannen\\
   あんない annai
  \end{tabular}
- \caption{On n'utilise pas de petit /tsu/ pour le son /n/}
- \label{tab:petit-tsu-n}
 \end{table}
 
 Pour écrire les voyelles longues, on écrit une voyelle supplémentaire. Par exemple, okaasan (mère) s'écrit おかあさん. En rōmaji, on a le choix entre doubler la voyelle ou écrire un accent plat pour montrer qu'elle est accentuée. D'autres exemples sont donnés dans le \autoref{tab:ex-doublage}. Attention, certains sons peuvent être obtenus de deux différentes manières, exemples dans le \autoref{tab:long-sounds}.
 
-\begin{table}[htbp]
+\begin{table}[htp]
  \centering
+ \caption{Exemples d'appui sur la voyelle}
+ \label{tab:ex-doublage}
  \begin{tabular}{rl}
   mère & おかあさん okāsan \\
   père & おとうさん otōsan\\
@@ -123,12 +143,12 @@ Pour écrire les voyelles longues, on écrit une voyelle supplémentaire. Par ex
   glace & こおり kōri\\
   grand & おおきい ōkī\\
  \end{tabular}
- \caption{Exemples d'appui sur la voyelle}
- \label{tab:ex-doublage}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[htp]
  \centering
+ \caption{Différentes manières de former les sons longs}
+ \label{tab:long-sounds}
  \begin{tabular}{cll}
   ā & doubler le $a$ (おかあさん okāsan)\\
   ī & doubler le $i$ (おにいさん onīsan)\\
@@ -136,291 +156,422 @@ Pour écrire les voyelles longues, on écrit une voyelle supplémentaire. Par ex
   ē & doubler le $e$ & ou ajouter un $i$ (せんせい sensē)\\
   ō & doubler le $o$ (おおき ōki) & ou ajouter un $u$ (おうえん ōen)\\
  \end{tabular}
- \caption{Différentes manières de former les sons longs}
- \label{tab:long-sounds}
 \end{table}
 
-\chapter{Compter}
-\section{Jusqu'à 100}
+\section{Compter}
+\subsection{Jusqu'à 100}
 
 Les chiffres de base sont représentés dans le \autoref{tab:chiffres}.
 
-\begin{table}[htbp]
+\begin{table}[htp]
  \centering
- \begin{tabular}{rll}
-  0 & れい　 rei\\
-  1 & いち　 ichi\\
-  2 & に　　 ni\\
-  3 & さん　 san\\
-  4 & よん　 yon & し　 shi\\
-  5 & ご　　 go\\
-  6 & ろく　 roku\\
-  7 & なな　 nana & しち shichi\\
-  8 & はち　 hachi\\
-  9 & きゅう kyū & く　 ku\\
- 10 & じゅう jū
- \end{tabular}
  \caption{Nombres de 0 à 10}
  \label{tab:chiffres}
+ \begin{tabular}{rlll}
+  0 & 零 & れい\\
+  1 & 一 & いち\\
+  2 & 二 & に\\
+  3 & 三 & さん\\
+  4 & 四 & よん & し\\
+  5 & 五 & ご\\
+  6 & 六 & ろく\\
+  7 & 七 & なな & しち\\
+  8 & 八 & はち\\
+  9 & 九 & きゅう & く\\
+ 10 & 十 & じゅう
+ \end{tabular}
 \end{table}
 
 Pour former les nombres jusqu'à 99, on écrit le numéro de dizaine, 10, puis les unités. Par exemple, 25 s'écrit 2-10-5, donc にじゅうご (nijūgo). Le \autoref{tab:dizaines} présente des exemples.
 
 \begin{table}[htbp]
  \centering
- \begin{tabular}{cll}
-  11 & じゅういち      &jū ichi\\
-  22 & にじゅうに      &nijū ni\\
-  33 & さんじゅうさん   &sanjū san\\
-  44 & よんじゅうよん   &yonjū yon\\
-  55 & ごじゅうご      &gojū go\\
-  66 & ろくじゅうろく   &rokujū roku\\
-  77 & ななじゅうなな   &nanajū nana\\
-  88 & はちじゅうはち   &hachijū hachi\\
-  99 & きゅうじゅうきゅう&kyūjū kyū\\
- \end{tabular}
  \caption{Exemples de nombres de 11 à 99}
  \label{tab:dizaines}
+ \begin{tabular}{crll}
+  11 &  十一 & \term{じゅう}いち      &jū ichi\\
+  22 & 二十二 & に\term{じゅう}に      &nijū ni\\
+  33 & 三十三 & さん\term{じゅう}さん   &sanjū san\\
+  44 & 四十四 & よん\term{じゅう}よん   &yonjū yon\\
+  55 & 五十五 & ご\term{じゅう}ご      &gojū go\\
+  66 & 六十六 & ろく\term{じゅう}ろく   &rokujū roku\\
+  77 & 七十七 & なな\term{じゅう}なな   &nanajū nana\\
+  88 & 八十八 & はち\term{じゅう}はち   &hachijū hachi\\
+  99 & 九十九 & きゅう\term{じゅう}きゅう&kyūjū kyū\\
+ \end{tabular}
 \end{table}
 
-\section{Au-delà de 100}
+\subsection{Au-delà de 100}
 
-Les centaines sont marquées avec ひゃく (hyaku). Attention à la prononciation pour 300, 600 et 800, marqués par un `×' dans le \autoref{tab:centaines}.
+\paragraph{100 -- 999}
+Les centaines sont marquées avec \ruby 百{ひゃく}. Attention à la prononciation pour 300, 600 et 800, marqués par un `×' dans le \autoref{tab:centaines}.
 
-\begin{table}[htbp]
+\begin{table}[p]
  \centering
- \begin{tabular}{clll}
-  100 & ひゃく      &hyaku\\
-  200 & にひゃく    &nihyaku\\
-  300 & さんびゃく   &sanbyaku&×\\
-  400 & よんひゃく   &yonhyaku\\
-  500 & ごひゃく    &gohyaku\\
-  600 & ろっぴゃく   &roppyaku&×\\
-  700 & ななひゃく   &nanahyaku\\
-  800 & はっぴゃく   &happyaku&×\\
-  900 & きゅうひゃく &kyūhyaku\\
- \end{tabular}
  \caption{Tableau des centaines}
  \label{tab:centaines}
+ \begin{tabular}{crrll}
+  100 & 百 & \term{ひゃく}      &hyaku\\
+  200 & 二百 & に\term{ひゃく}    &nihyaku\\
+  300 & 三百 & さん\term{びゃく}   &sanbyaku&×\\
+  400 & 四百 & よん\term{ひゃく}   &yonhyaku\\
+  500 & 五百 & ご\term{ひゃく}    &gohyaku\\
+  600 & 六百 & ろっ\term{ぴゃく}   &roppyaku&×\\
+  700 & 七百 & なな\term{ひゃく}   &nanahyaku\\
+  800 & 八百 & はっ\term{ぴゃく}   &happyaku&×\\
+  900 & 九百 & きゅう\term{ひゃく} &kyūhyaku\\
+ \end{tabular}
 \end{table}
 
-Les milliers sont marqués avec せん (sen). Attention à la prononciation pour 3~000 et 8~000, marqués par un `×' dans le \autoref{tab:milliers}.
+\paragraph{1~000 -- 9~999}
+Les milliers sont marqués avec \ruby 千{せん}. Attention à la prononciation pour 3~000 et 8~000, marqués par un `×' dans le \autoref{tab:milliers}.
 
-\begin{table}[htbp]
+\begin{table}[p]
  \centering
- \begin{tabular}{clll}
-  1~000 & せん       &sen\\
-  2~000 & にせん      &nisen\\
-  3~000 & さんぜん    &sanzen&×\\
-  4~000 & よんせん    &yonsen\\
-  5~000 & ごせん      &gosen\\
-  6~000 & ろくせん    &rokusen\\
-  7~000 & ななせん    &nanasen\\
-  8~000 & はっせん    &hassen&×\\
-  9~000 & きゃううせん &kyūsen\\
- \end{tabular}
  \caption{Tableau des milliers}
  \label{tab:milliers}
+ \begin{tabular}{crrll}
+  1~000 & 千 & \term{せん} &sen\\
+  2~000 & 二千 & に\term{せん}      &nisen\\
+  3~000 & 三千 & さん\term{ぜん}    &sanzen&×\\
+  4~000 & 四千 & よん\term{せん}    &yonsen\\
+  5~000 & 五千 & ご\term{せん}      &gosen\\
+  6~000 & 六千 & ろく\term{せん}    &rokusen\\
+  7~000 & 七千 & なな\term{せん}    &nanasen\\
+  8~000 & 八千 & は\term{っせん}    &hassen&×\\
+  9~000 & 九千 & きゃう\term{せん} &kyūsen\\
+ \end{tabular}
 \end{table}
 
-Pour écrire les nombres de 10~000 à 90~000, on utilise まん (man). Il n'y a pas d'exceptions.
+\paragraph{10~000 -- 99~999~999}
+Pour écrire les nombres de 10~000, on utilise \ruby 万{まん}. Il n'y a pas d'exceptions, à part que l'on écrit \ruby{一万}{いちまん} (10~000) et pas juste 万.
 
-\section{Compter de l'argent}
+Pour les rangs suivants, on va combiner les résultats précédents : prenons l'exemple de 57~613~495, le japonais se comporte comme si on groupait les chiffres par quatre: 5761~3495.
+\begin{itemize}
+ \item 5 unités,
+ \item 9 dizaines,
+ \item 4 centaines,
+ \item 3 milliers;
+ \item 1 dix-millier,
+ \item 6 dizaines de dix-milliers,
+ \item 7 centaines de dix-milliers,
+ \item 5 milliers de dix-milliers.
+\end{itemize}
+En lisant la décomposition de bas en haut, on trouve 五千 七百 六十 一万 三千 四百 九十 五.
 
-L'unité d'argent est le 円 (えん, en). Pour parler d'argent, on suffixe simple le nombre par le kanji 円, par exemple 1234~¥ s'écrit せんにひゃくさんじゅうよん円 (sen nihyaku sanjū yon en).
+\subsection{Compteurs}\label{sec:compteurs}
+
+Pour compter des objets, on va désigner une `unité', appelée `compteur'. Le compteur se place derrière le nombre pour exprimer à quoi il correspond.
+
+\begin{itemize}
+ \item 二十円 est 20 suivi de `en', c'est donc une somme d'argent,
+ \item 一じ est 1 suivi de `ji', c'est donc un horaire.
+\end{itemize}
+
+Il existe un grand nombre de compteurs, nous allons ici en voir certains.
+
+\paragraph{Argent}
+
+L'unité d'argent est le \ruby 円{えん}. Pour parler d'argent, on suffixe simple le nombre par le kanji 円, par exemple 1234~¥ s'écrit 千二百三十四円.
 
 Pour demander combien coûte quelque chose, on utilise l'interrogatif いくら (ikura):
 \begin{cquote}{}
- この本いくらですか (kono hon wa ikura desu ka, combien coûte ce livre\footnote{`Livre' s'écrit 本 (ほん, hon).} ?)
+ この\ruby{本}{ほん}いくらですか (combien coûte ce livre ?)
   
- にせん円です (nisen en desu, 2~000~¥)
+ 二千円 (2~000~¥)
 \end{cquote}
 
-\section{Lire l'heure}
+\paragraph{Heures}
 
 Les japonais lisent l'heure en format 12 heures: 0--12 heures du matin, puis 0--12 heures du soir. On lit l'heure en disant le nombre des heures, puis じ, puis le nombre de minutes. La prononciation change selon les heures, voir le \autoref{tab:heures}.
 
 \begin{table}[htbp]
  \centering
- \begin{tabular}{clll}
-  1h & いちじ    &ichiji\\
-  2h & にじ      &niji\\
-  3h & さんじ    &sanji\\
-  4h & よじ      &yoji&×\\
-  5h & ごじ      &goji\\
-  6h & ろくじ    &rokuji\\
-  7h & しちじ    &shichiji\\
-  8h & はちじ    &hachiji\\
-  9h & くじ      &kuji\\
-  10h& じゅうじ  &jūji\\
-  11h& じゅういち&jūichi\\
-  12h& じゅうにじ&jūniji\\
-  1h 30& いちじ&ichiji han
- \end{tabular}
  \caption{Tableau des heures}
  \label{tab:heures}
+ \begin{tabular}{crll}
+  1h & いち\term{じ} &ichiji\\
+  2h & に\term{じ} &niji\\
+  3h & さん\term{じ} &sanji\\
+  4h & よ\term{じ} &yoji&×\\
+  5h & ご\term{じ} &goji\\
+  6h & ろく\term{じ} &rokuji\\
+  7h & しち\term{じ} &shichiji\\
+  8h & はち\term{じ} &hachiji\\
+  9h & く\term{じ} &kuji\\
+  10h& じゅう\term{じ} &jūji\\
+  11h& じゅうい\term{じ}&jūiji\\
+  12h& じゅうに\term{じ}&jūniji\\
+  1h 30& いち\term{じ}&ichiji han
+ \end{tabular}
 \end{table}
 
-Quand on veut donner une durée en minutes, on utilise le suffixe ぷん (pun). Voir le \autoref{tab:minutes}.
+Quand on veut donner une durée en minutes, on utilise le suffixe ぷん. Voir le \autoref{tab:minutes}.
 
 \begin{table}[htbp]
  \centering
- \begin{tabular}{cllll}
-  1 & いっぷん　　　　&ippun\\
-  2 & にふん　　　　　&nifun\\
-  3 & さんぷん　　　　&sanpun\\
-  4 & よんぷん　　　　&yonpun\\
-  5 & ごふん　　　　　&gofun\\
-  6 & ろっぷん　　　　&roppun\\
-  7 & ななふん　　　　&nanafun\\
-  8 & はっぷん　　　　&happun & はちふん & hachifun\\
-  9 & きゅうふん　　　&kyūfun\\
-  10& じゅっぷん　　　&juppun & じっぷん & jippun\\
-  11& じゅういっぷん  &jūippun\\
-  12& じゅうにふん　　&jūnifun\\
-  13& じゅうさんぷん　&jūsanpun\\
-  14& じゅうよんぷん　&jūyonpun\\
-  15& じゅうごふん　　&jūgofun\\
-  16& じゅうろっぷん　&jūroppun\\
-  17& じゅうななふん　&jūnanafun\\
-  18& じゅうはっぷん　&jūhappun & じゅうはちふん & jūhachifun\\
-  19& じゅうきゅうふん&jūkyūfun\\
-  20& にじゅっぷん　　&nijuppun & にじっぷん & nijippun\\
-  30& さんじゅっぷん　&sanjuppun & さんじっぷん & sanjippun\\
- \end{tabular}
  \caption{Tableau des minutes}
  \label{tab:minutes}
+ \begin{tabular}{crlrl}
+  1 & いっ\term{ぷん} &ippun\\
+  2 & に\term{ふん} &nifun\\
+  3 & さん\term{ぷん} &sanpun\\
+  4 & よん\term{ぷん} &yonpun\\
+  5 & ご\term{ふん} &gofun\\
+  6 & ろっ\term{ぷん} &roppun\\
+  7 & なな\term{ふん} &nanafun\\
+  8 & はっ\term{ぷん} &happun & はち\term{ふん} & hachifun\\
+  9 & きゅう\term{ふん} &kyūfun\\
+  10& じゅっ\term{ぷん} &juppun & じっ\term{ぷん} & jippun\\
+  11& じゅういっ\term{ぷん} &jūippun\\
+  12& じゅうに\term{ふん} &jūnifun\\
+  13& じゅうさん\term{ぷん} &jūsanpun\\
+  14& じゅうよん\term{ぷん} &jūyonpun\\
+  15& じゅうご\term{ふん} &jūgofun\\
+  16& じゅうろっ\term{ぷん} &jūroppun\\
+  17& じゅうなな\term{ふん} &jūnanafun\\
+  18& じゅうはっ\term{ぷん} &jūhappun & じゅうはち\term{ふん} & jūhachifun\\
+  19& じゅうきゅう\term{ふん}&jūkyūfun\\
+  20& にじゅっ\term{ぷん} &nijuppun & にじっ\term{ぷん} & nijippun\\
+  30& さんじゅっ\term{ぷん} &sanjuppun & さんじっ\term{ぷん} & sanjippun\\
+ \end{tabular}
 \end{table}
 
-\section{Âge d'une personne}
+\paragraph{Âge}
 
 L'âge est déterminé en utilisant le suffixe さい (sai). Voir le \autoref{tab:age}.
 
 \begin{table}[htbp]
  \centering
- \begin{tabular}{rllll}
-  1 an  & いっさい    &issai&×\\
-  2 ans & にさい     　&nisai\\
-  3 ans & さんさい    &sansai\\
-  4 ans & よんさい    &yonsai\\
-  5 ans & ごさい    　&gosai\\
-  6 ans & ろくさい    　&rokusai\\
-  7 ans & ななさい   　&nanasai\\
-  8 ans & はっさい  　　&hassai&×\\
-  9 ans & きゅうさい   &kyūsai\\
-  10 ans& じゅっさい  　&jussai\\
-  11 ans& じゅういっさい&jūissai & じっさい & jissai\\
-  20 ans& はたち　　　　&hatachi
- \end{tabular}
  \caption{Tableau des âges}
  \label{tab:age}
+ \begin{tabular}{rrlll}
+  1 an  & い\term{っさい} &issai&×\\
+  2 ans & に\term{さい} &nisai\\
+  3 ans & さん\term{さい} &sansai\\
+  4 ans & よん\term{さい} &yonsai\\
+  5 ans & ご\term{さい} &gosai\\
+  6 ans & ろく\term{さい} &rokusai\\
+  7 ans & なな\term{さい} &nanasai\\
+  8 ans & は\term{っさい} &hassai&×\\
+  9 ans & きゅう\term{さい} &kyūsai\\
+  10 ans& じゅ\term{っさい} &jussai\\
+  11 ans& じゅうい\term{っさい}&jūissai & じ\term{っさい} & jissai\\
+  20 ans& はたち &hatachi
+ \end{tabular}
 \end{table}
 
-\section{Numéro de téléphone}
+\subsection{Autres nombres}
+
+\paragraph{Numéro de téléphone}
 
 Pour lire un numéro de téléphone, on lit simplement les chiffres indépendamment (pas de groupement).
 
 Il est aussi possible d'insérer の entre le code de zone (les 3 premiers chiffres) et le reste du numéro.
 
-Le numéro de téléphone se dit でんわばんごう (denwa bangō).
+Le numéro de téléphone se dit でんわばんごう.
 
-\chapter{Grammaire et particules}
+\chapter{Grammaire}
+\section{Forme longue}
 
-\section{Déclaration: です}
-On utilise la terminaison です en fin de phrase pour déclarer quelque chose. Voir le \autoref{tab:desu} pour des exemples.
+\subsection{Particules}
+
+En Japonais, une phrase est composée d'un ensemble de blocs liés par des particules (écrites en hiraganas). Une phrase se termine soit pas un verbe, soit par です.
+
+Le Japonais est une langue très contextuelle: en temps normal, on ne précise pas les informations qui peuvent être devinées grâce au contexte.
+
+\paragraph{Groupes nominaux}
+Les phrases sont organisées autour de groupe nominaux. Un groupe nominal est composé d'un ou plusieurs noms à la suite.
+
+Par exemple, だいがく (université) est un groupe nominal, comme さくらだいがく (Université Sakura).
 
 \begin{table}[htbp]
  \centering
- \begin{tabular}{ll}
-  がくせいです & (Je) suis étudiant \\
-  日本ごです & (Ma filière) est le japonais\\
-  じゅうにさいです & (Mon âge) est 20 ans\\
- \end{tabular}
  \caption{Exemples d'utilisation de です}
  \label{tab:desu}
+ \begin{tabular}{ll}
+  がくせい\term{です} & (Je) suis étudiant \\
+  日本ご\term{です} & (Ma filière) est le japonais\\
+  にじゅういちさい\term{です} & (Mon âge) est 21 ans\\
+ \end{tabular}
 \end{table}
 
+On retrouve des exemples de groupes nominaux suivis de です dans le \autoref{tab:desu}.
 On remarque que les informations entre parenthèses dans le \autoref{tab:desu} ne sont pas comprises dans la phrase: on les connaît grâce au contexte. がくせいです peut vouloir dire ``je suis étudiant'' mais aussi ``tu es étudiant'', ``elle est étudiante'', ``nous sommes étudiants'', ``vous êtes étudiants'', etc. Il est donc très important de faire attention au contexte.
-
 De la même manière, じゅうにさいです peut vouloir dire ``j'ai 20 ans'' mais aussi ``je fais de la musique depuis 20 ans'', etc, selon le contexte.
 
-\section{Ajouter du contexte: particule は}
-Dans le cas où le contexte n'est pas suffisant, on peut préciser en utilisant la particule は (se prononce /wa/).
+\paragraph{は}
+La particule は (prononcée /wa/) permet de définir qui fait l'action. On l'utilise quand on souhaite expliciter le sujet. Par exemple, on peut écrire わたし\term{は}マリナです (わたし: `je', は: particule du sujet, マリナ: prénom, です: terminaison).
 
-Par exemple, ``わたしは Adrien です'' veut dire ``je suis Adrien''; ``やましたさんはせんえいです'' veut dire ``M. Yamashita est un professeur''.
+Syntaxe: ``… nom \term{は} …''.
 
-\section{Question: か}
-Pour poser une question, on utilise la forme d'une déclaration à laquelle on ajoute か (ka). Des exemples sont donnés dans le \autoref{tab:questions-simples}.
+\paragraph{を et が}
+Les particules を (prononcée /o/) et が définissent qui subit l'action. Par exemple, たこやき\term{を}たべます (たこやき: boulettes de poulpe, を: particule de l'objet, たべます: verbe `manger' conjugué).
+
+Syntaxe: ``… nom \term{を} …'', ou ``… nom \term{が} …''.
+
+En règle générale, les verbes d'actions sont précédés de を (eg. する), alors que les verbes d'états sont précédés de が (eg. ある), mais il existe aussi de nombreuses exceptions.
+
+\paragraph{の et な}
+La particule の permet d'ajouter un niveau de précision à un groupe nominal. Elle se place entre deux groupes nominaux, et exprime que le premier précise le second. Par exemple, dans la phrase さくらだいがく\term{の}がくせえ (さくらだいがく: l'université Sakura, の: particule de précision, がくせい: étudiant) permet de définir qu'on ne parle pas de n'importe quel étudiant, mais spécifiquement d'un étudiant de l'université Sakura. Plus d'exemples sont présentés dans le \autoref{tab:no}.
 
 \begin{table}[htbp]
  \centering
+ \caption{Exemples d'utilisation de の}
+ \label{tab:no}
  \begin{tabular}{ll}
-  がくせいですか & (Es-tu) un étudiant? \\
-  じゅうにさいですか & (As-tu) 20 ans?
+  たけしさあん\term{の}でんわばんごう & Le numéro de téléphone de Takeshi \\
+  だいがく\term{の}せんせい & Professeur d'université \\
+  日本ご\term{の}がくせい & Étudiant de la langue japonaise \\
+  日本\term{の}だいがく & Une université japonaise
  \end{tabular}
- \caption{Exemples de questions}
- \label{tab:questions-simples}
 \end{table}
 
-Quand on cherche à connaître l'âge, on remplace la valeur par なん (nan). Par exemple, puisque ``Je suis étudiant en Japonais'' se dit:
+Syntaxe: ``…~nom\textsubscript{précision} \term{の} nom\textsubscript{principal}~…''.
+
+Pour avoir exactement la même relation que の, mais avec un adjectif \cf{sec:adjectifs}, on va utiliser:
+\begin{itemize}
+ \item Rien pour les い-adjectifs: ``…~adjectif nom~…''
+ \item な pour les な-adjectifs: ``…~adjectif \term{な} nom~…''
+\end{itemize}
+
+\paragraph{で}
+La particule で représente la position géographique. On l'utilise pour préciser l'endroit où la phrase a lieu, par exemple 東京\term{で}たべました (東京: Tōkyō, で: position géographique, たべました: verbe `manger' au passé) signifie ``j'ai mangé à Tokyo''.
+
+Syntaxe: ``…~nom\textsubscript{endroit} \term{で}~…''.
+
+\paragraph{に et へ}
+Les particules に et へ (e) peuvent être utilisées pour donner le but d'une action. Par exemple, la phrase 日本\term{へ}ようこそ (日本: le Japon, へ: le but, ようこそ: `bienvenue') signifie ``Bienvenue au Japon''.
+
+La particule に peut aussi être utilisée pour définir à quel moment une action à lieu (la position temporelle). On n'utilise pas に pour désigner des dates relatives (derrière ``aujourd'hui'', ``demain''\dots), les intervalles (``tous les jours''), ainsi que derrière le mot いつ (``quand''). On évite に derrière des périodes de la journée (``le matin'', ``le soir'') mais ce n'est pas interdit.
+
+Syntaxe: ``…~nom \term{へ}~…'' ou ``…~nom \term{に}~…''.
+
+\paragraph{も}
+La particule も permet d'exprimer la similarité entre deux phrases: ``Nolan a mangé, David aussi.''
+Cette particule précède un verbe dans une seconde phrase: ``nom\textsubscript{1} は/が/を verbe\textsubscript{1}, nom\textsubscript{2} \term{も} verbe\textsubscript{1}.''
+
+\paragraph{と}
+La particule と représente le `et' : リス\term{と}おにぎりをたべました (リス : le riz, と: et, おにぎり: onigiris, を: objet, たべました: j'ai mangé). Syntaxe : ``…~nom と nom~…''.
+
+On l'utilise aussi pour dire que l'on fait quelque chose avec une autre personne : dans ce cas-là, on écrit ``…~une~personne \term{と}~…''.
+
+\subsection{Forme longue intérogative}
+
+Pour poser une question, on va former une phrase déclarative finissant par です ou par un verbe, et ajouter la terminaison か.
+
+\paragraph{Compteurs}
+
+Une phrase déclarative comporte très souvent l'information que l'on souhaite avoir (si on souhaite demander l'âge, la réponse est du style ``mon âge est 22 ans''), alors comment peut-on former une phrase déclarative pour poser cette question?
+
+On va remplacer l'information que l'on souhaite connaître par un compteur, qui va permettre à l'interlocuteur de deviner ce qu'on l'on veut savoir. On utilise なに pour quelque chose qui n'est pas comptable, et なん pour quelque chose qui l'est.
+Pour une liste des compteurs, voir \cref{sec:compteurs}.
+
+Par exemple, puisque ``Je suis étudiant en Japonais'' se dit:
 \begin{center}
- せんこうは日本ごです\\
- senkō wa nihongo desu
+ せんこうは\term{日本ご}です
 \end{center}
 on peut poser la question ``Quelle est ta filière ?'':
 \begin{center}
- せんこうはなんですか\\
- senkō wa nan desu ka
+ せんこうは\term{なん}です\term{か}
 \end{center}
 
-Souvent, on précise le type de réponse que l'on attend; par exemple si on attend une heure, on utilise なんじ (nan suivit de ji pour l'heure), なんさい pour un âge (nan suivi de sai pour l'âge), etc.
+Souvent, on précise le type de réponse que l'on attend; par exemple si on attend une heure, on utilise なんじ, なんさい pour un âge, etc \cf{sec:compteurs}.
 
-\section{Précisions: particule の}
+\subsection{Verbes}
 
-の (no) permet de mettre en relation deux idées; l'idée générale est placée en premier, puis l'idée plus spécifique. Par exemple, さくらだいがくのがくせえ (sakura daigaku no gakusee) signifie ``étudiant de l'université Sakura''. Des exemples sont présentés dans le \autoref{tab:no}.
+Comme on l'a vu précédemment, une phrase doit se terminer par です ou par un verbe.
+On retrouve deux groupes de verbes : les verbes en る, et les verbes en う.
 
-\begin{table}[htbp]
- \centering
- \begin{tabular}{ll}
-  たけしさあんのでんわばんごう & Le numéro de téléphone de Takeshi \\
-  だいがくのせんせい & Professeur d'université \\
-  日本ごのがくせい & Étudiant de la langue japonaise \\
-  日本のだいがく & Une université japonaise
- \end{tabular}
- \caption{Exemples d'utilisation de の}
- \label{tab:no}
-\end{table}
+Les verbes possèdent une `base', une `forme du dictionnaire', ainsi que plusieurs conjugaisons.
 
-\chapter{Expression orale}
+\subsubsection{Présent}
 
-\paragraph{あの}
-L'interjection \emph{ano} peut être utilisée pour commencer une phrase si on n'est pas sûr de ne pas interrompre.
-
-\paragraph{はい et ええ}
-Les deux sont utilisées comme réponses à une question en oui/non. はい peut aussi servir pour répondre à la porte, ou lors de l'appel au début du cours.
-
-\paragraph{そおですか}
-Pour exprimer que l'on a compris, comme ``is that so?'' en anglais.
-
-\paragraph{Honorifiques}
-さん est l'honorifique standard pour les prénoms et les noms de famille. ちゃん est utilisé pour les enfants, on peut utiliser くん pour les petits garçons.
-
-\paragraph{Parler de soi}
-Le mot せんせい implique un certain respect; il ne faut donc pas l'utiliser pour se décrire soi-même. On peut utiliser きょうし à la place.
-
-De la même manière, on n'utilise jamais さん ou autres honorifiques pour parler de soi.
-
-\paragraph{Désigner l'interlocuteur}
-Il est possible d'utiliser あなた pour désigner la personne a qui l'on parle (tu), mais ce n'est pas très courant. Il vaut mieux utiliser son nom.
-
-\chapter{Aides mémoires}
-
-\section{Divers}
-
-Voir \autoref{tab:greetings}, \autoref{tab:pointeurs} et \autoref{tab:position-relative}.
+Les る-verbes portent ce nom parce que leur forme du dictionnaire se forme en ajoutant le suffixe る à leur base.
+Par exemple, la base \ruby{食}{た}べ (manger) devient la forme du dictionnaire 食べる.
+Pour former leur présent, on va ajouter à la base les suffixes ます pour l'affirmatif, et ません pour le négatif \cf{tab:ru-verbes-present}.
 
 \begin{table}[h]
  \centering
+ \caption{Exemples de る-verbes au présent}
+ \label{tab:ru-verbes-present}
+ \begin{tabular}{llrrr}
+  Base & & Dictionnaire & Affirmatif & Négatif \\
+  \hline
+  \ruby 食{た}べ & manger & 食べ\term{る} & 食べ\term{ます} & 食べ\term{ません} \\
+  \ruby 寝{ね} & dormir & 寝\term{る} & 寝\term{ます} & 寝\term{ません} \\
+  \ruby 起{お}き & se lever & 起き\term{る} & 起き\term{ます} & 起き\term{ません} \\
+  \ruby 見{み} & regarder & 見\term{る} & 見\term{ます} & 見\term{ません} \\
+ \end{tabular}
+\end{table}
+
+Les う-verbes portent ce nom parce que leur forme du dictionnaire se termine par le son /u/.
+La syllabe portant le son /u/ se déplace pour utiliser la voyelle /i/ (mais la même consonne), puis on ajoute les mêmes terminaisons que précédemment \cf{tab:u-verbes-present}.
+
+\begin{table}[h]
+ \centering
+ \caption{Exemples de う-verbes au présent}
+ \label{tab:u-verbes-present}
+ \begin{tabular}{lrrr}
+   & Dictionnaire & Affirmatif & Négatif \\
+  \hline
+  boire & \ruby 飲{の}\term{む} & 飲\term{みます} & 飲\term{みません} \\
+  lire & \ruby 読{よ}\term{む} & 読\term{みます} & 読\term{みません} \\
+  parler & \ruby 話{はな}\term{す} & 話\term{します} & 話\term{しません} \\
+  écouter & \ruby 聞{き}\term{く} & 聞\term{きます} & 聞\term{きません} \\
+  aller & \ruby 行{い}\term{く} & 行\term{きます} & 行\term{きません} \\
+  rentrer à la maison & \ruby 帰{かえ}\term{る} & 帰\term{ります} & 帰\term{りません} \\
+ \end{tabular}
+\end{table}
+
+On remarque que le verbe \ruby 帰{かえ}る est considéré comme un う-verbe, alors qu'il se termine par る.
+Les verbes finissant par /u~ru/, /a~ru/ ou /o~ru/ sont toujours des う-verbes, les verbes finissant par /i~ru/ ou /e~ru/ sont souvent des る-verbes (par exemple \ruby 寝{ね}る), mais il existe aussi des exceptions (dont \ruby 帰{かえ}る).
+
+On retrouve aussi deux verbes irréguliers, する et くる \cf{tab:irregulier-verbes-present}.
+
+\begin{table}[h]
+ \centering
+ \caption{Verbes irréguliers au présent}
+ \label{tab:irregulier-verbes-present}
+ \begin{tabular}{lrrr}
+   & Dictionnaire & Affirmatif & Négatif \\
+  \hline
+  aller & \term{する} & \term{します} & \term{しません} \\
+  venir & \term{くる} & \term{きます} & \term{きません} \\
+ \end{tabular}
+\end{table}
+
+Pour décrire un élément futur, on écrit une phrase au présent, que l'on situe dans le futur grâce à une particule (par exemple に).
+
+Pour proposer à quelqu'un de faire quelque chose, on peut utiliser la forme négative suivie de か:
+\begin{cquote}{ }
+ \ruby 昼{ひる}ご\ruby 飯{はん}を\ruby 食{た}べ\term{ませんか}。
+ Est-ce que tu serais intéressé par manger ce midi avec moi ?
+\end{cquote}
+
+
+\subsubsection{Passé}
+
+%TODO
+
+\subsubsection{Suffixes}
+
+\subsection{Adjectifs}\label{sec:adjectifs}
+
+\section{Forme en て}
+
+\section{Forme courte}
+
+
+
+%TODO Not rewritten yet
+
+Voir \autoref{tab:greetings}.
+
+\begin{table}[h]
+ \centering
+ \caption{Greetings}
+ \label{tab:greetings}
  \begin{tabular}{ll}
   おはよう & Good morning \\
   こんいちは & Good afternoon \\
@@ -442,29 +593,179 @@ Voir \autoref{tab:greetings}, \autoref{tab:pointeurs} et \autoref{tab:position-r
   あの & Interjection ``excusez-moi'' (équivalent d'un hm) \\
   そうですか & I see / Is that so? \\
  \end{tabular}
- \caption{Greetings}
- \label{tab:greetings}
 \end{table}
+
+\section{Particules}
+
+Voir \autoref{tab:particules-inside} et \autoref{tab:particules-outside}.
 
 \begin{table}[h]
  \centering
- \begin{tabular}{ll}
-  これ & Cette chose proche de moi (eg. これはいくらですか) \\
-  それ & Cette chose proche de toi \\
-  あれ & Cette chose là-bas \\
-  この & Ce [objet] proche de moi (eg. このとけいはいくらですか) \\
-  その & Ce [objet] proche de toi \\
-  あの & Ce [objet] là-bas \\
-  ここ & Here \\
-  そこ & There \\
-  あそこ & Over there \\
+ \caption{Particules sur un verbe}
+ \label{tab:particules-outside}
+ \begin{tabular}{lll}
+ か & Question & verbe か \\
+ ね & N'est-ce pas? & verbe ね \\
+ よ & Je t'assure que & verbe よ \\
+ ては & Il est interdit de & phrase\textsubscript{te} は いけません \\
+ ても & Il est autorisé de & phrase\textsubscript{te} も いいです \\
+ てもか & Est-ce qu'il est autorisé de & phrase\textsubscript{te} も いいですか \\
  \end{tabular}
- \caption{Pointer vers quelqu'un/quelque chose}
- \label{tab:pointeurs}
+\end{table}
+
+\chapter{Expressions}
+
+\section{Pointer, désigner}
+
+Pour chaque mot pour pointer, le Japonais a trois versions:
+\begin{itemize}
+ \item une version pour désigner quelque chose proche de la personne qui parle,
+ \item une version pour désigner quelque chose proche de la personne qui écoute,
+ \item une version pour désigner ce qui est loin des deux,
+ \item une version pour demander lequel est désigné.
+\end{itemize}
+La liste des mots est présentée dans le tableau \cref{tab:pointer}.
+
+\begin{table}[htp]
+ \centering
+ \caption{Mots pour pointer}
+ \label{tab:pointer}
+ \begin{tabular}{lllll}
+  & Proche de moi & Proche de toi & Loin de nous & Intérogatif \\
+ \cline{2-5}
+ celui-ci & これ & それ & あれ & どれ (lequel) \\
+ ce\dots & この & その & あの & どの (quel\dots) \\
+ ici, là & ここ & そこ & あそこ & どこ (où) \\
+  & & & & だれ (qui) \\
+ \end{tabular}
+\end{table}
+
+\section{Événements}
+
+\subsection{Fréquence}
+
+Pour déterminer la fréquence d'un événement, on va utiliser des adverbes de fréquence, par exemple:
+\begin{cquote}{ }
+ \ruby 私{わたし}は\term{よく}テレビを\ruby 見{み}ます。
+ Je regarde souvent la télévision.
+ 
+ メアリーさんは\term{ときどき}\ruby 朝{あさ}ご\ruby 飯{はん}を\ruby 食{た}べません。
+ Certaines fois, Marie ne mange pas de petit-déjeûné.
+\end{cquote}
+
+Ils se placent devant un groupe d'action, sans particule.
+
+Voir \cref{tab:freq}.
+La phrase doit avoir la même valeur (positive, négative) que l'adverbe correspondant.
+
+\begin{table}[h]
+ \centering
+ \caption{Vocabulaire de la fréquence}
+ \label{tab:freq}
+ \begin{tabular}{lllr}
+  まいにち & 毎日 & Tous les jours & (positif) \\
+  よく &  & Souvent & (positif) \\
+  ときどき &  & Rarement & (positif) \\
+  あまり &  & Presque jamais & (négatif) \\
+  ぜんぜん &  & Jamais & (négatif) \\
+ \end{tabular}
+\end{table}
+
+\chapter{Dictionnaire}
+
+\section{Personnalité, occupation, nationalité}
+
+\subsection{Pays, nationalité, langue}
+
+De manière générale, la nationalité se forme avec le nom du pays, suivi du suffixe \ruby 人{じん}; de manière générale, le nom de la langue se forme avec le nom du pays suivi de \ruby 語{ご} \cf{tab:nationalite}.
+
+\begin{table}[htp]
+ \centering
+ \caption{Pays, nationalité et langue}
+ \label{tab:nationalite}
+ \begin{tabular}{llrr}
+ Pays & & Nationalité & Langue \\
+ \hline
+ \ruby{日本}{にほん} & Japon & 日本人 & 日本語 \\
+ フランス & France & フランス人 & フランス語 \\
+ イギリス & Angleterre & イギリス人 & \ruby{英}{えい}語 \\
+ アメリカ & Amérique & アメリカ人 & アメリカ英語 \\
+ かんこく & Corée \\
+ ちゅうごく & Chine \\
+ \end{tabular}
+\end{table}
+
+De la même manière, on utilisera なん人 pour demander la nationalité d'une personne.
+
+\subsection{Métier}
+
+\section{Objets}
+
+\subsection{Vocabulaire}
+
+Voir \cref{tab:objets:vie}, \cref{tab:objets:nourriture}.
+
+\begin{table}[h]
+ \centering
+ \caption{Objets de la vie courante}
+ \label{tab:objets:vie}
+ \begin{tabular}{lll}
+  えんぴつ &  & Crayon \\
+  かさ &  & Parapluie \\
+  かばん &  & Sac \\
+  くつ &  & Chaussures \\
+  さいふ &  & Porte-monaie \\
+  ジーンズ &  & Jeans \\
+  じしょ &  & Dictionnaire \\
+  じてんしゃ &  & Vélo \\
+  しんぶん &  & Journal \\
+  Tシャツ &  & T-shirt \\
+  とけい &  & Orloge, montre \\
+  ノート &  & Carnet de notes \\
+  ペン &  & Stylo \\
+  ぼうし &  & Chapeau, casquette \\
+  ほん & 本 & Livre \\
+ \end{tabular}
 \end{table}
 
 \begin{table}[h]
  \centering
+ \caption{Nourriture}
+ \label{tab:objets:nourriture}
+ \begin{tabular}{lll}
+  さかな &  & Poisson　\\
+  やさい &  & Légumes \\
+  とんかつ &  & Poitrine de porc \\
+  にく &  & Viande \\
+  メニュー &  & Menu \\
+ \end{tabular}
+\end{table}
+
+\subsection{Lieux}
+
+Voir \cref{tab:lieux}.
+
+\begin{table}[h]
+ \centering
+ \caption{Lieux}
+ \label{tab:lieux}
+ \begin{tabular}{lll}
+  きっさてん &  & Café \\
+  ぎんこう &  & Banque \\
+  トイレ &  & Toilettes \\
+  としょかん &  & Bibliothèque \\
+  ゆうびんきょく &  & Bureau de poste \\
+ \end{tabular}
+\end{table}
+
+\subsection{Position relative (gauche, droite\dots)}
+
+Voir \cref{tab:position-relative}.
+
+\begin{table}[h]
+ \centering
+ \caption{Position relative de deux objets}
+ \label{tab:position-relative}
  \begin{tabular}{ll}
   みぎ & À droite de \\
   ひだり & À gauche de \\
@@ -476,66 +777,9 @@ Voir \autoref{tab:greetings}, \autoref{tab:pointeurs} et \autoref{tab:position-r
   ちかく & Proche de \\
   となり & À côté de \\
  \end{tabular}
- \caption{Position relative de deux objets}
- \label{tab:position-relative}
 \end{table}
-
-\section{Particules}
-
-Voir \autoref{tab:particules-inside} et \autoref{tab:particules-outside}.
-
-\begin{table}[h]
- \centering
- \begin{tabular}{lll}
- は (wa) & Celui qui fait & nom は verbe \\
- を (o) & Celui qui subit & nom を verbe \\
- の & Précision & détail\textsubscript{nom} の nom \\
- な & Précision & détail\textsubscript{な-adjectif} な nom \\
-    & Précision & détail\textsubscript{い-adjectif} nom \\
- で & Position géographique & position で \\
- に ou へ (e) & Objectif & objectif に/へ \\
- に & Instant & instant に \\
- も & Aussi & nom\textsubscript{1} は/が/を verbe, nom\textsubscript{2} も verbe \\
- と & Et & nom と nom \\
- と & Avec quelqu'un & quelqu'un と \\
-    & Et ensuite & phrase\textsubscript{te}, phrase\textsubscript{normale} \\
- \end{tabular}
- \caption{Particules dans la phrase}
- \label{tab:particules-inside}
-\end{table}
-
-\begin{table}[h]
- \centering
- \begin{tabular}{lll}
- か & Question & verbe か \\
- ね & N'est-ce pas? & verbe ね \\
- よ & Je t'assure que & verbe よ \\
- ては & Il est interdit de & phrase\textsubscript{te} は いけません \\
- ても & Il est autorisé de & phrase\textsubscript{te} も いいです \\
- てもか & Est-ce qu'il est autorisé de & phrase\textsubscript{te} も いいですか \\
- \end{tabular}
- \caption{Particules sur un verbe}
- \label{tab:particules-outside}
-\end{table}
-
-\paragraph{Questions}
-Pour préciser un sujet, on écrit la phrase comme si c'était une affirmation normale, mais en remplaçant ce que l'on veut savoir par le mot correspondant (eg. ``What is your major?'' せんこうはなんですか？, ``Combien ça coûte?'' これはいくらですか).
-
-Quantifieurs et autres marqueurs de question:
-\begin{itemize}
- \item なん quoi (なに devant une particule)
- \item なんじ quelle heure
- \item なんさい quel âge
- \item なに人 quelle nationalité
- \item どれ lequel
- \item どの quel
- \item どこ where
- \item だれ who
-\end{itemize}
 
 \section{Verbes}
-
-\subsection{Vocabulaire}
 
 Voir \autoref{tab:verbes-u}, \autoref{tab:verbes-ru} et \autoref{tab:verbes-irréguliers}.
 
@@ -543,6 +787,8 @@ Il faut faire attention aux verbes ある (il y a quelque chose) et いる (il y
 
 \begin{table}[h]
  \centering
+ \caption{Verbes en /u/}
+ \label{tab:verbes-u}
  \begin{tabular}{lll}
   いく & 行く & Aller quelque part \\
   かえる & 帰る & Revenir de quelque part \\
@@ -576,12 +822,12 @@ Il faut faire attention aux verbes ある (il y a quelque chose) et いる (il y
   もつ & 持つ & Porter, tenir \\
   やすむ & 休む & Être absent, se reposer \\
  \end{tabular}
- \caption{Verbes en /u/}
- \label{tab:verbes-u}
 \end{table}
 
 \begin{table}[h]
  \centering
+ \caption{Verbes en る}
+ \label{tab:verbes-ru}
  \begin{tabular}{lll}
   おきる & 起きる & Se lever \\
   たべる & 食べる & Manger \\
@@ -598,19 +844,17 @@ Il faut faire attention aux verbes ある (il y a quelque chose) et いる (il y
   でんわをかける & 電話をかける & Appeler quelqu'un \\
   わすれる & 忘れる & Oublier, abandonner un objet \\
  \end{tabular}
- \caption{Verbes en る}
- \label{tab:verbes-ru}
 \end{table}
 
 \begin{table}[h]
  \centering
+ \caption{Verbes irréguliers}
+ \label{tab:verbes-irréguliers}
  \begin{tabular}{lll}
   くる & 来る & Aller \\
   する & する & Faire \\
   べんきょうする & 勉強する & Étudier (faire des études) \\
  \end{tabular}
- \caption{Verbes irréguliers}
- \label{tab:verbes-irréguliers}
 \end{table}
 
 \subsection{Conjugaison}
@@ -671,12 +915,16 @@ Pour les verbes irréguliers:
  \item くる $\mapsto$ きて
 \end{itemize}
 
+%TODO: te-imasu: une habitude
+
 \section{Adjectifs}
 
 Voir \autoref{tab:adjectifs-i} et \autoref{tab:adjectifs-na}.
 
 \begin{table}[h]
  \centering
+ \caption{Adjectifs en い}
+ \label{tab:adjectifs-i}
  \begin{tabular}{lll}
   あたらしい & 新しい & nouveau \\
   あつい & 暑い & chaud (météo) \\
@@ -695,12 +943,12 @@ Voir \autoref{tab:adjectifs-i} et \autoref{tab:adjectifs-na}.
   やさひい & & facile (objet), gentil (personne) \\
   やすい & 安い & pas cher (objet) \\
  \end{tabular}
- \caption{Adjectifs en い}
- \label{tab:adjectifs-i}
 \end{table}
 
 \begin{table}[h]
  \centering
+ \caption{Adjectifs en な}
+ \label{tab:adjectifs-na}
  \begin{tabular}{lll}
   きれい（な） & & Beau, propre \\
   げんき（な） & 元気 & En bonne santé \\
@@ -713,8 +961,6 @@ Voir \autoref{tab:adjectifs-i} et \autoref{tab:adjectifs-na}.
   ひま（な） & 暇 & Avoir du temps libre \\
   たいへん（な） & 大変 & Compliqué (situation difficule) \\
  \end{tabular}
- \caption{Adjectifs en な}
- \label{tab:adjectifs-na}
 \end{table}
 
 \paragraph{Conjugaison des adjectifs en い} Pour la conjugaison, on enlève le い final.
